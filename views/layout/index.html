@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planet There</title>
+    <!-- the font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="../../public/assets/css/styles.css">
 </head>
 <body>
@@ -13,109 +18,148 @@
   <main class="homepage">
       <!-- Hero Section -->
       <section class="hero-section">
-          <img src="../../public/assets/images/hero-bg.png" alt="Hero Background" class="hero-bg">
-          <h2 class="hero-title"> THE PLANET IS YOURS </h2>
+          <h2 class="hero-title"> THE PLANET IS YOURS <br> PLAN IT FREE <br> PLAN IT THERE </h2>
+          
+          <!-- Search Section -->
+            <section class="search-section">
+            <form class="search-form">
+                <div class="search-field">
+                    <label for="event-type" class="search-label">Looking for</label>
+                    <div class="search-dropdown">
+                        <span class="dropdown-title">Choose event type</span>
+                        <img src="../../public/assets/images/dropdown-icon.svg" alt="Dropdown" class="dropdown-icon">
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="location" class="search-label">Location</label>
+                    <div class="search-dropdown">
+                        <span class="dropdown-title">Choose location</span>
+                        <img src="../../public/assets/images/dropdown-icon.svg" alt="Dropdown" class="dropdown-icon">
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="date-time" class="search-label">When</label>
+                    <div class="search-dropdown">
+                        <span class="dropdown-title">Choose date and time</span>
+                        <img src="../../public/assets/images/dropdown-icon.svg" alt="Dropdown" class="dropdown-icon">
+                    </div>
+                </div>
+
+                <button type="submit" class="search-btn">
+                    <img src="../../public/assets/images/search-btn-icon.svg" alt="Search" class="search-btn-icon">
+                </button>
+            </form>
+        </section>
       </section>
 
-      <!-- Search Section -->
-      <section class="search-section">
-          <form class="search-form">
-              <div class="search-field">
-                  <label for="event-type" class="search-label">Looking for</label>
-                  <div class="search-dropdown">
-                      <span class="dropdown-title">Choose event type</span>
-                      <img src="../../public/assets/images/dropdown-icon.svg" alt="Dropdown" class="dropdown-icon">
-                  </div>
-              </div>
-
-              <div class="search-field">
-                  <label for="location" class="search-label">Location</label>
-                  <div class="search-dropdown">
-                      <span class="dropdown-title">Choose location</span>
-                      <img src="../../public/assets/images/dropdown-icon.svg" alt="Dropdown" class="dropdown-icon">
-                  </div>
-              </div>
-
-              <div class="search-field">
-                  <label for="date-time" class="search-label">When</label>
-                  <div class="search-dropdown">
-                      <span class="dropdown-title">Choose date and time</span>
-                      <img src="../../public/assets/images/dropdown-icon.svg" alt="Dropdown" class="dropdown-icon">
-                  </div>
-              </div>
-
-              <button type="submit" class="search-btn">
-                  <img src="../../public/assets/images/search-btn-icon.svg" alt="Search" class="search-btn-icon">
-              </button>
-          </form>
-      </section>
+      
 
       <!-- Events Section -->
-      <section class="events-section">
-          <div class="events-container">
-              <div class="events-list">
-                  <div class="events-content">
-                      <h2 class="section-title">Upcoming <span style="color: #009688;">Events</span></h2>
-                      <div class="events-grid">
-                          <!-- Event Card Template -->
-                          <article class="event-card">
-                              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b" 
-                                    alt="Language Exchange Picnic" class="event-image">
-                              <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                              <div class="event-details">
-                                  <div class="event-info">
-                                      <time class="event-date">Friday, October 18, 6.00 PM</time>
-                                      <address class="event-location">Tuilieres Garden, Paris</address>
-                                  </div>
-                                  <div class="event-attendance">
-                                      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3c93d5e99e88f3ef6ba85c1fbb654c7afe6eb641caca34a8173b6cfd2df3274c" 
-                                            alt="Attendees" class="attendance-icon">
-                                      <span class="attendance-count">18/20</span>
-                                  </div>
-                              </div>
-                          </article>
+        <section class="events-section">
+            <h2 class="section-title">Upcoming <span class="highlight">Events</span></h2>
+            <div class="events-container">
+                <div class="events-grid">
+                    <!-- Event Card Template -->
+                    <article class="event-card">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b" 
+                            alt="Language Exchange Picnic" class="event-image">
+                        <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
+                        <div class="event-details">
+                            <div class="event-info">
+                                <time class="event-date">Friday, October 18, 6.00 PM</time>
+                                <address class="event-location">Tuilieres Garden, Paris</address>
+                            </div>
+                            <div class="event-attendance">
+                                <img src="../../public/assets/images/attendance-icon.svg" 
+                                    alt="Attendees" class="attendance-icon">
+                                <span class="attendance-count">18/20</span>
+                            </div>
+                        </div>
+                    </article>
 
-                          <!-- More event cards can be put here -->
+                    <article class="event-card">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b" 
+                            alt="Language Exchange Picnic" class="event-image">
+                        <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
+                        <div class="event-details">
+                            <div class="event-info">
+                                <time class="event-date">Friday, October 18, 6.00 PM</time>
+                                <address class="event-location">Tuilieres Garden, Paris</address>
+                            </div>
+                            <div class="event-attendance">
+                                <img src="../../public/assets/images/attendance-icon.svg" 
+                                    alt="Attendees" class="attendance-icon">
+                                <span class="attendance-count">18/20</span>
+                            </div>
+                        </div>
+                    </article>
 
-                      </div>
-                      <button class="load-more-btn">Load more...</button>
-                  </div>
-              </div>
-          </div>
-      </section>
+                    <article class="event-card">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b" 
+                            alt="Language Exchange Picnic" class="event-image">
+                        <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
+                        <div class="event-details">
+                            <div class="event-info">
+                                <time class="event-date">Friday, October 18, 6.00 PM</time>
+                                <address class="event-location">Tuilieres Garden, Paris</address>
+                            </div>
+                            <div class="event-attendance">
+                                <img src="../../public/assets/images/attendance-icon.svg" 
+                                    alt="Attendees" class="attendance-icon">
+                                <span class="attendance-count">18/20</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="event-card">
+                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b" 
+                            alt="Language Exchange Picnic" class="event-image">
+                        <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
+                        <div class="event-details">
+                            <div class="event-info">
+                                <time class="event-date">Friday, October 18, 6.00 PM</time>
+                                <address class="event-location">Tuilieres Garden, Paris</address>
+                            </div>
+                            <div class="event-attendance">
+                                <img src="../../public/assets/images/attendance-icon.svg" 
+                                    alt="Attendees" class="attendance-icon">
+                                <span class="attendance-count">18/20</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- More event cards can go here -->
+
+                </div>
+                
+            </div>
+            <button class="load-more-btn">Load more...</button>
+        </section>
+
 
       <!-- Create Event Section -->
       <section class="create-event-section">
           <div class="create-event-container">
               <div class="create-event-image">
-                  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/de1471d5c507db7b86645f35388e62cc6cd60933f2cfae3edd68ed572ab5c2e2" 
-                        alt="Create your own event" class="create-event-img">
+                  <img src="../../public/assets/images/create-event-img.png" alt="Create your own event" class="create-event-img">
               </div>
               <div class="create-event-content">
                   <div class="create-event-text">
                       <h2 class="create-event-title">Make your own Event</h2>
                       <p class="create-event-subtitle">See how easy it is!</p>
-                      <div class="create-event-btn-wrapper">
-                          <button class="create-event-btn">
-                              <span class="create-event-btn-text">Create Events</span>
-                          </button>
-                      </div>
+                        <button class="create-event-btn">
+                            <span class="create-event-btn-text">Create Events</span>
+                        </button>
                   </div>
               </div>
           </div>
       </section>
 
-      <!-- Brands Section -->
-      <section class="brands-section">
-          <h2 class="brands-title"><span style="color: #333;">Join these</span> brands</h2>
-          <p class="brands-description">We've had the pleasure of working with industry-defining brands. These are just some of them.</p>
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e6a1e338d2c395ebaf41519cb78729bf2e6f4490e5a9fa664181705edf34dfb6" 
-                alt="Partner Brands" class="brands-logo">
-      </section>
-
       <!-- Popular Section -->
       <section class="popular-section">
-          <h2 class="section-title">Popular <span style="color: #009688;">Now</span></h2>
+        <h2 class="section-title">Popular <span class="highlight">Now</span></h2>
           <div class="popular-events">
               <!-- Event Card Template -->
               <article class="event-card">
