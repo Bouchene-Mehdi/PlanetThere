@@ -144,9 +144,9 @@
                   <div class="create-event-text">
                       <h2 class="create-event-title">Couldn't find anything for you?</h2>
                       <p class="create-event-subtitle">Create your own event</p>
-                        <button class="create-event-btn">
-                            <span class="create-event-btn-text">Create Events</span>
-                        </button>
+                      <button class="create-event-btn">
+                        <span class="create-event-btn-text">Create Events</span>
+                      </button>
                   </div>
               </div>
           </div>
@@ -215,7 +215,7 @@
   // The navbar and footer are loaded through JS whenever the website is opened
     
     // Load Navbar
-    fetch("navbar.html")
+    fetch("navbar-logged-out.html")
         .then(response => response.text())
         .then(data => document.getElementById("navbar").innerHTML = data);
 
