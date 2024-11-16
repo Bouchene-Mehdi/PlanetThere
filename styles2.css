@@ -275,3 +275,36 @@ main{
     background-color: rgba(0, 150, 136, 0.7);
     cursor: pointer;
 }
+
+.upload-button{
+    margin-left: 75px;
+}
+
+.pic-upload-section{
+ display: flex;
+ flex-direction: column;
+ justify-content: space-around;
+}
+
+.pic-upload-section h2{
+    font-family: 'Product Sans', sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+}
+
+.pic-upload-section p{
+    font-family: 'Product Sans', sans-serif;
+    font-weight: normal;
+    color: #696868;
+    text-align: center;
+    font-size: 16px;
+}
+
+.uppload-description p{
+    margin: 0px;
+}
+
+.image-sec{
+    justify-self: center;
+}
