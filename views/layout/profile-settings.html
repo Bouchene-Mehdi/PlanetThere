@@ -28,6 +28,20 @@
                 <h1>Personal Information</h1>
                 <p class="page-subheader">Configure your privacy</p>
             </div>
+
+            <div class="follows-header">
+                <img src="../../public/assets/images/follows-icon.svg" alt="Follows" class="follows-icon">
+                <div class="followers">
+                    <span class="label">Followers</span>
+                    <br>
+                    <span class="value">123</span>
+                </div>
+                <div class="followers">
+                    <span class="label">Following</span>
+                    <br>
+                    <span class="value">123</span>
+                </div>
+            </div>
         </header>
     
         <!-- Profile Form -->
@@ -35,12 +49,12 @@
             <!-- Username and Email -->
             <div class="form-row">
                 <label for="username">Username</label>
-                <input type="text" id="username" value="Billiejean12">
+                <input type="text" id="username" value="Billiejean12" readonly>
             </div>
             <div class="form-row">
                 <label for="email">Email</label>
                 <div class="input-wrapper">
-                    <input type="email" id="email" value="jeanmichel@gmail.com">
+                    <input type="email" id="email" value="jeanmichel@gmail.com" readonly>
                     <select>
                         <option>Friends</option>
                         <option>Public</option>
@@ -88,7 +102,7 @@
             <div class="form-row">
                 <label for="dob">Date of Birth</label>
                 <div class="input-wrapper">
-                    <input type="date" id="dob" value="2001-01-01">
+                    <input type="date" id="dob" value="2001-01-01" readonly>
                     <select>
                         <option>Friends</option>
                         <option>Public</option>

@@ -1,6 +1,7 @@
 /* Global Settings */
 * {
     box-sizing: border-box;
+    font: 400 0.97em 'Poppins', sans-serif;
 }
 
 /* Profile Settings */
@@ -52,7 +53,7 @@
 }
 
 .page-header h1 {
-    font-size: 1.3em;
+    font-size: 1.4em;
     color: #333;
     margin: 0;
 }
@@ -63,11 +64,38 @@
     margin-top: 5px;
 }
 
+/* Follows Header */
+.follows-header {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-self: flex-end;
+    gap: 20px;
+}
+
+.follows-icon {
+    width: 18%;
+    margin-right: 8px;
+}
+
+/* .page-header h1 {
+    font-size: 1.4em;
+    color: #333;
+    margin: 0;
+}
+
+.page-header .page-subheader {
+    font-size: 1em;
+    color: #777;
+    margin-top: 5px;
+} */
+
 /* Profile Form */
-.profile-form {
+.profile-form{
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two columns */
-    gap: 40px 50px;
+    gap: 50px 50px;
     max-width: 100%; /* Prevent horizontal overflow */
     margin-top: 40px;
 }
@@ -92,6 +120,7 @@ label {
     border-radius: 5px;
     overflow: hidden;
     background: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 input {
@@ -101,6 +130,11 @@ input {
     font-size: 1em;
     color: #777;
     outline: none;
+    border-radius: 5px;
+}
+
+#username {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 select {
@@ -117,8 +151,11 @@ select {
 
 /* Save Button */
 .save-button {
-    grid-column: span 2;
+    display: block;
+    grid-column: 1 / span 2;
+    align-self: center;
     padding: 12px 24px;
+    margin: 10px 44% 30px 44%;
     background-color: #009688;
     color: #fff;
     border: none;
@@ -126,7 +163,7 @@ select {
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
-    justify-self: end;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .save-button:hover {

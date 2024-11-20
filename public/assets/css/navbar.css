@@ -1,11 +1,11 @@
 /* navbar.css */
 .nav-bar {
     position: relative;
-    z-index: 10;
+    z-index: 1;
     display: flex;
     width: 100%;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
@@ -22,17 +22,16 @@
     height: auto;
     align-self: center;
     object-fit: contain;
-    margin: 5px;
+    margin-left: 05px;
+    margin-right: auto;
 }
 
 .nav-menu {
-    align-self: center;
-    z-index: 0;
     display: flex;
     align-items: center;
     gap: 40px;
-    justify-content: flex-end;
-    margin: 35px;
+    font-size: 0.9em;
+    justify-content: space-between;
 }
 
 .signup-btn {
@@ -43,35 +42,33 @@
     white-space: nowrap;
     text-align: center;
     margin: auto 0;
+    margin-right: 20px;
     padding: 12px 34px;
     border: none;
 }
 
 .nav-links {
-    align-self: center;
     list-style: none;
     display: flex;
+    gap: 30px 68px; /* Proper spacing between links */
     padding: 0;
-    z-index: 0;
+    margin: 0;
     min-width: 240px;
-    align-items: center;
-    gap: 30px 68px;
-    justify-content: flex-start;
-    flex-wrap: wrap;
 }
 
 .profile-link {
     display: flex;
     align-items: center;
-    margin-left: 20px;
+    margin-left: auto;
 }
 
 .profile-image {
-    margin-left: 150px;
+    margin-left: auto;
+    margin-right: 20px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     border: 2px solid #009688;
     cursor: pointer;
-    align-self: flex-end;
+    
 }

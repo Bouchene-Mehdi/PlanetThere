@@ -1,0 +1,121 @@
+/* Events History Page */
+.events-history {
+    background: #f5f7fa;
+    padding: 20px 50px;
+}
+
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-header .page-title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.page-header .page-subtitle {
+    font-size: 1.2em;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Events Section */
+.events-section {
+    margin-top: 20px;
+}
+
+.section-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.section-title .highlight {
+    color: #009688;
+}
+
+/* Events Grid */
+.events-container {
+    margin-top: 10px;
+}
+
+.events-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* Event Cards */
+.event-card {
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.event-image {
+    aspect-ratio: 1.45;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.event-title {
+    color: #000;
+    margin-top: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.event-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.event-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9em;
+}
+
+.event-date {
+    color: #009688;
+}
+
+.event-location {
+    color: #7f7f7f;
+    margin-top: 4px;
+}
+
+.event-attendance {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #7f7f7f;
+}
+
+.attendance-icon {
+    width: 24px;
+    margin-right: 8px;
+}
+
+/* Load More Button */
+.load-more-btn {
+    margin: 20px auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #009688;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+}
