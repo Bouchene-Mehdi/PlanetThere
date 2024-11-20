@@ -116,7 +116,7 @@
 }
 
 .events-container {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 /* Grid layout for the event cards */
@@ -134,8 +134,8 @@
     flex-direction: column;
     overflow: hidden;
     padding: 20px;
-    width: 90%;
-    height: 90%;
+    width: 88%;
+    height: 88%;
 }
 
 .event-image {
@@ -156,13 +156,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 16px;
+    margin-bottom: 20px;
+    margin-top: auto;
 }
 
 .event-info {
     display: flex;
     flex-direction: column;
-    font-size: 0.75em;
+    font-size: 0.1em;
 }
 
 .event-date {

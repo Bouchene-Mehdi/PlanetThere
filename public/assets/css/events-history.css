@@ -1,37 +1,40 @@
 /* Events History Page */
 .events-history {
     background: #f5f7fa;
-    padding: 20px 50px;
+    padding: 30px 50px;
 }
 
 /* Page Header */
 .page-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .page-header .page-title {
-    font-size: 2em;
-    font-weight: bold;
+    font-size: 1.1em;
     color: #333;
     margin: 0;
 }
 
 .page-header .page-subtitle {
-    font-size: 1.2em;
+    font-size: 0.9em;
     color: #777;
-    margin-top: 5px;
+    margin-top: 1.4%;
 }
 
 /* Events Section */
 .events-section {
-    margin-top: 20px;
+    width: 100%;
+    margin-top: 5px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .section-title {
-    font-size: 1.5em;
-    color: #333;
-    margin-bottom: 20px;
+    color: #000;
+    font-size: 1.7em;
+    font-weight: bold;
 }
 
 .section-title .highlight {
@@ -58,6 +61,8 @@
     flex-direction: column;
     overflow: hidden;
     padding: 20px;
+    width: 76%;
+    height: 86%;
 }
 
 .event-image {
@@ -69,22 +74,20 @@
 
 .event-title {
     color: #000;
-    margin-top: 15px;
-    font-size: 1.1em;
-    font-weight: bold;
+    font-size: 1.0em;
+    font-weight: 400;
 }
 
 .event-details {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 16px;
 }
 
 .event-info {
     display: flex;
     flex-direction: column;
-    font-size: 0.9em;
+    font-size: 0.75em;
 }
 
 .event-date {
@@ -99,8 +102,9 @@
 .event-attendance {
     display: flex;
     align-items: center;
-    font-size: 0.9em;
+    font-size: 0.75em;
     color: #7f7f7f;
+
 }
 
 .attendance-icon {
