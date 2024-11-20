@@ -163,7 +163,7 @@
 .event-info {
     display: flex;
     flex-direction: column;
-    font-size: 0.1em;
+    font-size: 0.80em;
 }
 
 .event-date {
