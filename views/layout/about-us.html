@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="../../public/assets/css/global.css">
+    <link rel="stylesheet" href="../../public/assets/css/navbar.css">
+    <link rel="stylesheet" href="../../public/assets/css/about-us.css">
+    <link rel="stylesheet" href="../../public/assets/css/footer.css">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="about-us">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1>About us</h1>
+        </section>
+
+        <div class="overview-section">
+            <div class="overview-item">
+                <h3>FUNDING</h3>
+                <h2>None !</h2>
+                <p>PlanetThere is fully self-funded</p>
+            </div>
+            <div class="overview-item">
+                <h3>FOUNDED</h3>
+                <h2>2024</h2>
+                <p></p>
+            </div>
+            <div class="overview-item">
+                <h3>LOCATED IN</h3>
+                <h2>Paris, FR</h2>
+                <p>Built in Austin</p>
+            </div>
+            <div class="overview-item">
+                <h3>PRESS</h3>
+                <h2>In the News</h2>
+                <p>What the media is saying</p>
+            </div>
+            <div class="overview-item">
+                <h3>PURPOSE</h3>
+                <h2>Better Care</h2>
+                <p>A word from our CEO</p>
+            </div>
+            <div class="overview-item">
+                <h3>CULTURE</h3>
+                <h2>Values</h2>
+                <p>Our DNA</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load Navbar
+        fetch("navbar-logged-in.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+
+        // Load Footer
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("footer").innerHTML = data);
+    </script>
+</body>
+</html>

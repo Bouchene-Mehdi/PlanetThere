@@ -1,5 +1,12 @@
 /* global.css */
 
+@font-face {
+    font-family: 'Product Sans';
+    src: url('../../assets/fonts/Product\ Sans\ Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 a {
     text-decoration: none; 
     color: #000;
