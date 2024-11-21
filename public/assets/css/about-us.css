@@ -17,12 +17,33 @@
     text-shadow: black 0px 0px 2px
 }
 
+.paragraph-section {
+    background-color: #f9f9f9;
+    text-align:center;
+    padding: 40px 150px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.paragraph-section p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #333333;
+    margin: 0;
+}
+
+.highlight {
+    color: #009688;
+    font-weight: bold;
+}
+
 .overview-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 50px 20px;
+    padding: 0px 20px;
+    padding-bottom: 60px;
     background-color: #f9f9f9;
 }
 
