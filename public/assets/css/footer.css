@@ -64,7 +64,7 @@
     width: 100%;
     align-items: flex-start;
     gap: 20px;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .language-selector {
@@ -97,7 +97,7 @@
     align-items: center;
     gap: 15px;
     justify-content: center;
-    width: 90%;
+    width: 100%;
 }
 
 .social-icon {

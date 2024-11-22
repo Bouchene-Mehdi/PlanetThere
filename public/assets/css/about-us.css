@@ -76,3 +76,17 @@
     color: #666666;
     margin: 0;
 }
+
+.toggle-button {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #009688;
+    transform: rotate(0deg);
+    transition: transform 2.2s; /* Smooth rotation transition */
+}
+
+.toggle-button.active {
+    transform: rotate(900deg); /* Rotate 90 degrees when active */
+}
