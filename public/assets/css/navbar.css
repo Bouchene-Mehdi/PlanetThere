@@ -5,7 +5,7 @@
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    flex-direction: row;
 }
 
 .logo {
@@ -17,13 +17,12 @@
     align-self: center;
 }
 
-.brand-logo {
+.brand-logo img {
     width: 180px;
     height: auto;
     align-self: center;
     object-fit: contain;
     margin-left: 5px;
-    margin-right: auto;
 }
 
 .nav-menu {
@@ -31,8 +30,8 @@
     align-items: center;
     gap: 40px;
     font-size: 0.9em;
-    justify-content: space-between;
     font: 400 0.7em, 'Poppins', sans-serif;
+    margin-left: auto;
 }
 
 .signup-btn {
@@ -51,7 +50,7 @@
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px 68px; /* Proper spacing between links */
+    gap: 30px 68px;
     padding: 0;
     margin: 0;
     min-width: 240px;
@@ -74,4 +73,3 @@
     cursor: pointer;
     object-fit: cover;
 }
-
