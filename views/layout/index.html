@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planet There</title>
-    <!-- the font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/assets/css/footer.css">
+    <link rel="stylesheet" href="../../public/assets/css/navbar.css">
+    <link rel="stylesheet" href="../../public/assets/css/global.css">
+    <link rel="stylesheet" href="../../public/assets/css/homepage.css">
     
-    <link rel="stylesheet" href="../../public/assets/css/styles.css">
+    
 </head>
 <body>
 
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="search-btn">
+                <button type="submit" class="search-btn" href="#">
                     <img src="../../public/assets/images/search-btn-icon.svg" alt="Search" class="search-btn-icon">
                 </button>
             </form>
@@ -147,78 +147,79 @@
               </div>
               <div class="create-event-content">
                   <div class="create-event-text">
-                      <h2 class="create-event-title">Make your own Event</h2>
-                      <p class="create-event-subtitle">See how easy it is!</p>
-                        <button class="create-event-btn">
-                            <span class="create-event-btn-text">Create Events</span>
-                        </button>
+                      <h2 class="create-event-title">Couldn't find anything for you?</h2>
+                      <p class="create-event-subtitle">Create your own event</p>
+                      <button class="create-event-btn">
+                        <span class="create-event-btn-text">Create Events</span>
+                      </button>
                   </div>
               </div>
           </div>
       </section>
 
-      <!-- Popular Section -->
-      <section class="popular-section">
+      <!-- Popular Now Section -->
+      <section class="events-section">
         <h2 class="section-title">Popular <span class="highlight">Now</span></h2>
-          <div class="popular-events">
-              <!-- Event Card Template -->
-              <article class="event-card">
-                  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3138a3aef8f7b6c5f284baa13354634a317e494be4f4867deecfb52be079117e" 
-                        alt="How to build a modern website" class="event-image">
-                  <h3 class="event-title">How to build a modern website - Google Meets Webinar</h3>
-                  <div class="event-details">
-                      <div class="event-info">
-                          <time class="event-date">Monday, October 20, 9.30PM</time>
-                          <address class="event-location">Online, Google Meets</address>
-                      </div>
-                      <div class="event-attendance">
-                          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ffa1d47db8d291c7da84169e39210039af1cf7a13e1b16f00a8f3d8e28285301" 
-                                alt="Attendees" class="attendance-icon">
-                          <span class="attendance-count">32/50</span>
-                      </div>
-                  </div>
-              </article>
-              <!-- More event cards can follow here in the same structure -->
-          </div>
-          <button class="load-more-btn">Load more...</button>
-      </section>
+        <div class="events-container">
+            <div class="events-grid">
+                <!-- Event Cards -->
+                <article class="event-card">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3138a3aef8f7b6c5f284baa13354634a317e494be4f4867deecfb52be079117e" 
+                         alt="How to build a modern website" class="event-image">
+                    <h3 class="event-title">How to build a modern website - Google Meets Webinar</h3>
+                    <div class="event-details">
+                        <div class="event-info">
+                            <time class="event-date">Monday, October 20, 9.30PM</time>
+                            <address class="event-location">Online, Google Meets</address>
+                        </div>
+                        <div class="event-attendance">
+                            <img src="../../public/assets/images/attendance-icon.svg" 
+                                 alt="Attendees" class="attendance-icon">
+                            <span class="attendance-count">32/50</span>
+                        </div>
+                    </div>
+                </article>
+                <!-- More event cards can go here -->
+            </div>
+        </div>
+        <button class="load-more-btn">Load more...</button>
+    </section>
 
-      <!-- Stay Fit Section -->
-      <section class="stay-fit-section">
-          <h2 class="stay-fit-title">Stay <span style="color: #009688;">FIT</span></h2>
-          <div class="stay-fit-events">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/868c37c87ef8067ed29cc53afe9c25381b0c18e3675bd31e8ab5ca4cf1d6a824" 
-                    alt="Stay Fit Banner" class="stay-fit-image">
-              <!-- Event Card Template -->
-              <article class="event-card">
-                  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/25c52274fcc0a0a99f22d89afb68a067728304be18579a0e76a3057dc3660c09" 
-                        alt="Sunday Football Match" class="event-image">
-                  <h3 class="event-title">Sunday Football Match - Vanves</h3>
-                  <div class="event-details">
-                      <div class="event-info">
-                          <time class="event-date">Sunday, October 27, 2.00PM</time>
-                          <address class="event-location">Stade de Vanves, Vanves</address>
-                      </div>
-                      <div class="event-attendance">
-                          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/93538efaaaa986a980555574303cf4b29767f76f5c10b6799406aaa69b4caa49" 
-                                alt="Attendees" class="attendance-icon">
-                          <span class="attendance-count">2/22</span>
-                      </div>
-                  </div>
-              </article>
-              <!-- More event cards can follow here in the same structure -->
-          </div>
-          <button class="categories-btn">More Categories</button>
-      </section>
-  </main>
+    <!-- Stay Fit Section -->
+    <section class="events-section">
+        <h2 class="section-title">Stay <span class="highlight">Fit</span></h2>
+        <div class="events-container">
+            <div class="events-grid">
+                <!-- Event Cards -->
+                <article class="event-card">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/25c52274fcc0a0a99f22d89afb68a067728304be18579a0e76a3057dc3660c09" 
+                         alt="Sunday Football Match" class="event-image">
+                    <h3 class="event-title">Sunday Football Match - Vanves</h3>
+                    <div class="event-details">
+                        <div class="event-info">
+                            <time class="event-date">Sunday, October 27, 2.00PM</time>
+                            <address class="event-location">Stade de Vanves, Vanves</address>
+                        </div>
+                        <div class="event-attendance">
+                            <img src="../../public/assets/images/attendance-icon.svg" 
+                                 alt="Attendees" class="attendance-icon">
+                            <span class="attendance-count">2/22</span>
+                        </div>
+                    </div>
+                </article>
+                <!-- More event cards can go here -->
+            </div>
+        </div>
+        <button class="load-more-btn">More Categories</button>
+    </section>
+</main>
 
   <div id="footer"></div>
 
   <script>
   // The navbar and footer are loaded through JS whenever the website is opened
-    
     // Load Navbar
-    fetch("navbar.html")
+    fetch("navbar-logged-out.html")
         .then(response => response.text())
         .then(data => document.getElementById("navbar").innerHTML = data);
 

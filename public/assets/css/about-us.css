@@ -1,0 +1,92 @@
+/* about-us.css */
+.about-us {
+    width: 100%;
+}
+
+.hero-section {
+    background-image: url('../images/about-us-bg.JPG');
+    background-size: cover;
+    text-align: center;
+    padding: 60px 0;
+    color: white;
+}
+
+.hero-section h1 {
+    font-size: 3.5em;
+    font-weight: bold;
+    text-shadow: black 0px 0px 2px
+}
+
+.paragraph-section {
+    background-color: #f9f9f9;
+    text-align:center;
+    padding: 40px 150px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.paragraph-section p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #333333;
+    margin: 0;
+}
+
+.highlight {
+    color: #009688;
+    font-weight: bold;
+}
+
+.overview-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0px 20px;
+    padding-bottom: 60px;
+    background-color: #f9f9f9;
+}
+
+.overview-item {
+    text-align: center;
+    width: 300px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.overview-item h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #888888;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+
+.overview-item h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333333;
+    margin: 0 0 10px;
+}
+
+.overview-item p {
+    font-size: 1rem;
+    color: #666666;
+    margin: 0;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #009688;
+    transform: rotate(0deg);
+    transition: transform 2.2s; /* Smooth rotation transition */
+}
+
+.toggle-button.active {
+    transform: rotate(900deg); /* Rotate 90 degrees when active */
+}
