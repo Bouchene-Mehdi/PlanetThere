@@ -70,8 +70,11 @@
 <section class="registration-section">
 	<form class="registration-form">
 		
-			
-			<h1 class="legend">Last Steps <span style="font-weight: 100;">!</span></h1>
+			<div class="legend-section">
+			<h1 class="legend">Last <span style="color: #009688;">Steps</span> <span style="font-weight: 100;">!</span></h1>
+			<p class="legend-subtext">Let us know you a little bit better!</p>
+			</div>
+
 			
             <div class="pic-upload-section">
 				<div class="uppload-description">
@@ -89,6 +92,16 @@
 				<img src="pics.png" alt="pictures illustration">
 			</div>
 
+			<div class="Last-name-field">
+				<label class="form-label name-label" for="LastName">Last name</label>
+				<input class="Last-name-field-field" type="text" id="LastName" name="LastName" placeholder="Enter your last name">
+			</div>
+
+			<div class="First-name-field">
+				<label class="form-label name-label" for="FirstName">First name</label>
+				<input type="text" id="FirstName" name="FirstNAme" placeholder="Enter your first name">
+			</div>
+
 			<div class="phone-field">
 				<label class="form-label" for="username">Enter your phone number</label>
 				<input type="tel" id="username" name="username" placeholder="Enter your phone number">
@@ -98,8 +111,8 @@
 				<label class="form-label" for="dateofbirth">Enter your date of birth*</label>
 				<input type="text" id="dateofbirth" name="dateofbirth" placeholder="MM/DD/YYYY" required>
 			</div>
-			<p>Mandatory fields are marked with *</p>
-			<button class="sign-up-button" type="submit">Sign-up</button>
+			
+			<button class="sign-up-button" type="submit">Finalize</button>
 		
 	</form>
 	 <p class="footer-part">Already have an account? Click <a href="#">here</a></p>
