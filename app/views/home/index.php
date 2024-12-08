@@ -1,16 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Planet There</title>
-		<link rel="stylesheet" href="../../public/assets/css/footer.css" />
-		<link rel="stylesheet" href="../../public/assets/css/navbar.css" />
-		<link rel="stylesheet" href="../../public/assets/css/global.css" />
-		<link rel="stylesheet" href="../../public/assets/css/homepage.css" />
-	</head>
-	<body>
-		<div id="navbar"></div>
 
 		<main class="homepage">
 			<!-- Hero Section -->
@@ -29,7 +16,7 @@
 							<div class="search-dropdown">
 								<span class="dropdown-title">Choose event type</span>
 								<img
-									src="../../public/assets/images/dropdown-icon.svg"
+									src="assets/images/dropdown-icon.svg"
 									alt="Dropdown"
 									class="dropdown-icon"
 								/>
@@ -41,7 +28,7 @@
 							<div class="search-dropdown">
 								<span class="dropdown-title">Choose location</span>
 								<img
-									src="../../public/assets/images/dropdown-icon.svg"
+									src="assets/images/dropdown-icon.svg"
 									alt="Dropdown"
 									class="dropdown-icon"
 								/>
@@ -53,7 +40,7 @@
 							<div class="search-dropdown">
 								<span class="dropdown-title">Choose date and time</span>
 								<img
-									src="../../public/assets/images/dropdown-icon.svg"
+									src="assets/images/dropdown-icon.svg"
 									alt="Dropdown"
 									class="dropdown-icon"
 								/>
@@ -62,7 +49,7 @@
 
 						<button type="submit" class="search-btn" href="#">
 							<img
-								src="../../public/assets/images/search-btn-icon.svg"
+								src="assets/images/search-btn-icon.svg"
 								alt="Search"
 								class="search-btn-icon"
 							/>
@@ -97,7 +84,7 @@
 								</div>
 								<div class="event-attendance">
 									<img
-										src="../../public/assets/images/attendance-icon.svg"
+										src="assets/images/attendance-icon.svg"
 										alt="Attendees"
 										class="attendance-icon"
 									/>
@@ -124,7 +111,7 @@
 								</div>
 								<div class="event-attendance">
 									<img
-										src="../../public/assets/images/attendance-icon.svg"
+										src="assets/images/attendance-icon.svg"
 										alt="Attendees"
 										class="attendance-icon"
 									/>
@@ -151,7 +138,7 @@
 								</div>
 								<div class="event-attendance">
 									<img
-										src="../../public/assets/images/attendance-icon.svg"
+										src="assets/images/attendance-icon.svg"
 										alt="Attendees"
 										class="attendance-icon"
 									/>
@@ -178,7 +165,7 @@
 								</div>
 								<div class="event-attendance">
 									<img
-										src="../../public/assets/images/attendance-icon.svg"
+										src="assets/images/attendance-icon.svg"
 										alt="Attendees"
 										class="attendance-icon"
 									/>
@@ -198,7 +185,7 @@
 				<div class="create-event-container">
 					<div class="create-event-image">
 						<img
-							src="../../public/assets/images/create-event-img.png"
+							src="assets/images/create-event-img.png"
 							alt="Create your own event"
 							class="create-event-img"
 						/>
@@ -241,7 +228,7 @@
 								</div>
 								<div class="event-attendance">
 									<img
-										src="../../public/assets/images/attendance-icon.svg"
+										src="assets/images/attendance-icon.svg"
 										alt="Attendees"
 										class="attendance-icon"
 									/>
@@ -277,7 +264,7 @@
 								</div>
 								<div class="event-attendance">
 									<img
-										src="../../public/assets/images/attendance-icon.svg"
+										src="assets/images/attendance-icon.svg"
 										alt="Attendees"
 										class="attendance-icon"
 									/>
@@ -291,20 +278,3 @@
 				<button class="load-more-btn">More Categories</button>
 			</section>
 		</main>
-
-		<div id="footer"></div>
-
-		<script>
-			// The navbar and footer are loaded through JS whenever the website is opened
-			// Load Navbar
-			fetch('navbar-logged-out.html')
-				.then((response) => response.text())
-				.then((data) => (document.getElementById('navbar').innerHTML = data));
-
-			// Load Footer
-			fetch('footer.html')
-				.then((response) => response.text())
-				.then((data) => (document.getElementById('footer').innerHTML = data));
-		</script>
-	</body>
-</html>

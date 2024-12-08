@@ -1,43 +1,43 @@
 /* terms.css */
 .terms {
-    width: 100%;
+	width: 100%;
 }
 
 .hero-section {
-    background-image: url('../images/terms-bg.png');
-    background-size: cover;
-    text-align: center;
-    padding: 60px 0;
-    color: white;
+	background-image: url('../images/terms-bg.png');
+	background-size: cover;
+	text-align: center;
+	padding: 60px 0;
+	color: white;
 }
 
 .hero-section h1 {
-    font-size: 3.5em;
-    font-weight: bold;
-    text-shadow: 0px 0px 2px black;
+	font-size: 3.5em;
+	font-weight: bold;
+	text-shadow: 0px 0px 2px black;
 }
 
 .terms-content {
-    margin: 20px auto;
-    max-width: 68%;
-    padding: 20px;
-    background-color: white;
-    color: #333;
-    font-size: 1em;
-    line-height: 1.6em;
+	margin: 20px auto;
+	max-width: 68%;
+	padding: 20px;
+	background-color: white;
+	color: #333;
+	font-size: 1em;
+	line-height: 1.6em;
 }
 
 .terms-content h2 {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #009688;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    border-left: 4px solid #009688;
-    padding-left: 10px;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #009688;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	border-left: 4px solid #009688;
+	padding-left: 10px;
 }
 
 .terms-content p {
-    margin-bottom: 15px;
-    text-align: justify;
+	margin-bottom: 15px;
+	text-align: justify;
 }

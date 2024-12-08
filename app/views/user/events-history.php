@@ -1,7 +1,6 @@
 
 <body>
 
-    <div id="navbar"></div>
 
     <main class="events-history">
         <!-- Page Header -->
@@ -9,7 +8,6 @@
             <h1 class="page-title">History of Events</h1>
             <p class="page-subtitle">Take a look into the past!</p>
         </header>
-
         <!-- Your Past Events Section -->
         <section class="events-section">
             <h2 class="section-title">Your Past <span class="highlight">Events</span></h2>
@@ -28,7 +26,7 @@
                                     <address class="event-location">Online, Google Meets</address>
                                 </div>
                                 <div class="event-attendance">
-                                    <img src="../../public/assets/images/attendance-icon.svg"
+                                    <img src="assets/images/attendance-icon.svg"
                                         alt="Attendees" class="attendance-icon">
                                     <span class="attendance-count">32/50</span>
                                 </div>
@@ -60,7 +58,7 @@
                                     <address class="event-location">Tuileries Garden, Paris</address>
                                 </div>
                                 <div class="event-attendance">
-                                    <img src="../../public/assets/images/attendance-icon.svg"
+                                    <img src="assets/images/attendance-icon.svg"
                                         alt="Attendees" class="attendance-icon">
                                     <span class="attendance-count">18/20</span>
                                 </div>
@@ -76,19 +74,5 @@
         </section>
     </main>
 
-    <div id="footer"></div>
-
-    <script>
-        // Load Navbar
-        fetch("navbar-logged-in.html")
-            .then(response => response.text())
-            .then(data => document.getElementById("navbar").innerHTML = data);
-
-        // Load Footer
-        fetch("footer.html")
-            .then(response => response.text())
-            .then(data => document.getElementById("footer").innerHTML = data);
-    </script>
 
 </body>
-</html>
