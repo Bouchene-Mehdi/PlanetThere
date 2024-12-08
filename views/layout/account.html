@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Center</title>
+    <link rel="stylesheet" href="../../public/assets/css/global.css">
+    <link rel="stylesheet" href="../../public/assets/css/navbar.css">
+    <link rel="stylesheet" href="../../public/assets/css/account.css">
+    <link rel="stylesheet" href="../../public/assets/css/footer.css">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="account-center">
+        <!-- Header Section -->
+        <header class="account-header">
+            <h1>Welcome Jean Michel!</h1>
+            <p class="subheader">Account Center</p>
+        </header>
+
+        <!-- Account Options -->
+        <div class="account-options">
+            <!-- Personal Information Section -->
+            <div class="option">
+                <a href="profile-settings.html" class="option-link">
+                    <div class="icon-title">
+                        <img src="../../public/assets/images/account-icon.svg" alt="Personal Information Icon" class="icon">
+                        <div class="text">
+                            <h2>Personal Information</h2>
+                            <p>View and change your personal information</p>
+                        </div>
+                    </div>
+                </a>
+                <hr>
+            </div>
+
+            <!-- History of Events Section -->
+            <div class="option">
+                <a href="events-history.html" class="option-link">
+                    <div class="icon-title">
+                        <img src="../../public/assets/images/book-icon.svg" alt="History of Events Icon" class="icon">
+                        <div class="text">
+                            <h2>History of Events</h2>
+                            <p>View the history and upcoming events</p>
+                        </div>
+                    </div>
+                </a>
+                <hr>
+            </div>
+
+            <!-- Friends Section -->
+            <div class="option">
+                <a href="friends.html" class="option-link">
+                    <div class="icon-title">
+                        <img src="../../public/assets/images/users-icon.svg" alt="Friends Icon" class="icon">
+                        <div class="text">
+                            <h2>Friends</h2>
+                            <p>Check who you follow and who follows you</p>
+                        </div>
+                    </div>
+                </a>
+                <hr>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="option">
+                <a href="settings.html" class="option-link">
+                    <div class="icon-title">
+                        <img src="../../public/assets/images/settings-icon.svg" alt="Settings Icon" class="icon">
+                        <div class="text">
+                            <h2>Settings</h2>
+                            <p>Adjust your preferences about the website functionalities</p>
+                        </div>
+                    </div>
+                </a>
+                <hr>
+            </div>
+
+            <!-- Delete Account Section -->
+            <div class="option delete">
+                <a href="delete-account.html" class="option-link">
+                    <div class="icon-title">
+                        <img src="../../public/assets/images/info-icon.svg" alt="Delete Account Icon" class="icon">
+                        <div class="text">
+                            <h2>Delete your account</h2>
+                            <p>Make sure you want to delete your account before starting this procedure</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // The navbar and footer are loaded through JS whenever the website is opened
+          // Load Navbar
+          fetch("navbar-logged-in.html")
+              .then(response => response.text())
+              .then(data => document.getElementById("navbar").innerHTML = data);
+      
+          // Load Footer
+          fetch("footer.html")
+              .then(response => response.text())
+              .then(data => document.getElementById("footer").innerHTML = data);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+/* faq.css */
+.faq {
+    width: 100%;
+}
+
+.hero-section {
+    background-image: url('../images/faq-bg.png');
+    background-size: cover;
+    text-align: center;
+    padding: 60px 0;
+    color: white;
+}
+
+.hero-section h1 {
+    font-size: 3.5em;
+    font-weight: bold;
+    text-shadow: black 0px 0px 2px
+}
+
+.questions-section {
+    margin: 40px auto;
+    max-width: 800px;
+}
+
+.question {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.question-header {
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.question-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #009688;
+    transform: rotate(0deg);
+    transition: transform 0.2s;
+    object-fit: contain;
+}
+
+.toggle-button.active {
+    transform: rotate(90deg);
+}
+
+.answer {
+    margin-top: -50px;
+    width: 80%;
+    padding: 15px 20px;
+    font-size: 1em;
+    color: #555;
+    display: none;
+    text-align: justify;
+}
+
+.answer.active {
+    display: block;
+}

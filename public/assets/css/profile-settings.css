@@ -1,0 +1,185 @@
+/* Global Settings */
+/* * {
+    box-sizing: border-box;
+    font: 400 0.97em 'Poppins', sans-serif;
+} */
+
+/* Profile Settings */
+.profile-settings {
+    width: 100%;
+    margin: 0 auto;
+    background: #f5f7fa;
+    padding: 20px 0px;
+}
+
+.combined-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    margin: 0 70px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-self: left;
+    gap: 20px;
+}
+
+.profile-header img {
+    aspect-ratio: 1 / 1;
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-header h1 {
+    font-size: 1.3em;
+    color: #333;
+    margin: 0;
+}
+
+.profile-header .email {
+    font-size: 1em;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Page Header */
+.page-header {
+    grid-column: 2;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 1.4em;
+    color: #333;
+    margin: 0;
+}
+
+.page-header .page-subheader {
+    font-size: 1em;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Follows Header */
+.follows-header {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-self: right;
+    gap: 20px;
+}
+
+.value {
+    color: #777;
+}
+
+.follows-icon {
+    width: 18%;
+    margin-right: 8px;
+}
+
+/* .page-header h1 {
+    font-size: 1.4em;
+    color: #333;
+    margin: 0;
+}
+
+.page-header .page-subheader {
+    font-size: 1em;
+    color: #777;
+    margin-top: 5px;
+} */
+
+/* Profile Form */
+.profile-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 50px 50px;
+    max-width: 100%; /* Prevent horizontal overflow */
+    margin: auto 70px;
+    margin-top: 40px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column; /* Stack label and input */
+    width: 100%;
+}
+
+label {
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+input {
+    flex: 1; /* takes up remaining space */
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    color: #777;
+    outline: none;
+    border-radius: 5px;
+}
+
+#username {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+select {
+    border: none;
+    font-size: 1em;
+    padding: 10px;
+    cursor: pointer;
+    width: 20%;
+    height: 100%; /* same height as the input */
+    background: #fff;
+    outline: none;
+    margin-right: 10px;
+}
+
+/* Save Button */
+.save-button {
+    display: block;
+    grid-column: 1 / span 2;
+    align-self: center;
+    padding: 12px 24px;
+    margin: 10px 44% 30px 44%;
+    background-color: #009688;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.save-button:hover {
+    background-color: #00796b;
+}
+
+/* Prevent Horizontal Overflow */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
