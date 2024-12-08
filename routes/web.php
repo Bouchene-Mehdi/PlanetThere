@@ -7,13 +7,14 @@ $routes=[
         '/tac' => 'PagesController@TAC',
         '/event-history' => 'UserController@UserEventHistory',
         '/profile-settings' => 'UserController@UserProfileSettings',
+        '/signup-1' => 'UserController@UserSignup_1',
+        '/signup-2' => 'UserController@UserSignup_2',
+        '/login' => 'UserController@UserLogin',
         '/account' => 'UserController@UserAccount',
-        '/contact' => 'HomeController@contact',
         '/user/register' => 'UserController@showRegisterForm',
         '/user/login' => 'UserController@showLoginForm',
         '/dashboard' => 'AdminController@dashboard',
         '/admin' => 'AdminController@admin',
-        '/signup' => 'UserController@signup',
     ],
 
     'POST' => [

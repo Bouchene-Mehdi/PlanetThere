@@ -31,6 +31,15 @@
 					case 'profile-settings':
 						echo 'assets/css/profile-settings.css';
 						break;
+					case 'signup-1':
+						echo 'assets/css/signup-1.css';
+						break;
+					case 'signup-2':
+						echo 'assets/css/signup-2.css';
+						break;
+					case 'login':
+						echo 'assets/css/login.css';
+						break;
 					default:
 						echo 'assets/css/global.css';
 						break;
