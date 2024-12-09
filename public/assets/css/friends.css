@@ -1,0 +1,135 @@
+.following-page {
+    text-align: center;
+    background: #f5f7fa;
+    padding-top: 5px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.following-header {
+    margin-bottom: 32px;
+}
+
+.following-header h1 {
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.following-header p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #009688;
+}
+
+.friends-list {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    padding: 0 40px;
+    justify-content: center;
+    margin-top: 20px;
+}
+.friends-list.hidden {
+    display: none;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    color: #666;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tab.active {
+    background-color: #009688;
+    color: #fff;
+}
+
+.following-list {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    padding: 0 40px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.profile-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    width: 180px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-pic {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.profile-card h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.profile-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0 15px;
+}
+
+.unfollow-btn {
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.follow-btn {
+    background-color: #009688;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.unblock-btn {
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.unfollow-btn:hover {
+    background-color: #e63939;
+}
