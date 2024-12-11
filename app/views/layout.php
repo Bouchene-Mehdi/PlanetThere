@@ -40,6 +40,12 @@
 					case 'login':
 						echo 'assets/css/login.css';
 						break;
+					case 'forgot-1':
+						echo 'assets/css/forgot-1.css';
+						break;
+					case 'forgot-2':
+						echo 'assets/css/forgot-2.css';
+						break;
 					default:
 						echo 'assets/css/global.css';
 						break;
@@ -51,7 +57,7 @@
 
         <?php 
             // Include the navbar dynamically
-            require views_path('partials/navbar-out.php'); 
+            require views_path('partials/navbar.php'); 
         ?>
         <?php echo $content; ?>
         <?php 

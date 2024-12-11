@@ -14,7 +14,6 @@ function base_url($path = '') {
     $base =  rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 
     return $protocol . $host . $base . '/' . ltrim($path, '/');
-
 }
 
 function base_path($path = '') {
@@ -55,6 +54,9 @@ function render($view, $data = [], $layout = 'layout'){
 
     require views_path($layout . ".php");
 }
+function isLoggedIn() {
+    return isset($_SESSION['user']) && !empty($_SESSION['user']);
+}
 function config($key){
     $config = require base_path('config/config.php');
     $keys= explode('.', $key);
@@ -67,4 +69,5 @@ function config($key){
     }
     return $value;
 }
+
 ?>

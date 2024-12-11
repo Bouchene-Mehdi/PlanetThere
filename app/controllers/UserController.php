@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../EmailHelper.php';
 class UserController 
 {
 
@@ -9,7 +10,6 @@ class UserController
         ];
         echo " routing is wokring";
     }
- 
     public function UserAccount(){
         render('user/account');
     }
@@ -24,6 +24,16 @@ class UserController
     }
     public function ShowSignup_2_form(){
         render('user/signup-2');
+    }
+    public function ShowForgot_1(){
+        render('user/forgot-1');
+    }
+    public function ShowForgot_2(){
+        render('user/forgot-2');
+    }
+        // Show the login form   
+     public function ShowLogin(){
+        render('user/login');
     }
     public function register_1() {
         // Initialize data with empty values and error messages
@@ -198,9 +208,85 @@ class UserController
             exit();
         }
     }
-    // Show the login form   
-    public function ShowLogin(){
-        render('user/login');
+    public function forgotPasswordStep1() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = trim($_POST['email']);
+    
+            // Validate the email
+            if (empty($email)) {
+                $_SESSION['forgot_errors']['email_err'] = 'Email is required.';
+                header('Location: /forgot-1');
+                exit();
+            }
+    
+            $userModel = new User();
+            $user = $userModel->verifyEmail($email);
+    
+            if (!$user) {
+                $_SESSION['forgot_errors']['email_err'] = 'No account found with that email.';
+                header('Location: /forgot-1');
+                exit();
+            }
+    
+            // Generate a token and save it in the database
+            $token = bin2hex(random_bytes(16));
+            $userModel->savePasswordResetToken($user['UserID'], $token);
+    
+            // Send email with the token
+            $resetLink = "localhost/forgot-2?token=$token";
+            mail($email, 'Password Reset', "Click the following link to reset your password: $resetLink");
+
+            $subject = 'Password Reset';
+            $body = "Click the following link to reset your password: $resetLink";
+            
+            $emailHelper = new EmailHelper();
+            $emailHelper->sendEmail($email, $subject, $body);
+            $_SESSION['forgot_success'] = 'A password reset link has been sent to your email.';
+            header('Location: /forgot-1');
+            exit();
+        }
+    }
+
+    public function forgotPasswordStep2() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $token = $_POST['token'];
+            $password = trim($_POST['password']);
+            $confirmPassword = trim($_POST['confirm_password']);
+    
+            // Validate inputs
+            if (empty($password)) {
+                $_SESSION['forgot_errors']['password_err'] = 'Password is required.';
+            }
+            if ($password !== $confirmPassword) {
+                $_SESSION['forgot_errors']['confirm_password_err'] = 'Passwords do not match.';
+            }
+            if (!empty($_SESSION['forgot_errors'])) {
+                header('Location: /forgot-2?token=' . $token);
+                exit();
+            }
+    
+            $userModel = new User();
+            $userId = $userModel->getUserIdByResetToken($token);
+    
+            if (!$userId) {
+                $_SESSION['forgot_errors']['token_err'] = 'Invalid or expired token.';
+                header('Location: /forgot-1');
+                exit();
+            }
+    
+            // Update the user's password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            if ($userModel->updatePassword($userId, $hashedPassword)) {
+                // Invalidate the token
+                $userModel->invalidateResetToken($userId);
+    
+                $_SESSION['forgot_success'] = 'Your password has been successfully reset.';
+                header('Location: /login');
+                exit();
+            } else {
+                die('Something went wrong.');
+            }
+        }
     }
     
     

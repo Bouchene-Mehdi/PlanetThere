@@ -86,4 +86,35 @@ class User {
         
         return null; // Username not found
     }
+    public function savePasswordResetToken($userId, $token) {
+        $query = 'UPDATE users SET reset_token = :token, token_expiry = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE UserID = :id';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':token', $token);
+        $stmt->bindParam(':id', $userId);
+        return $stmt->execute();
+    }
+    
+    public function getUserIdByResetToken($token) {
+        $query = 'SELECT UserID FROM users WHERE reset_token = :token AND token_expiry > NOW() LIMIT 1';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    
+    public function updatePassword($userId, $hashedPassword) {
+        $query = 'UPDATE users SET PasswordHash = :password WHERE UserID = :id';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':password', $hashedPassword);
+        $stmt->bindParam(':id', $userId);
+        return $stmt->execute();
+    }
+    
+    public function invalidateResetToken($userId) {
+        $query = 'UPDATE users SET reset_token = NULL, token_expiry = NULL WHERE UserID = :id';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $userId);
+        return $stmt->execute();
+    }
+    
 }
