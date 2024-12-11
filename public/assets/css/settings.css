@@ -1,0 +1,166 @@
+.settings-page {
+    background: #f5f7fa;
+    text-align: center;
+    padding: 5vh 5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.settings-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.settings-header p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.settings-options {
+    align-self: center;
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.settings-item {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Push items to opposite ends */
+    align-items: center; /* Vertically center the label and switch */
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-wrap: nowrap; /* Prevent items from wrapping */
+}
+
+.settings-item label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    text-align: left; /* Ensure the label text aligns to the left */
+    flex: 1; /* Allow the label to take up remaining space */
+}
+
+.highlight {
+    color: #009688;
+}
+
+.dropdown {
+    padding: 0.5em;
+    font-size: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    outline: none;
+    flex-shrink: 0; /* Prevent dropdown from shrinking */
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px; /* Width of the switch */
+    height: 20px; /* Height of the switch */
+    flex-shrink: 0; /* Prevent shrinking in the flex container */
+}
+
+.switch input {
+    opacity: 0; /* Still hidden */
+    width: 100%; /* Match the width of the switch */
+    height: 100%; /* Match the height of the switch */
+    position: absolute; /* Position it over the switch */
+    left: 0; /* Ensure it covers the entire switch area */
+    top: 0;
+    z-index: 1;
+    cursor: pointer; /* Pointer cursor for interactivity */
+}
+
+
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Default background color */
+    border-radius: 10px; /* Rounded corners */
+    transition: 0.4s; /* Smooth transition */
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 14px; /* Height of the toggle button */
+    width: 14px; /* Width of the toggle button */
+    left: 3px; /* Spacing from the left */
+    bottom: 3px; /* Spacing from the bottom */
+    background-color: white; /* Color of the toggle button */
+    border-radius: 50%; /* Make it round */
+    transition: 0.4s; /* Smooth transition for movement */
+}
+
+input:checked + .slider {
+    background-color: #009688; /* Background color when checked */
+}
+
+input:checked + .slider:before {
+    transform: translateX(40px); /* Move the toggle button */
+}
+
+.password-change {
+    display: flexbox;
+    background-color: white;
+    padding: 2.0rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.password-change h2 {
+    text-align: left;
+    margin: auto;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 2.5rem;
+}
+
+.password-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.0rem;
+}
+
+.password-form input {
+    width: 80%;
+    align-self: center;
+    padding: 0.75em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #ddd;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.password-form .save-button {
+    background-color: #009688;
+    color: white;
+    border: none;
+    padding: 0.75em 1.5em;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: center;
+}
+
+.password-form .save-button:hover {
+    background-color: #00796b;
+}

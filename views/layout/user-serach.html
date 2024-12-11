@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Search</title>
+    <link rel="stylesheet" href="../../public/assets/css/global.css">
+    <link rel="stylesheet" href="../../public/assets/css/navbar.css">
+    <link rel="stylesheet" href="../../public/assets/css/user-search.css">
+    <link rel="stylesheet" href="../../public/assets/css/footer.css">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="user-search-page">
+        <!-- Search Bar Section -->
+        <div class="search-bar-container">
+            <div class="search-bar">
+                <input type="text" id="user-search-input" placeholder="Who are you looking for?">
+                <button class="search-button">
+                    <img src="../../public/assets/images/search-btn-icon.svg" alt="Search Icon">
+                </button>
+            </div>
+        </div>
+
+        <!-- User Profiles -->
+        <section class="user-profiles">
+            <div class="profile-card">
+                <img src="../../public/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                <h2>NameHannah</h2>
+                <p>Miley</p>
+            </div>
+            <div class="profile-card">
+                <img src="../../public/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                <h2>NameHannah</h2>
+                <p>Miley</p>
+            </div>
+            <div class="profile-card">
+                <img src="../../public/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                <h2>NameHannah</h2>
+                <p>Miley</p>
+            </div>
+            <div class="profile-card">
+                <img src="../../public/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                <h2>NameHannah</h2>
+                <p>Miley</p>
+            </div>
+            <div class="profile-card">
+                <img src="../../public/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                <h2>Jack Nickolson</h2>
+                <p>Patryk</p>
+            </div>
+            <div class="profile-card">
+                <img src="../../public/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                <h2>NameHannah</h2>
+                <p>Miley</p>
+            </div>
+            <div class="profile-card">
+                <img src="../../public/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                <h2>NameHannah</h2>
+                <p>Miley</p>
+            </div>
+            <div class="profile-card">
+                <img src="../../public/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                <h2>NameHannah</h2>
+                <p>Miley</p>
+            </div>
+            <div class="profile-card">
+                <img src="../../public/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                <h2>NameHannah</h2>
+                <p>Miley</p>
+            </div>
+            
+            <!-- Add more profile cards as needed -->
+        </section>
+
+        <!-- Load More Button -->
+        <div class="load-more-container">
+            <button class="load-more-btn">Load more...</button>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load Navbar
+        fetch("navbar-logged-in.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+
+        // Load Footer
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("footer").innerHTML = data);
+    </script>
+</body>
+</html>

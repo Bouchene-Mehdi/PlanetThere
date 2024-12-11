@@ -1,0 +1,69 @@
+.attendees-page {
+    text-align: center;
+    background: #f5f7fa;
+    padding: 20px;
+}
+
+.attendees-header {
+    margin-bottom: 32px;
+}
+
+.attendees-header h1 {
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.attendees-list {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    padding: 0 40px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profile-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    width: 180px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-pic {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.profile-card h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.profile-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0 15px;
+}
+
+.remove-btn {
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.remove-btn:hover {
+    background-color: #e63939;
+}
