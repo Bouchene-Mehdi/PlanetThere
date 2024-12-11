@@ -35,6 +35,12 @@ class UserController
      public function ShowLogin(){
         render('user/login');
     }
+    public function ShowUserSearch(){
+        render('user/user-search'); 
+    }
+    public function ShowUserSettings(){
+        render('user/settings');
+    }
     public function register_1() {
         // Initialize data with empty values and error messages
         $data = [

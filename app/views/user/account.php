@@ -12,7 +12,7 @@
         <div class="account-options">
             <!-- Personal Information Section -->
             <div class="option">
-                <a href="profile-settings.html" class="option-link">
+                <a href="/profile-settings" class="option-link">
                     <div class="icon-title">
                         <img src="assets/images/account-icon.svg" alt="Personal Information Icon" class="icon">
                         <div class="text">
@@ -26,7 +26,7 @@
 
             <!-- History of Events Section -->
             <div class="option">
-                <a href="events-history.html" class="option-link">
+                <a href="/event-history" class="option-link">
                     <div class="icon-title">
                         <img src="assets/images/book-icon.svg" alt="History of Events Icon" class="icon">
                         <div class="text">
@@ -54,7 +54,7 @@
 
             <!-- Settings Section -->
             <div class="option">
-                <a href="settings.html" class="option-link">
+                <a href="/settings" class="option-link">
                     <div class="icon-title">
                         <img src="assets/images/settings-icon.svg" alt="Settings Icon" class="icon">
                         <div class="text">
@@ -65,7 +65,19 @@
                 </a>
                 <hr>
             </div>
-
+            <!-- Settings Section -->
+            <div class="option delete">
+                <a href="log-out.html" class="option-link">
+                    <div class="icon-title">
+                        <img src="/assets/images/log-out-icon.svg" alt="Log Out Icon" class="icon">
+                        <div class="text">
+                            <h2>Log out</h2>
+                            <p>Log out of your account</p>
+                        </div>
+                    </div>
+                </a>
+                <hr>
+            </div>
             <!-- Delete Account Section -->
             <div class="option delete">
                 <a href="delete-account.html" class="option-link">
