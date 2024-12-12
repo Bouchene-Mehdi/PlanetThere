@@ -192,8 +192,9 @@ input{
 .uppload-picture-box{
     width: 270px;
     height: 150px;
-    background-color: #EDEFF2;
-    
+    background-image: url(pictures/pic-uppload-pic.png);
+    box-shadow: none;
+    border-radius: 0px;
 }
 
 .event-descryption{
@@ -210,14 +211,30 @@ input{
     padding: 5px 0px 0px 8px;
 }
 
-.max-participants, .frequency, .event-descryption{
+.max-participants, .frequency, .event-descryption, .category, .event-date{
     display: flex;
     flex-direction: column;
     gap:10px;
 }
 
+.category select{
+    font-family: 'Product Sans', sans-serif;
+    font-size: 14px;
+    padding: 17px 7px 17px 7px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 2px 5px 10px rgba(199,199, 199);
+    
+}
+
+option{
+    border: none;
+}
+
+
 .event-date{
-    grid-column: 1/2;
+    grid-column: 2/3;
+    
 }
 
 

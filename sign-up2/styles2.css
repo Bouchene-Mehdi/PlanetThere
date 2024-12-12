@@ -271,11 +271,7 @@ main{
     appearance: none;
 }
 
-#file-upload{
-    visibility: hidden;
-    width: 0px;
-    height: 0px;
-}
+
 
 .file-upload-button{
     display: inline-block;
@@ -288,6 +284,7 @@ main{
     border: none;
     border-radius: 5px;
     text-align: center;
+    
 }
 
 .file-upload-button:hover{
@@ -295,8 +292,14 @@ main{
     cursor: pointer;
 }
 
+#file-upload{
+    max-width: 250px;
+}
+
 .upload-button{
     margin-left: 75px;
+    display: flex;
+    justify-content: center;
 }
 
 .pic-upload-section{
@@ -305,6 +308,11 @@ main{
  justify-content: space-around;
  
  
+}
+
+.upload-button{
+    margin:0px
+    
 }
 
 .pic-upload-section h2{

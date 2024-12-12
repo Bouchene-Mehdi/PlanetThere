@@ -61,7 +61,21 @@
 					<input type="number" min="0" id="frequency" name="frequency" placeholder="days gap (0 if once only)" required>
 				</div>
 
-				
+				<div class="category">
+					<label class="form-label" for="categories">CATEGORY</label>
+					<select name="categories" id="categories" required>
+						<option value="" hidden>What categories fits your event?</option>
+						<option value="Sport">Sport</option>
+						<option value="Entertainment">Entertainment</option>
+						<option value="Politics">Politics</option>
+						<option value="Education">Education</option>
+					  </select>
+				</div>
+
+				<div class="event-date">
+					<label class="form-label" for="finishdate">PICK THE FINISH DATE</label>
+					<input max="2024-12-31" type="date" id="finishdate" name="finishdate" >
+				</div>
 
 				<div class="event-descryption">
 					<label class="form-label" for="descryption">DESCRIPTION</label>
