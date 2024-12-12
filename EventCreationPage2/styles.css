@@ -207,6 +207,7 @@ input{
     box-shadow: 2px 5px 10px rgba(199,199, 199);
     border: none;
     border-radius: 2px;
+    padding: 5px 0px 0px 8px;
 }
 
 .max-participants, .frequency, .event-descryption{

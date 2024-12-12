@@ -41,9 +41,9 @@
 				<div class="gallery">
 					
 						
-						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  required>
+						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  >
 					
-						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  required>
+						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  >
 				
 				</div>
 			</div>
@@ -58,11 +58,7 @@
 					
 						
 					<label class="form-label" for="frequency">FREQUENCY</label>
-					<select class="frequency-list" id="frequency" name="frequency" >
-						<option class="default-option" value="" disabled selected hidden>Do you want your event to repeat over time?</option>
-						<option value="yes">Yes</option>
-						<option value="no">No</option>
-					</select>
+					<input type="number" min="0" id="frequency" name="frequency" placeholder="days gap (0 if once only)" required>
 				</div>
 
 				
