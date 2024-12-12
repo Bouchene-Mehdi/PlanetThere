@@ -74,11 +74,10 @@
     font-size: 0.9em;
 }
 
-.btn-attend, .btn-follow, .btn-attendance{
+.btn-attend, .btn-follow, .btn-attendance, .btn-finished{
     margin-right: 40px;
     padding: 10px 20px;
     width: 10%;
-    font-weight: bold;
     background-color: #009688;
     color: #ffffff;
     border: none;
@@ -87,6 +86,10 @@
     font-size: 14px;
     cursor: pointer;
     text-transform: uppercase;
+}
+
+.btn-finished{
+    background-color: #a94442;
 }
 
 .btn-edit {
@@ -192,6 +195,82 @@
     align-items: center;
     /* BlackFont */
     color: #333333;
+}
+
+/*Review Section*/
+
+/* Feedback Section */
+.feedback-section {
+    margin: 40px auto;
+    padding: 20px;
+    width: 90%;
+    text-align: center;
+    font-family: 'Product Sans', sans-serif;
+}
+
+.feedback-section h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.feedback-section .highlight {
+    color: #009688;
+}
+
+.star-rating {
+    margin: 10px 0;
+}
+
+.star-rating i {
+    font-size: 64px;
+    color: #dcdcdc; /* Default grey color */
+    cursor: pointer;
+    margin: 0 5px;
+    transition: color 0.3s ease-in-out;
+}
+
+.star-rating i:hover,
+.star-rating i.active {
+    color: #ffcc00; /* Highlighted star color */
+}
+
+.feedback-input {
+    width: 100%;
+    height: 300px;
+    margin: 15px 0;
+    /*padding: 10px;*/
+    font-size: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-family: 'Product Sans', sans-serif;
+
+}
+
+.feedback-input:focus {
+    outline: none;
+    border-color: #009688;
+    box-shadow: 0 0 4px rgba(0, 150, 136, 0.4);
+}
+
+.btn-submit {
+    background: #009688;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out;
+    align-self: self-end;
+}
+
+.btn-submit:hover {
+    background-color: #00796b;
 }
 
 /*Events Section*/
