@@ -1,0 +1,350 @@
+/* Main Content */
+
+.main-content {
+    width: 100%;
+    background-color: #f5f7fa;
+}
+
+/* Event Header */
+.event-header {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.event-header h1 {
+    padding-top: 20px;
+    margin-top: 0;
+    justify-self: center;
+    font-family: 'Product Sans', 'sans-serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 58px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+
+    /* GreyFont */
+    color: #7F7F7F;
+
+}
+
+.event-author-header {
+    display: flex;
+    width: 90%;
+    height: 100px;
+    justify-content: space-between;
+    justify-self: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.event-author{
+    display: flex;
+    align-items: center;
+    height: inherit;
+    margin-left: 40px;
+}
+
+.author-photo{
+    aspect-ratio: 1/1;
+    height: 70%;
+    border-radius: 50%;
+    border: 3px solid #00c3a9;
+    margin-right: 20px;
+}
+
+.author-by{
+    font: 400 1em 'Product Sans', sans-serif;
+}
+
+.author-by .author-name{
+    font: 400 1.6em 'Product Sans', sans-serif;
+    margin-left: 5px;
+}
+
+.event-header-attendance{
+    display: flex;
+    align-items: center;
+    color: #7f7f7f;
+    font-size: 0.9em;
+}
+
+.btn-attend, .btn-follow{
+    margin-right: 40px;
+    padding: 10px 20px;
+    width: 10%;
+    background-color: #009688;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+/* Carousel Section */
+.event-carousel {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.carousel {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    justify-self: center;
+    width: 90%;
+    aspect-ratio: 3/1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+.carousel-control {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.carousel-images img {
+    width: 100%;
+    /*height: 100%; !* Match the height of the container *!*/
+    /*object-fit: cover; !* Maintain aspect ratio and crop if necessary *!*/
+    object-position: center; /* Center the image in the container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Event Details */
+.event-text-details {
+    display: flex; /* Arrange items in a row */
+    flex-direction: column;
+    justify-content: space-between; /* Space between the details */
+    align-items: center;
+    gap: 20px; /* Add spacing between items if needed */
+    margin: 20px 0; /* Add some vertical margin for spacing */
+}
+
+.detail {
+    justify-self: center;
+    width: 90%;
+    height: 50px;
+    flex: 1; /* Allow each detail to take equal space */
+    background: #fff; /* Set background color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+    text-align: left; /* Align text to the left */
+}
+
+.detail h3 {
+    /* TIME and date */
+
+    margin-left: 20px;
+    font-family: 'Product Sans', 'sans-serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    /* BlackFont */
+    color: #333333;
+}
+
+.detail p {
+    margin-left: 20px;
+    font-family: 'Product Sans', 'sans-serif';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    /*text-transform: uppercase;*/
+
+    /* BlackFont */
+    color: #333333;
+
+
+}
+
+/* Description */
+.event-description {
+    justify-self: center;
+    width: 90%;
+    padding: 20px 0;
+    flex: 1; /* Allow each detail to take equal space */
+    background: #fff; /* Set background color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+    text-align: left; /* Align text to the left */
+}
+
+.event-description h3, p {
+    margin: 10px 20px;
+    text-align: justify;
+    font-family: 'Product Sans', 'sans-serif';
+}
+
+.event-description h3{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    /* BlackFont */
+    color: #333333;
+}
+
+.event-description p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    /*text-transform: uppercase;*/
+    /* BlackFont */
+    color: #333333;
+}
+
+/*Events Section*/
+
+.events-section {
+    width: 88%;
+    margin-top: 5px;
+    /*padding: 0 20px;*/
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+
+.section-title {
+    margin-left: 20px;
+    color: #000;
+    font: 400 2em 'Product Sans', sans-serif;
+    font-weight: bold;
+}
+
+.section-title .highlight {
+    color: #009688;
+}
+
+
+.events-container {
+    margin-top: 10px;
+}
+
+.events-grid {
+    width: inherit;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Add a responsive layout for smaller screens */
+@media (max-width: 1200px) {
+    .events-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+    }
+}
+
+@media (max-width: 900px) {
+    .events-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+    }
+}
+
+@media (max-width: 600px) {
+    .events-grid {
+        grid-template-columns: 1fr; /* 1 column on very small screens */
+    }
+}
+
+/* Event Card */
+.event-card {
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px;
+    width: 88%;
+    height: 88%;
+}
+
+.event-image {
+    aspect-ratio: 1.45;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.event-title {
+    color: #000;
+    margin-top: 15px;
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.event-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 20px;
+    margin-top: auto;
+}
+
+.event-info {
+    display: flex;
+    flex-direction: column;
+    justify-self: left;
+    font-size: 0.80em;
+}
+
+.event-date {
+    color: #009688;
+}
+
+.event-location {
+    color: #7f7f7f;
+    margin-top: 4px;
+    text-align: left;
+    justify-self: left;
+}
+
+/* Event attendance styling */
+.event-attendance {
+    display: flex;
+    align-items: center;
+    color: #7f7f7f;
+    font-size: 0.9em;
+    align-self: end;
+}
+
+.attendance-icon {
+    width: 24px;
+    margin-right: 8px;
+}
+
+.load-more-btn {
+    margin: 20px auto;
+    margin-top: 30px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #009688;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.load-more-btn:hover {
+    background-color: #00796b;
+}
