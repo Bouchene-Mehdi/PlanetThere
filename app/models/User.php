@@ -27,6 +27,18 @@ class User {
 
         return false; // User does not exi  st
     }
+    public function deleteAccountByUsername($username) {
+        // Assume you have a database connection (using PDO here for security)
+        $db = Database::getInstance(); // Assuming you have a Database class for DB connection
+        $query = "DELETE FROM users WHERE username = :username"; // Adjust the table name and field names if necessary
+
+        // Prepare and execute the query
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+
+        // Execute and return true if successful, false otherwise
+        return $stmt->execute();
+    }
     public function verifyEmail($email) {
         $query = 'SELECT * FROM users WHERE email = :email LIMIT 1';
         $stmt = $this->db->prepare($query);
@@ -116,5 +128,37 @@ class User {
         $stmt->bindParam(':id', $userId);
         return $stmt->execute();
     }
-    
+    public function updateProfile($username, $firstName, $lastName, $phone, $phoneVisibility, $dobVisibility) {
+        // Sanitize input (ensure we are getting valid visibility values)
+        $phoneVisibility = ($phoneVisibility === 'Public') ? 1 : 0;
+        $dobVisibility = ($dobVisibility === 'Public') ? 1 : 0;
+
+        // Database connection (using PDO)
+
+        // SQL query to update user information and privacy settings in one go
+        $sql = "UPDATE users 
+                SET FirstName = :firstName, 
+                    LastName = :lastName, 
+                    Phone = :phone, 
+                    phonePublic = :phonePublic, 
+                    dobPublic = :dobPublic
+                WHERE Username = :username";
+
+        // Prepare the SQL statement
+        $stmt = $this->db->prepare($sql);
+
+        // Bind parameters
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':firstName', $firstName, PDO::PARAM_STR);
+        $stmt->bindParam(':lastName', $lastName, PDO::PARAM_STR);
+        $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $stmt->bindParam(':phonePublic', $phoneVisibility, PDO::PARAM_INT);
+        $stmt->bindParam(':dobPublic', $dobVisibility, PDO::PARAM_INT);
+
+        // Execute the query
+        if ($stmt->execute()) {
+            return true;  // Return true if the update is successful
+        }
+        return false;  // Return false if the update fails
+    }
 }

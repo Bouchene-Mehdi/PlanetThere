@@ -55,6 +55,16 @@
 					case 'settings':
 						echo 'assets/css/settings.css';
 						break;
+					case 'create-event1':
+						echo 'assets/css/create-event-1.css';
+						break;
+					case 'create-event2':
+						echo 'assets/css/create-event-2.css';
+						break;
+					case 'friends':
+						echo 'assets/css/friends.css';
+						break;
+		
 					default:
 						echo 'assets/css/global.css';
 						break;

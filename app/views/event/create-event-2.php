@@ -1,24 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-	<header class="nav-bar">
-		<img src="pictures/logo.png" alt="Planet There Logo" class="logo">
-		<img src="pictures/logo-text.svg" alt="Brand Logo" class="brand-logo">
-		<nav class="nav-menu">
-		  
-			<!-- Profile Picture as a clickable link -->
-			<a href="#" class="profile-link">
-				<img src="pictures/profile-image.jpg" alt="Profile" class="profile-image">
-			</a>
-		</nav>
-	</header>
+
 
 <main class="main">
 
@@ -41,9 +21,9 @@
 				<div class="gallery">
 					
 						
-						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  required>
+						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  >
 					
-						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  required>
+						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  >
 				
 				</div>
 			</div>
@@ -58,14 +38,24 @@
 					
 						
 					<label class="form-label" for="frequency">FREQUENCY</label>
-					<select class="frequency-list" id="frequency" name="frequency" >
-						<option class="default-option" value="" disabled selected hidden>Do you want your event to repeat over time?</option>
-						<option value="yes">Yes</option>
-						<option value="no">No</option>
-					</select>
+					<input type="number" min="0" id="frequency" name="frequency" placeholder="days gap (0 if once only)" required>
 				</div>
 
-				
+				<div class="category">
+					<label class="form-label" for="categories">CATEGORY</label>
+					<select name="categories" id="categories" required>
+						<option value="" hidden>What categories fits your event?</option>
+						<option value="Sport">Sport</option>
+						<option value="Entertainment">Entertainment</option>
+						<option value="Politics">Politics</option>
+						<option value="Education">Education</option>
+					  </select>
+				</div>
+
+				<div class="event-date">
+					<label class="form-label" for="finishdate">PICK THE FINISH DATE</label>
+					<input max="2024-12-31" type="date" id="finishdate" name="finishdate" >
+				</div>
 
 				<div class="event-descryption">
 					<label class="form-label" for="descryption">DESCRIPTION</label>
@@ -88,5 +78,3 @@
 </section>
 
 </main>
-</body>
-</html>

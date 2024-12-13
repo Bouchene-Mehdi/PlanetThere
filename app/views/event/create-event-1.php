@@ -1,24 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-	<header class="nav-bar">
-		<img src="pictures/logo.png" alt="Planet There Logo" class="logo">
-		<img src="pictures/logo-text.svg" alt="Brand Logo" class="brand-logo">
-		<nav class="nav-menu">
-		  
-			<!-- Profile Picture as a clickable link -->
-			<a href="#" class="profile-link">
-				<img src="pictures/profile-image.jpg" alt="Profile" class="profile-image">
-			</a>
-		</nav>
-	</header>
 
 <main class="main">
 
@@ -84,5 +63,3 @@
 </section>
 
 </main>
-</body>
-</html>

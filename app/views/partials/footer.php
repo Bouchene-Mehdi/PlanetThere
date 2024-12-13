@@ -10,9 +10,9 @@
             <li><a href="/tac" class="nav-link">Terms of Service</a></li>
             <li><a href="/faq" class="nav-link">FAQ</a></li>
             <li><a href="/" class="nav-link">Home</a></li>
-            <li><a href="/" class="nav-link">Events</a></li>
-            <li><a href="/" class="nav-link">People</a></li>
-            <li><a href="/" class="nav-link">Create an Event</a></li>
+            <li><a href="/event-search" class="nav-link">Events</a></li>
+            <li><a href="/user-search" class="nav-link">People</a></li>
+            <li><a href="/create-event1" class="nav-link">Create an Event</a></li>
             <li><a href="/about" class="nav-link">About us</a></li>
         </ul>
     </nav>

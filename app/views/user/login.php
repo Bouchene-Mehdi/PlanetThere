@@ -36,12 +36,14 @@
         <div class="Password-field">
             <label class="form-label" for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password">
+            <p class="forgot-part">forgot your password ? Click <a href="/forgot-1">here</a></p>
 
             <!-- Display error if password is not provided -->
             <?php if (isset($_SESSION['login_errors']['password_err'])): ?>
                 <p class="error"><?= $_SESSION['login_errors']['password_err']; ?></p>
                 <?php unset($_SESSION['login_errors']['password_err']); ?>  <!-- Clear the error message after display -->
             <?php endif; ?>
+
 
             <!-- Display error if login failed -->
             <?php if (isset($_SESSION['login_errors']['login_err'])): ?>

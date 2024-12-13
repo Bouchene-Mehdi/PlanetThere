@@ -30,7 +30,7 @@
                     <h2>Upload your profile picture:</h2>
                     <p>Accepted formats: jpeg, png</p>
                 </div>
-
+   
                 <div class="upload-button">
                     <label for="file-upload" class="file-upload-button">Upload File</label>
                     <input type="file" id="file-upload" name="profile_picture" accept="image/jpeg, image/png">

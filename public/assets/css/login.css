@@ -227,6 +227,12 @@ main {
 .name-label {
 	text-transform: uppercase;
 }
+.forgot-part {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	margin-top: 20px;
+}
 
 .footer-part {
 	font-family: 'Product Sans', sans-serif;

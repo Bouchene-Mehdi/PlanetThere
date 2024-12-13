@@ -41,6 +41,9 @@ class UserController
     public function ShowUserSettings(){
         render('user/settings');
     }
+    public function ShowFriends(){
+        render('user/friends');
+    }
     public function register_1() {
         // Initialize data with empty values and error messages
         $data = [
@@ -170,6 +173,7 @@ class UserController
                 var_dump($finalData);
 
                 unset($_SESSION['page1_data']); // Clear session
+                header("Location: /login");
                 exit;
             }
         }
@@ -294,7 +298,81 @@ class UserController
             }
         }
     }
+    public function logout() {
+        // Start the session if it's not already started
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     
+        // Unset all session variables
+        session_unset();
+    
+        // Destroy the session
+        session_destroy();
+    
+        // Redirect the user to the homepage or login page
+        header('Location: /');
+        exit();
+    }
+    public function deleteAccount() {
+        // Ensure the user is logged in and $_SESSION['user'] is set
+        if (isset($_SESSION['user'])) {
+            $username = $_SESSION['user']['Username']; // Get the username from session
+
+            // Load the model and call the deleteAccount function
+            $userModel = new User();
+
+            // Call the model function to delete the user account
+            if ($userModel->deleteAccountByUsername($username)) {
+                // Successfully deleted the account, now log out the user
+                session_unset();
+                session_destroy();
+
+                // Redirect to a confirmation page
+                header("Location: /"); // Adjust the redirect URL
+                exit();
+            } else {
+                // If deletion fails, show an error message
+                echo "Error: Could not delete account.";
+            }
+        } else {
+            // If the user is not logged in, redirect to login page
+            header("Location: /login");
+            exit();
+        }
+    }
+    public function updateProfile() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Get data from the POST request
+            $username = $_SESSION['user']['Username'];  // Get UserId from the session
+            $firstName = $_POST['first_name'];
+            $lastName = $_POST['last_name'];
+            $phone = $_POST['phone'];
+            $dob = $_POST['dob'];  // Assuming DOB is updated as well
+            $phoneVisibility = $_POST['phone_public'];  // 'Private' or 'Public'
+            $dobVisibility = $_POST['dob_public'];  // 'Private' or 'Public'
+
+            // Instantiate the User model and update the profile
+            $userModel = new User();
+            $result = $userModel->updateProfile($username, $firstName, $lastName, $phone, $phoneVisibility, $dobVisibility);
+            
+            // Handle the result (show success or error message)
+            if ($result) {
+                // Update successful
+                $_SESSION['user']['FirstName'] = $_POST['first_name'];
+                $_SESSION['user']['LastName'] = $_POST['last_name'];
+                $_SESSION['user']['Phone'] = $_POST['phone'];
+                $_SESSION['user']['phonePublic'] = ($phoneVisibility === 'Public') ? 1 : 0;
+                $_SESSION['user']['dobPublic'] = ($dobVisibility === 'Public') ? 1 : 0;
+                header("Location: /profile-settings?success=1");
+                exit();
+            } else {
+                // Update failed
+                header("Location: /profile-settings?error=1");
+                exit();
+            }
+        }
+    }
     
 }
 ?>
