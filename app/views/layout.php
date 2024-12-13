@@ -46,6 +46,25 @@
 					case 'forgot-2':
 						echo 'assets/css/forgot-2.css';
 						break;
+					case 'event-search':
+						echo 'assets/css/event-search.css';
+						break;
+					case 'user-search':
+						echo 'assets/css/user-search.css';
+						break;
+					case 'settings':
+						echo 'assets/css/settings.css';
+						break;
+					case 'create-event1':
+						echo 'assets/css/create-event-1.css';
+						break;
+					case 'create-event2':
+						echo 'assets/css/create-event-2.css';
+						break;
+					case 'friends':
+						echo 'assets/css/friends.css';
+						break;
+		
 					default:
 						echo 'assets/css/global.css';
 						break;

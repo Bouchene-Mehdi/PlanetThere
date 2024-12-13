@@ -12,9 +12,17 @@ $routes=[
         '/forgot-1' => 'UserController@ShowForgot_1',
         '/forgot-2' => 'UserController@ShowForgot_2',
         '/login' => 'UserController@ShowLogin',
+        '/log-out' => 'UserController@logout',
+        '/delete-account' => 'UserController@deleteAccount',
         '/account' => 'UserController@UserAccount',
+        '/user-search'=>'UserController@ShowUserSearch',
+        '/settings'=>'UserController@ShowUserSettings',
+        '/friends'=>'UserController@ShowFriends',
         '/user/register' => 'UserController@showRegisterForm',
         '/user/login' => 'UserController@showLoginForm',
+        '/event-search'=>'EventController@ShowEventSearch',
+        '/create-event1'=>'EventController@ShowEventCreate1',
+        '/create-event2'=>'EventController@ShowEventCreate2',
         '/dashboard' => 'AdminController@dashboard',
         '/admin' => 'AdminController@admin',
     ],
@@ -26,6 +34,7 @@ $routes=[
         '/logout' => 'UserController@logout',
         '/user/forgot-password-1' => 'UserController@forgotPasswordStep1',
         '/user/forgot-password-2' => 'UserController@forgotPasswordStep2',
+        '/user/profile-update' => 'UserController@updateProfile',
     ]
 ];
 ?>

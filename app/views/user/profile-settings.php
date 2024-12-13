@@ -1,4 +1,3 @@
-
 <body>
     <div class="profile-settings">
 
@@ -7,8 +6,9 @@
             <div class="profile-header">
                 <img src="assets/images/profile-image.JPG" alt="Profile Picture" class="profile-picture">
                 <div>
-                    <h1>Jean Michel</h1>
-                    <p class="email">jeanmichel@gmail.com</p>
+                    <!-- Display FirstName and LastName from session -->
+                    <h1><?php echo $_SESSION['user']['FirstName'] . " " . $_SESSION['user']['LastName']; ?></h1>
+                    <p class="email"><?php echo $_SESSION['user']['Email']; ?></p>
                 </div>
             </div>
             <div class="page-header">
@@ -21,56 +21,45 @@
                 <div class="followers">
                     <span class="label">Followers</span>
                     <br>
-                    <span class="value">123</span>
+                    <span class="value">123</span> <!-- Replace with actual data if needed -->
                 </div>
                 <div class="followers">
                     <span class="label">Following</span>
                     <br>
-                    <span class="value">123</span>
+                    <span class="value">123</span> <!-- Replace with actual data if needed -->
                 </div>
             </div>
         </header>
     
         <!-- Profile Form -->
-        <form class="profile-form">
+        <form class="profile-form" method="POST" action="/user/profile-update"> <!-- Assuming 'profile-update.php' handles the POST request -->
             <!-- Username and Email -->
             <div class="form-row">
                 <label for="username">Username</label>
-                <input type="text" id="username" value="Billiejean12" readonly>
+                <!-- Display Username from session -->
+                <input type="text" id="username" value="<?php echo $_SESSION['user']['Username']; ?>" readonly>
             </div>
             <div class="form-row">
                 <label for="email">Email</label>
                 <div class="input-wrapper">
-                    <input type="email" id="email" value="jeanmichel@gmail.com" readonly>
-                    <select>
-                        <option>Friends</option>
-                        <option>Public</option>
-                        <option>Private</option>
-                    </select>
+                    <!-- Display Email from session -->
+                    <input type="email" id="email" value="<?php echo $_SESSION['user']['Email']; ?>" readonly>
                 </div>
             </div>
     
             <!-- Name and Surname -->
             <div class="form-row">
-                <label for="name">Name</label>
+                <label for="name">First Name</label>
                 <div class="input-wrapper">
-                    <input type="text" id="name" value="Jean">
-                    <select>
-                        <option>Public</option>
-                        <option>Friends</option>
-                        <option>Private</option>
-                    </select>
+                    <!-- Display FirstName from session -->
+                    <input type="text" id="first_name" name="first_name" value="<?php echo $_SESSION['user']['FirstName']; ?>" required>
                 </div>
             </div>
             <div class="form-row">
-                <label for="surname">Surname</label>
+                <label for="surname">Last Name</label>
                 <div class="input-wrapper">
-                    <input type="text" id="surname" value="Michel">
-                    <select>
-                        <option>Friends</option>
-                        <option>Public</option>
-                        <option>Private</option>
-                    </select>
+                    <!-- Display LastName from session -->
+                    <input type="text" id="last_name" name="last_name" value="<?php echo $_SESSION['user']['LastName']; ?>" required>
                 </div>
             </div>
     
@@ -78,22 +67,22 @@
             <div class="form-row">
                 <label for="phone">Phone number</label>
                 <div class="input-wrapper">
-                    <input type="tel" id="phone" value="+33 12 34 56 78">
-                    <select>
-                        <option>Private</option>
-                        <option>Public</option>
-                        <option>Friends</option>
+                    <!-- Display Phone from session -->
+                    <input type="tel" id="phone" name="phone" value="<?php echo $_SESSION['user']['Phone']; ?>" required>
+                    <select name="phone_public">
+                        <option value="Private" <?php echo $_SESSION['user']['phonePublic'] == 0 ? 'selected' : ''; ?>>Private</option>
+                        <option value="Public" <?php echo $_SESSION['user']['phonePublic'] == 1 ? 'selected' : ''; ?>>Public</option>
                     </select>
                 </div>
             </div>
             <div class="form-row">
                 <label for="dob">Date of Birth</label>
                 <div class="input-wrapper">
-                    <input type="date" id="dob" value="2001-01-01" readonly>
-                    <select>
-                        <option>Friends</option>
-                        <option>Public</option>
-                        <option>Private</option>
+                    <!-- Display DateOfBirth from session -->
+                    <input type="date" id="dob" name="dob" value="<?php echo $_SESSION['user']['DateOfBirth']; ?>" readonly>
+                    <select name="dob_public">
+                        <option value="Private" <?php echo $_SESSION['user']['dobPublic'] == 0 ? 'selected' : ''; ?>>Private</option>
+                        <option value="Public" <?php echo $_SESSION['user']['dobPublic'] == 1 ? 'selected' : ''; ?>>Public</option>
                     </select>
                 </div>
             </div>

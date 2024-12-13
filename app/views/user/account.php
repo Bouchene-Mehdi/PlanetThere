@@ -4,7 +4,7 @@
     <div class="account-center">
         <!-- Header Section -->
         <header class="account-header">
-            <h1>Welcome Jean Michel!</h1>
+            <h1>Welcome <?php echo $_SESSION['user']['FirstName'] . " " . $_SESSION['user']['LastName']; ?>!</h1>
             <p class="subheader">Account Center</p>
         </header>
 
@@ -12,7 +12,7 @@
         <div class="account-options">
             <!-- Personal Information Section -->
             <div class="option">
-                <a href="profile-settings.html" class="option-link">
+                <a href="/profile-settings" class="option-link">
                     <div class="icon-title">
                         <img src="assets/images/account-icon.svg" alt="Personal Information Icon" class="icon">
                         <div class="text">
@@ -26,7 +26,7 @@
 
             <!-- History of Events Section -->
             <div class="option">
-                <a href="events-history.html" class="option-link">
+                <a href="/event-history" class="option-link">
                     <div class="icon-title">
                         <img src="assets/images/book-icon.svg" alt="History of Events Icon" class="icon">
                         <div class="text">
@@ -40,7 +40,7 @@
 
             <!-- Friends Section -->
             <div class="option">
-                <a href="friends.html" class="option-link">
+                <a href="/friends" class="option-link">
                     <div class="icon-title">
                         <img src="assets/images/users-icon.svg" alt="Friends Icon" class="icon">
                         <div class="text">
@@ -54,7 +54,7 @@
 
             <!-- Settings Section -->
             <div class="option">
-                <a href="settings.html" class="option-link">
+                <a href="/settings" class="option-link">
                     <div class="icon-title">
                         <img src="assets/images/settings-icon.svg" alt="Settings Icon" class="icon">
                         <div class="text">
@@ -65,10 +65,22 @@
                 </a>
                 <hr>
             </div>
-
+            <!-- Settings Section -->
+            <div class="option delete" >
+                <a href="/log-out" class="option-link" id="logoutBtn">
+                    <div class="icon-title">
+                        <img src="/assets/images/log-out-icon.svg" alt="Log Out Icon" class="icon">
+                        <div class="text">
+                            <h2>Log out</h2>
+                            <p>Log out of your account</p>
+                        </div>
+                    </div>
+                </a>
+                <hr>
+            </div>
             <!-- Delete Account Section -->
             <div class="option delete">
-                <a href="delete-account.html" class="option-link">
+                <a  class="option-link" id="delete">
                     <div class="icon-title">
                         <img src="assets/images/info-icon.svg" alt="Delete Account Icon" class="icon">
                         <div class="text">
@@ -81,7 +93,29 @@
         </div>
 
     </div>
-
-    
+ <script>
+        document.getElementById('logoutBtn').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default button action (navigation)
+        
+        // Show confirmation dialog
+        const confirmation = confirm("Are you sure you want to log out?");
+        
+        if (confirmation) {
+            // If confirmed, proceed with the logout
+            window.location.href = '/log-out'; // Adjust to your logout route
+        }
+    });
+    document.getElementById('delete').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default button action (navigation)
+        
+        // Show confirmation dialog
+        const confirmation = confirm("Are you sure you want to delete your account ?");
+        
+        if (confirmation) {
+            // If confirmed, proceed with the logout
+            window.location.href = '/delete-account'; // Adjust to your logout route
+        }
+    });
+</script>
 
 </body>
