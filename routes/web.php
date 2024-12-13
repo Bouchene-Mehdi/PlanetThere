@@ -35,6 +35,7 @@ $routes=[
         '/user/forgot-password-1' => 'UserController@forgotPasswordStep1',
         '/user/forgot-password-2' => 'UserController@forgotPasswordStep2',
         '/user/profile-update' => 'UserController@updateProfile',
+        '/user/search'=>'UserController@postUserSearch',
     ]
 ];
 ?>

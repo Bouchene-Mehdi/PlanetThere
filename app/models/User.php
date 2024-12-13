@@ -161,4 +161,24 @@ class User {
         }
         return false;  // Return false if the update fails
     }
+    public function searchUsers($query = '') {
+        if (empty($query)) {
+            // If no query, return all users
+            $sql = "SELECT username, firstName, lastName FROM users";
+            $stmt = $this->db->prepare($sql);
+        } else {
+            // Search by username, firstName, or lastName
+            $sql = "SELECT username, firstName, lastName
+                    FROM users 
+                    WHERE username LIKE :query 
+                       OR firstName LIKE :query 
+                       OR lastName LIKE :query";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':query', '%' . $query . '%', PDO::PARAM_STR);
+        }
+    
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }
