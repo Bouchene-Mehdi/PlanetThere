@@ -35,9 +35,23 @@ class UserController
      public function ShowLogin(){
         render('user/login');
     }
-    public function ShowUserSearch(){
-        render('user/user-search'); 
+    public function ShowUserSearch() {
+        // Initialize session variables if not set
+        if (!isset($_SESSION['searchQuery'])) {
+            $_SESSION['searchQuery'] = ''; // Default to empty if no search
+        }
+    
+        if (!isset($_SESSION['users'])) {
+            $userModel = new User();
+            $_SESSION['users'] = $userModel->searchUsers('');
+        }
+    
+        // Retrieve the search query and users from the session
+        // Render the view (no need to pass data, the view uses session variables)
+        render('user/user-search');
     }
+    
+        
     public function ShowUserSettings(){
         render('user/settings');
     }
@@ -373,6 +387,32 @@ class UserController
             }
         }
     }
+    public function postUserSearch() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $searchQuery = $_POST['search_query'];
+            if($searchQuery !=''){
+                $searchQuery = trim($_POST['search_query'] ?? '');
+            }
+    
+            // Initialize the model
+            $userModel = new User();
+    
+            // Fetch users based on the search query
+            $users = $userModel->searchUsers($searchQuery);
+    
+            // Store the search query and results in the session
+            $_SESSION['searchQuery'] = $searchQuery;
+            $_SESSION['users'] = $users;
+    
+            // Redirect to the same page to show the results
+            header('Location: /user-search');
+            exit();
+        }
+    }
+    
+    
     
 }
 ?>
