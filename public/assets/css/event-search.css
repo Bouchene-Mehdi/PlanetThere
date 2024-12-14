@@ -73,8 +73,8 @@
 
 .filter-tags span {
     display: inline-block;
-    background-color: #009688; /* Keep the tag background color */
-    color: white; /* Text color */
+    background-color: #009688;
+    color: white;
     padding: 5px 10px;
     border-radius: 20px;
     margin-right: 5px;
@@ -92,6 +92,76 @@
     padding: 0;
     margin-left: 8px;
     line-height: 1;
+}
+
+/* Match the dropdown styling to the inputs */
+.filters select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    background: #fff;
+    appearance: none; /* For a cleaner look */
+}
+
+/* Style the add button similar to search button */
+#add-category-btn, #add-location-btn {
+    background-color: #009688;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+#add-category-btn:hover, #add-location-btn:hover {
+    background-color: #00796b;
+}
+
+.add-keyword {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category-add-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.location-tags span {
+    display: inline-block;
+    background-color: #009688;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.location-tags span button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 8px;
+    line-height: 1;
+}
+
+.location-add-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 
