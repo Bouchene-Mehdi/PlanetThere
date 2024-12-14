@@ -39,6 +39,35 @@ class User {
         // Execute and return true if successful, false otherwise
         return $stmt->execute();
     }
+    public function getUserByUsername($username) {
+        // SQL query to fetch user data by Username
+        $query = "SELECT 
+                    UserID, Username, FirstName, LastName, Phone, DateOfBirth, Email, IsAdmin, IsBanned, 
+                    phonePublic, dobPublic 
+                  FROM users 
+                  WHERE Username = :username LIMIT 1";
+    
+        try {
+            // Prepare the SQL statement
+            $stmt = $this->db->prepare($query);
+    
+            // Bind the :username parameter to the input value
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    
+            // Execute the query
+            $stmt->execute();
+    
+            // Fetch the user data as an associative array
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            // Return the user data if found, otherwise return false
+            return $user ?: false;
+        } catch (PDOException $e) {
+            // Log any database errors
+            error_log("Database error in getUserByUsername: " . $e->getMessage());
+            return false;
+        }
+    }
     public function verifyEmail($email) {
         $query = 'SELECT * FROM users WHERE email = :email LIMIT 1';
         $stmt = $this->db->prepare($query);

@@ -38,8 +38,9 @@ function getCurrentRoute() {
     // Parse the current URL
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-    // Trim leading and trailing slashes
-    return trim($uri, '/');
+    // Trim leading and trailing slashes, and return the first part of the URL
+    $segments = explode('/', trim($uri, '/'));
+    return $segments[0]; // return the first segment (page name)
 }
 
 function render($view, $data = [], $layout = 'layout'){

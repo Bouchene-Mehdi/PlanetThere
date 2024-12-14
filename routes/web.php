@@ -1,41 +1,44 @@
 <?php
-$routes=[
-    'GET' => [
-        '/' => 'PagesController@index',
-        '/about' => 'PagesController@about',
-        '/faq' => 'PagesController@faq',
-        '/tac' => 'PagesController@TAC',
-        '/event-history' => 'UserController@UserEventHistory',
-        '/profile-settings' => 'UserController@UserProfileSettings',
-        '/signup-1' => 'UserController@ShowSignup_1_form',
-        '/signup-2' => 'UserController@ShowSignup_2_form',
-        '/forgot-1' => 'UserController@ShowForgot_1',
-        '/forgot-2' => 'UserController@ShowForgot_2',
-        '/login' => 'UserController@ShowLogin',
-        '/log-out' => 'UserController@logout',
-        '/delete-account' => 'UserController@deleteAccount',
-        '/account' => 'UserController@UserAccount',
-        '/user-search'=>'UserController@ShowUserSearch',
-        '/settings'=>'UserController@ShowUserSettings',
-        '/friends'=>'UserController@ShowFriends',
-        '/user/register' => 'UserController@showRegisterForm',
-        '/user/login' => 'UserController@showLoginForm',
-        '/event-search'=>'EventController@ShowEventSearch',
-        '/create-event1'=>'EventController@ShowEventCreate1',
-        '/create-event2'=>'EventController@ShowEventCreate2',
-        '/dashboard' => 'AdminController@dashboard',
-        '/admin' => 'AdminController@admin',
-    ],
+require_once __DIR__ . '/../app/core/Router.php';
+$router= new Route();
 
-    'POST' => [
-        '/user/register-1' => 'UserController@register_1',
-        '/user/register-2' => 'UserController@register_2',
-        '/login' => 'UserController@login',
-        '/logout' => 'UserController@logout',
-        '/user/forgot-password-1' => 'UserController@forgotPasswordStep1',
-        '/user/forgot-password-2' => 'UserController@forgotPasswordStep2',
-        '/user/profile-update' => 'UserController@updateProfile',
-        '/user/search'=>'UserController@postUserSearch',
-    ]
-];
+// GET routes
+$router->get('/', 'PagesController@index');
+$router->get('/about', 'PagesController@about');
+$router->get('/faq', 'PagesController@faq');
+$router->get('/tac', 'PagesController@TAC');
+$router->get('/event-history', 'UserController@UserEventHistory');
+$router->get('/profile-settings', 'UserController@UserProfileSettings');
+$router->get('/signup-1', 'UserController@ShowSignup_1_form');
+$router->get('/signup-2', 'UserController@ShowSignup_2_form');
+$router->get('/forgot-1', 'UserController@ShowForgot_1');
+$router->get('/forgot-2', 'UserController@ShowForgot_2');
+$router->get('/login', 'UserController@ShowLogin');
+$router->get('/profile', 'UserController@ShowProfile');
+$router->get('/profile/{username}', 'UserController@showUserProfileByUsername');
+$router->get('/log-out', 'UserController@logout');
+$router->get('/delete-account', 'UserController@deleteAccount');
+$router->get('/account', 'UserController@UserAccount');
+$router->get('/user-search', 'UserController@ShowUserSearch');
+$router->get('/settings', 'UserController@ShowUserSettings');
+$router->get('/friends', 'UserController@ShowFriends');
+$router->get('/user/register', 'UserController@showRegisterForm');
+$router->get('/user/login', 'UserController@showLoginForm');
+$router->get('/event-search', 'EventController@ShowEventSearch');
+$router->get('/create-event1', 'EventController@ShowEventCreate1');
+$router->get('/create-event2', 'EventController@ShowEventCreate2');
+
+
+// POST routes
+$router->post('/user/register-1', 'UserController@register_1');
+$router->post('/user/register-2', 'UserController@register_2');
+$router->post('/login', 'UserController@login');
+$router->post('/logout', 'UserController@logout');
+$router->post('/user/forgot-password-1', 'UserController@forgotPasswordStep1');
+$router->post('/user/forgot-password-2', 'UserController@forgotPasswordStep2');
+$router->post('/user/profile-update', 'UserController@updateProfile');
+$router->post('/user/search', 'UserController@postUserSearch');
+
+
+
 ?>

@@ -35,6 +35,44 @@ class UserController
      public function ShowLogin(){
         render('user/login');
     }
+    public function showProfile(){
+        render('user/profile');
+    }
+    public function showUserProfileByUsername($username = null) {
+        // Vérifier si un username est passé en paramètre
+        if ($username) {
+            // Utiliser le username fourni
+        } elseif (isset($_SESSION['user']['Username']) && !empty($_SESSION['user']['Username'])) {
+            // Si aucun paramètre n'est passé, utiliser le username de la session
+            $username = $_SESSION['user']['Username'];
+        } else {
+            // Si aucun username n'est disponible, rediriger vers la page de recherche avec un message d'erreur
+            $_SESSION['error'] = "Username is required.";
+            header("Location: /user-search");
+            exit();
+        }
+    
+        // Créer une instance du modèle User
+        $userModel = new User();
+        $user = $userModel->getUserByUsername($username);
+    
+        // Vérifier si l'utilisateur existe
+        if ($user) {
+            // Stocker les données de l'utilisateur dans la session
+            $_SESSION['user_profile'] = $user;
+    
+            // Afficher la page de profil ou effectuer une autre action
+            render('/user/profile');
+
+        } else {
+            // Définir un message d'erreur si l'utilisateur n'est pas trouvé
+            $_SESSION['error'] = "User not found.";
+            header("Location: /user-search");
+            exit();
+        }
+    }
+    
+    
     public function ShowUserSearch() {
         // Initialize session variables if not set
         if (!isset($_SESSION['searchQuery'])) {
