@@ -2,12 +2,8 @@
 
 <main class="main">
 
-
-
-
-
 <section class="event-creation-section">
-	<form class="event-creation-form">
+	<form class="event-creation-form" method="POST" action="/event/create-2" >
 		
 			
 			<div class="legend-section">
@@ -15,6 +11,13 @@
 				
 			</div>
 			
+           <!-- Error Handling Section -->
+		   <?php if (isset($_SESSION['errors']['finishdate'])): ?>
+                <div class="error-message">
+                    <p class="error"><?php echo htmlspecialchars($_SESSION['errors']['finishdate']); ?></p>
+                </div>
+                <?php unset($_SESSION['errors']['finishdate']); ?> <!-- Clear after displaying -->
+            <?php endif; ?>
 
 			<div class="pictures-section">
 				<p class="pictures-section-paragraph">Pictures</p>
@@ -43,7 +46,7 @@
 
 				<div class="category">
 					<label class="form-label" for="categories">CATEGORY</label>
-					<select name="categories" id="categories" required>
+					<select name="categories" id="categories" >
 						<option value="" hidden>What categories fits your event?</option>
 						<option value="Sport">Sport</option>
 						<option value="Entertainment">Entertainment</option>
@@ -53,13 +56,13 @@
 				</div>
 
 				<div class="event-date">
-					<label class="form-label" for="finishdate">PICK THE FINISH DATE</label>
-					<input max="2024-12-31" type="date" id="finishdate" name="finishdate" >
+					<label class="form-label" for="repeatdate">REPEAT UNTIL ?</label>
+					<input max="2024-12-31" type="date" id="repeatdate" name="finishdate" >
 				</div>
 
 				<div class="event-descryption">
-					<label class="form-label" for="descryption">DESCRIPTION</label>
-					<textarea  id="descryption" name="descryption" placeholder="Tell us about your event!" required></textarea>
+					<label class="form-label" for="description">DESCRIPTION</label>
+					<textarea  id="description" name="description" placeholder="Tell us about your event!" required></textarea>
 				</div>
 
 

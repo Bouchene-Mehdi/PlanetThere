@@ -38,6 +38,13 @@ $router->post('/user/forgot-password-1', 'UserController@forgotPasswordStep1');
 $router->post('/user/forgot-password-2', 'UserController@forgotPasswordStep2');
 $router->post('/user/profile-update', 'UserController@updateProfile');
 $router->post('/user/search', 'UserController@postUserSearch');
+$router->post('/user/toggleFollow/{targetUserId}', 'UserController@toggleFollow');
+$router->post('/user/toggleBlock/{targetUserId}', 'UserController@toggleBlock');
+$router->post('/event/create-1', 'EventController@createEventStep1');
+$router->post('/event/create-2', 'EventController@createEventStep2');
+
+
+
 
 
 

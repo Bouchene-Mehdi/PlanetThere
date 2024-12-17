@@ -209,5 +209,122 @@ class User {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+    public function isFollowing($follower_id, $followed_id) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM follows WHERE follower_id = :follower_id AND followed_id = :followed_id");
+        $stmt->bindParam(':follower_id', $follower_id);
+        $stmt->bindParam(':followed_id', $followed_id);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+
+    // Follow a user
+    public function followUser($follower_id, $followed_id) {
+        if (!$this->isFollowing($follower_id, $followed_id)) {
+            $stmt = $this->db->prepare("INSERT INTO follows (follower_id, followed_id) VALUES (:follower_id, :followed_id)");
+            $stmt->bindParam(':follower_id', $follower_id);
+            $stmt->bindParam(':followed_id', $followed_id);
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    // Unfollow a user
+    public function unfollowUser($follower_id, $followed_id) {
+        if ($this->isFollowing($follower_id, $followed_id)) {
+            $stmt = $this->db->prepare("DELETE FROM follows WHERE follower_id = :follower_id AND followed_id = :followed_id");
+            $stmt->bindParam(':follower_id', $follower_id);
+            $stmt->bindParam(':followed_id', $followed_id);
+            return $stmt->execute();
+        }
+        return false;
+    }
+    // Get the accounts the user follows
+    public function getFollowed($userId) {
+        $query = "SELECT u.UserID, u.Username, u.FirstName, u.LastName 
+                FROM users u
+                JOIN follows f ON u.UserID = f.followed_id 
+                WHERE f.follower_id = :userId";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Get the accounts following the user
+    public function getFollowers($userId) {
+        $query = "SELECT u.UserID, u.Username, u.FirstName, u.LastName 
+                FROM users u
+                JOIN follows f ON u.UserID = f.follower_id 
+                WHERE f.followed_id = :userId";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Get the accounts blocked by the user
+    public function getBlocked($userId) {
+        $query = "SELECT u.UserID, u.Username, u.FirstName, u.LastName 
+                FROM users u
+                JOIN blocks b ON u.UserID = b.blocked_id 
+                WHERE b.blocker_id = :userId";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    // BLOCK METHODS
+    // Check if a user has blocked another user
+    public function isBlocked($blocker_id, $blocked_id) {
+        $stmt = $this->db->prepare("SELECT COUNT(*) FROM blocks WHERE blocker_id = :blocker_id AND blocked_id = :blocked_id");
+        $stmt->bindParam(':blocker_id', $blocker_id);
+        $stmt->bindParam(':blocked_id', $blocked_id);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+
+    // Block a user
+    public function blockUser($blocker_id, $blocked_id) {
+        if (!$this->isBlocked($blocker_id, $blocked_id)) {
+            $stmt = $this->db->prepare("INSERT INTO blocks (blocker_id, blocked_id) VALUES (:blocker_id, :blocked_id)");
+            $stmt->bindParam(':blocker_id', $blocker_id);
+            $stmt->bindParam(':blocked_id', $blocked_id);
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+    // Unblock a user
+    public function unblockUser($blocker_id, $blocked_id) {
+        if ($this->isBlocked($blocker_id, $blocked_id)) {
+            $stmt = $this->db->prepare("DELETE FROM blocks WHERE blocker_id = :blocker_id AND blocked_id = :blocked_id");
+            $stmt->bindParam(':blocker_id', $blocker_id);
+            $stmt->bindParam(':blocked_id', $blocked_id);
+            return $stmt->execute();
+        }
+        return false;
+    }
+
+
+    //SETTINGS METHODS
+    public function getSettingsByUser($user_id) {
+        $query = "SELECT * FROM settings WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateSettings($user_id, $language, $dark_mode, $privacy, $notifications) {
+        $query = "UPDATE settings SET language = :language, dark_mode = :dark_mode, privacy = :privacy, notifications = :notifications WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':language', $language);
+        $stmt->bindParam(':dark_mode', $dark_mode);
+        $stmt->bindParam(':privacy', $privacy);
+        $stmt->bindParam(':notifications', $notifications);
+        $stmt->execute();
+    }
 }

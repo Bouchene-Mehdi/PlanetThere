@@ -23,8 +23,10 @@
                     <!-- Email -->
                     <p class="email"><?php echo htmlspecialchars($_SESSION['user_profile']['Email'] ?? 'Not Available'); ?></p>
                     <!-- Phone -->
+                    <!-- Phone -->
                     <p class="phone-number">
                         <?php 
+                        // Show phone number only if phonePublic is 1
                         echo ($_SESSION['user_profile']['phonePublic'] ?? 1) 
                             ? htmlspecialchars($_SESSION['user_profile']['Phone'] ?? 'Not Available') 
                             : 'Phone number hidden';
@@ -32,7 +34,14 @@
                     </p>
                     <!-- Date of Birth -->
                     <p class="dob">
+                        <style>
+                            .dob {
+                                color: #009688;
+                                padding-left: 10px;
+                            }
+                        </style>
                         <?php 
+                        // Show date of birth only if dobPublic is 1
                         echo ($_SESSION['user_profile']['dobPublic'] ?? 1) 
                             ? htmlspecialchars($_SESSION['user_profile']['DateOfBirth'] ?? 'Not Available') 
                             : 'Date of birth hidden';
@@ -41,8 +50,35 @@
                 </div>
             </div>
             <div class="profile-actions">
-                <button class="follow-btn">Follow</button>
-                <button class="block-btn">Block</button>
+                <?php if ($_SESSION['user']['Username'] !== $_SESSION['user_profile']['Username']): ?>
+
+                    <!-- Follow / Unfollow Form -->
+                    <form method="POST" action="/user/toggleFollow/<?php echo $_SESSION['user_profile']['UserID']; ?>" >
+                    
+                        <input type="hidden" name="user_to_follow" value="<?php echo $_SESSION['user_profile']['Username']; ?>">
+                        <button type="submit" name="toggle_follow" class="follow-btn">
+                            <?php 
+                            // Display text based on isFollowing session variable
+                            if (isset($_SESSION['isFollowing']) && $_SESSION['isFollowing']) {
+                                echo 'Unfollow';  // User is following, so show 'Unfollow'
+                            } else {
+                                echo 'Follow';  // User is not following, so show 'Follow'
+                            }
+                            ?>
+                        </button>
+                    </form>
+                    <form action="/user/toggleBlock/<?php echo $_SESSION['user_profile']['UserID']; ?>" method="POST">
+                        <button type="submit" class="block-btn">
+                            <?php 
+                            if (isset($_SESSION['isBlocked']) && $_SESSION['isBlocked']) {
+                                echo 'Unblock';
+                            } else {
+                                echo 'Block';
+                            }
+                            ?>
+                        </button>
+                    </form>
+                <?php endif; ?>
             </div>
         </header>
     </div>

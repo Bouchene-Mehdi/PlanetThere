@@ -71,4 +71,38 @@ function config($key){
     return $value;
 }
 
+function uploadFile($file) {
+// Define allowed file types and max file size
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    $maxFileSize = 5 * 1024 * 1024; // 5 MB
+
+    // Check if the file is valid
+    if ($file['error'] === UPLOAD_ERR_OK) {
+        $fileType = $file['type'];
+        $fileSize = $file['size'];
+
+        if (!in_array($fileType, $allowedTypes)) {
+            echo 'Invalid file type.';
+            return null;
+        }
+        if ($fileSize > $maxFileSize) {
+            echo 'File size exceeds the limit.';
+            return null;
+        }
+
+        // Generate unique file name and move the uploaded file
+        $fileName = uniqid('event_', true) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
+        $uploadDir = 'uploads/images/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $filePath = $uploadDir . $fileName;
+        move_uploaded_file($file['tmp_name'], $filePath);
+
+        return $filePath;
+    }
+
+    return null;
+}
 ?>

@@ -34,5 +34,6 @@
 
 <?php
 unset($_SESSION['searchQuery']);
+unset($_SESSION['search_results']);
 unset($_SESSION['users']);
 ?>
