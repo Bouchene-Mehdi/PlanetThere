@@ -4,6 +4,7 @@
 .content-container {
 	width: 100%;
 	background-color: #f5f7fa;
+	min-height: 75vh;
 }
 
 /* Profile Section */

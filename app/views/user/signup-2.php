@@ -31,10 +31,17 @@
                     <p>Accepted formats: jpeg, png</p>
                 </div>
    
-                <div class="upload-button">
+                <!-- <div class="upload-button">
                     <label for="file-upload" class="file-upload-button">Upload File</label>
                     <input type="file" id="file-upload" name="profile_picture" accept="image/jpeg, image/png">
+                </div> -->
+                
+			    <div class="upload-button">
+                    <input type="file" id="file-upload" name="file-upload" accept="image/png, image/jpeg, image/jpg">
                 </div>
+                <?php if (!empty($_SESSION['page2_errors']['profile_picture_err'])): ?>
+                    <div class="error-message"><?php echo $_SESSION['page2_errors']['profile_picture_err']; ?></div>
+                <?php endif; ?>
             </div>
 
             <!-- Placeholder Image -->

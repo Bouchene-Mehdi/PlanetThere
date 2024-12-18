@@ -1,11 +1,11 @@
 <?php
  return [
         'database' => [
-            'name' => 'planetthere',
+            'name' => 'planetthere_new',
             'host' => 'localhost',
             'username'=> 'root',
             'password' => '',
-            'port' => '3307',
+            'port' => '3306',
             'charset' => 'utf8'
         ],
         'app' => [

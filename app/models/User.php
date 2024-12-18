@@ -1,11 +1,30 @@
 <?php
 class User {
     private $db;
-
+    private $uploadDir = 'C:/xampp/htdocs/PlanetThere/public/uploads/users/';
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
     }
 
+    // Function to get user data by ID
+    public function getUserById($id) {
+        // Prepare the SQL query to fetch user data by ID
+        $query = 'SELECT * FROM users WHERE UserID = :id LIMIT 1';
+        
+        $stmt = $this->db->prepare($query);
+        
+        // Bind the parameter to the query
+        $stmt->bindParam(':id', $id);
+        
+        // Execute the query
+        $stmt->execute();
+        
+        // Fetch the user data as an associative array
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // Return the user data if found, otherwise return false
+        return $user ?: false;
+    }
     // Function to verify if a user exists by email or username
     public function verify($email, $username) {
         // Prepare the query to check if the email or username exists
@@ -43,7 +62,7 @@ class User {
         // SQL query to fetch user data by Username
         $query = "SELECT 
                     UserID, Username, FirstName, LastName, Phone, DateOfBirth, Email, IsAdmin, IsBanned, 
-                    phonePublic, dobPublic 
+                    phonePublic, dobPublic, ProfileImage
                   FROM users 
                   WHERE Username = :username LIMIT 1";
     
@@ -86,8 +105,8 @@ class User {
     // Function to register a new user
     public function register($data) {
         // Prepare the query to insert a new user into the database
-        $query = 'INSERT INTO users (username, email, PasswordHash , FirstName, LastName, Phone, DateofBirth) 
-                  VALUES (:username, :email, :password, :first_name, :last_name, :phone, :dob)';
+        $query = 'INSERT INTO users (username, email, PasswordHash , FirstName, LastName, Phone, DateofBirth, ProfileImage) 
+                  VALUES (:username, :email, :password, :first_name, :last_name, :phone, :dob, :profile_picture)';
         
         $stmt = $this->db->prepare($query);
         
@@ -99,6 +118,7 @@ class User {
         $stmt->bindParam(':last_name', $data['last_name']);
         $stmt->bindParam(':phone', $data['phone']);
         $stmt->bindParam(':dob', $data['dob']);
+        $stmt->bindParam(':profile_picture', $data['profile_picture']);
 
         // Execute the statement
         if ($stmt->execute()) {
@@ -106,6 +126,32 @@ class User {
         }
 
         return false; // Registration failed
+    }
+    public function handleImageUpload($file){
+        $maxSize= 1024 * 1024 * 10;
+        $tempLocation= $file['tmp_name'];
+        if($file['size'] > $maxSize){
+            $_SESSION['page2_errors']['profile_picture_err'] = 'File size is too large';
+            return false;
+        }
+        $fileExtension= pathinfo($file['name'], PATHINFO_EXTENSION);
+        $filename= uniqid('user_'). '.' . $fileExtension;
+
+        if(!file_exists($this->uploadDir)){
+            mkdir($this->uploadDir, 0777, true);
+        }
+        $filepath= $this->uploadDir . $filename;
+        if (!is_writable($this->uploadDir)) {
+            $_SESSION['page2_errors']['profile_picture_err']= "The directory is not writable!";
+            return false;
+        } 
+        if(move_uploaded_file($tempLocation, $filepath)){
+            $relativePath= '/uploads/users/' . $filename;
+            return $relativePath;
+        }else{
+            $_SESSION['page2_errors']['profile_picture_err'] = 'Failed to upload file';
+            return false;
+        }
     }
     public function login($email, $password) {
         // Check if the username exists
@@ -193,11 +239,11 @@ class User {
     public function searchUsers($query = '') {
         if (empty($query)) {
             // If no query, return all users
-            $sql = "SELECT username, firstName, lastName FROM users";
+            $sql = "SELECT username, firstName, lastName, ProfileImage FROM users";
             $stmt = $this->db->prepare($sql);
         } else {
             // Search by username, firstName, or lastName
-            $sql = "SELECT username, firstName, lastName
+            $sql = "SELECT username, firstName, lastName , ProfileImage
                     FROM users 
                     WHERE username LIKE :query 
                        OR firstName LIKE :query 
@@ -240,7 +286,7 @@ class User {
     }
     // Get the accounts the user follows
     public function getFollowed($userId) {
-        $query = "SELECT u.UserID, u.Username, u.FirstName, u.LastName 
+        $query = "SELECT u.UserID, u.Username, u.FirstName, u.LastName ,u.ProfileImage
                 FROM users u
                 JOIN follows f ON u.UserID = f.followed_id 
                 WHERE f.follower_id = :userId";
@@ -252,7 +298,7 @@ class User {
 
     // Get the accounts following the user
     public function getFollowers($userId) {
-        $query = "SELECT u.UserID, u.Username, u.FirstName, u.LastName 
+        $query = "SELECT u.UserID, u.Username, u.FirstName, u.LastName,u.ProfileImage
                 FROM users u
                 JOIN follows f ON u.UserID = f.follower_id 
                 WHERE f.followed_id = :userId";
@@ -264,7 +310,7 @@ class User {
 
     // Get the accounts blocked by the user
     public function getBlocked($userId) {
-        $query = "SELECT u.UserID, u.Username, u.FirstName, u.LastName 
+        $query = "SELECT u.UserID, u.Username, u.FirstName, u.LastName ,u.ProfileImage
                 FROM users u
                 JOIN blocks b ON u.UserID = b.blocked_id 
                 WHERE b.blocker_id = :userId";

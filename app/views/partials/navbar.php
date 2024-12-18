@@ -19,11 +19,11 @@
         <?php if (isset($_SESSION['user'])): ?>
             <!-- Logged-in user navbar -->
             <a href="/account" class="profile-link">
-                <img src="/assets/images/profile-image.jpg" alt="Profile" class="profile-image">
+                <img src="<?php echo $_SESSION['user']['ProfileImage']; ?>" alt="Profile" class="profile-image">
             </a>
         <?php else: ?>
             <!-- Logged-out user navbar -->
-            <a href="/login" class="nav-link">Login</a>
+            <a href="/login" class="nav-link" >Login</a>
             <button onclick="window.location.href='/signup-1'" class="signup-btn">Sign Up</button>
         <?php endif; ?>
     </nav>

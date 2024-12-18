@@ -1,8 +1,8 @@
 <!-- Footer -->
 <footer class="footer">
     <div class="footer-logo">
-        <img src="assets/images/logo.png" alt="Planet There Logo" class="footer-logo-img">
-        <img src="assets/images/footer-logo.svg" alt="Brand Logo" class="footer-brand-logo">
+        <img src="/assets/images/logo.png" alt="Planet There Logo" class="footer-logo-img">
+        <img src="/assets/images/footer-logo.svg" alt="Brand Logo" class="footer-brand-logo">
     </div>
     
     <nav class="footer-nav">

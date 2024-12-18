@@ -4,7 +4,7 @@
         <!-- Combined Header -->
         <header class="combined-header">
             <div class="profile-header">
-                <img src="assets/images/profile-image.JPG" alt="Profile Picture" class="profile-picture">
+                <img src="<?php echo $_SESSION['user']['ProfileImage']; ?>" alt="Profile Picture" class="profile-picture">
                 <div>
                     <!-- Display FirstName and LastName from session -->
                     <h1><?php echo $_SESSION['user']['FirstName'] . " " . $_SESSION['user']['LastName']; ?></h1>
@@ -21,12 +21,12 @@
                 <div class="followers">
                     <span class="label">Followers</span>
                     <br>
-                    <span class="value">123</span> <!-- Replace with actual data if needed -->
+                    <span class="value"><?php echo $followers ?></span> <!-- Replace with actual data if needed -->
                 </div>
                 <div class="followers">
                     <span class="label">Following</span>
                     <br>
-                    <span class="value">123</span> <!-- Replace with actual data if needed -->
+                    <span class="value"><?php echo $following ?></span> <!-- Replace with actual data if needed -->
                 </div>
             </div>
         </header>

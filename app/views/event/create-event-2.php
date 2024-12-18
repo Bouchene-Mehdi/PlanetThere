@@ -3,7 +3,7 @@
 <main class="main">
 
 <section class="event-creation-section">
-	<form class="event-creation-form" method="POST" action="/event/create-2" >
+	<form class="event-creation-form" method="POST" action="/event/create-2"  enctype="multipart/form-data" >
 		
 			
 			<div class="legend-section">
@@ -24,9 +24,9 @@
 				<div class="gallery">
 					
 						
-						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  >
+						<input class="uppload-picture-box" name="image1" id="image1" type="file" accept="image/png, image/jpeg, image/webp, image/jpg"  >
 					
-						<input class="uppload-picture-box" type="file" accept="image/png, image/jpeg, image/webp"  >
+						<input class="uppload-picture-box" name="image2" id="image2" type="file" accept="image/png, image/jpeg, image/webp, image/jpg"  >
 				
 				</div>
 			</div>
@@ -47,17 +47,15 @@
 				<div class="category">
 					<label class="form-label" for="categories">CATEGORY</label>
 					<select name="categories" id="categories" >
-						<option value="" hidden>What categories fits your event?</option>
-						<option value="Sport">Sport</option>
-						<option value="Entertainment">Entertainment</option>
-						<option value="Politics">Politics</option>
-						<option value="Education">Education</option>
+						<?php foreach ($categories as $category): ?>
+							<option value="<?= $category['CategoryID']; ?>"><?= htmlspecialchars($category['CategoryName']); ?></option>
+						<?php endforeach; ?>
 					  </select>
 				</div>
 
 				<div class="event-date">
 					<label class="form-label" for="repeatdate">REPEAT UNTIL ?</label>
-					<input max="2024-12-31" type="date" id="repeatdate" name="finishdate" >
+					<input min="2024-12-16" type="date" id="repeatdate" name="finishdate" >
 				</div>
 
 				<div class="event-descryption">

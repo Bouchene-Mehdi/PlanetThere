@@ -12,11 +12,13 @@
 
     <!-- Lists -->
     <section class="friends-lists">
+
         <!-- Following List -->
         <div class="friends-list" id="following">
             <?php foreach ($followedList as $followed): ?>
+
                 <a href="/profile/<?= urlencode($followed['Username']) ?>" class="profile-card">
-                    <img src="/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                    <img src="<?php echo $followed['ProfileImage']; ?>" alt="Profile Picture" class="profile-pic">
                     <h2><?= htmlspecialchars($followed['Username']) ?></h2>
                     <p><?= htmlspecialchars($followed['FirstName'] . ' ' . $followed['LastName']) ?></p>
                 </a>
@@ -27,7 +29,7 @@
         <div class="friends-list hidden" id="followers">
             <?php foreach ($followersList as $follower): ?>
                 <a href="/profile/<?= urlencode($follower['Username']) ?>" class="profile-card">
-                    <img src="/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                    <img src="<?php echo $follower['ProfileImage']; ?>" alt="Profile Picture" class="profile-pic">
                     <h2><?= htmlspecialchars($follower['Username']) ?></h2>
                     <p><?= htmlspecialchars($follower['FirstName'] . ' ' . $follower['LastName']) ?></p>
                 </a>
@@ -38,7 +40,7 @@
         <div class="friends-list hidden" id="blocked">
             <?php foreach ($blockedList as $blocked): ?>
                 <a href="/profile/<?= urlencode($blocked['Username']) ?>" class="profile-card">
-                    <img src="/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
+                    <img src="<?php echo $blocked['ProfileImage']; ?>" alt="Profile Picture" class="profile-pic">
                     <h2><?= htmlspecialchars($blocked['Username']) ?></h2>
                     <p><?= htmlspecialchars($blocked['FirstName'] . ' ' . $blocked['LastName']) ?></p>
             

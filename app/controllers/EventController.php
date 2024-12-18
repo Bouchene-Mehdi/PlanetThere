@@ -1,14 +1,54 @@
 <?php
 require_once __DIR__ . '/../models/Event.php';
+require_once __DIR__ . '/../models/Category.php';
+require_once __DIR__ . '/../models/User.php';
 class EventController {
-    public function ShowEventSearch(){
-        render('event/event-search');
-    }
+
     public function ShowEventCreate1(){
         render('event/create-event-1');
     }
     public function ShowEventCreate2(){
-        render('event/create-event-2');
+           // Fetch categories from the database
+    
+    $categoryModel = new Category();
+    $categories = $categoryModel->getAllCategories();
+
+    // Pass the categories to the view
+    render('event/create-event-2', ['categories' => $categories]);
+
+    }
+
+    public function ShowEventDetails($EventID){
+        // Initialize the event model
+        $eventModel = new Event();
+        
+        // Fetch the event details by ID
+        $event = $eventModel->getEventById($EventID);
+        $userModel= new User();
+        $categoryModel = new Category();
+        $categories = $categoryModel->getCategryById($event['CategoryID']);
+        $userModel = new User();
+
+        // Vérifier si un username est passé en paramètre
+
+        $user=$userModel->getUserById($event['EventManagerID']);
+        $_SESSION['IsRegistered'] = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
+
+        
+
+            // Utiliser le username fourni
+    
+        // Fetch the attendance count for the event
+        $attendanceCount = $eventModel->getAttendanceCount($EventID);
+    
+        
+        // Render the view with event details
+        render('event/event-details', [
+            'event' => $event,
+            'attendanceCount' => $attendanceCount,
+            'user'=>$user,
+            'categories'=>$categories
+        ]);
     }
     // EventController.php (Create Event Step 1)
     public function createEventStep1() {
@@ -52,21 +92,13 @@ class EventController {
     
         // Initialize data from session
         $data = $_SESSION['event_data'];
-        $data['image1'] = '';  // To store image1 path
-        $data['image2'] = '';  // To store image2 path
-    
+
         // Check if form is submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Initialize error session keys
             $_SESSION['errors'] = []; // Reset errors session for each form submission
     
-            if(isset($_FILES['image1']) ) {
-                $data['image1'] = $this->uploadFile($_FILES['image1']);
-            }
-            // Handle file uploads for images
-            if(isset($_FILES['image2'])) {
-                $data['image2'] = $this->uploadFile($_FILES['image2']);
-            }
+
     
             // Sanitize input data for additional fields
             $maxParticipants = trim($_POST['maxParticipants']);
@@ -74,7 +106,7 @@ class EventController {
             $category = trim($_POST['categories']);
             $finishDate = trim($_POST['finishdate']);
             $description = trim($_POST['description']);
-            $category=null;
+            
             // Validation logic
             if ($frequency > 0 && empty($finishDate)) {
                 $_SESSION['errors']['finishdate'] = 'Finish date is required if frequency is greater than 0.';
@@ -89,9 +121,32 @@ class EventController {
             // Merge date and time for start and end datetime
             $eventStartDateTime = $data['eventstartdate'] . ' ' . $data['eventstarttime'];  // Combine start date and time
             $eventEndDateTime = $data['eventenddate'] . ' ' . $data['eventendtime'];        // Combine end date and time
+
     
             // Store the event data into the database
             $event = new Event();
+            if(isset($_FILES['image1']) && $_FILES['image1']['error'] === 0){
+                $imagePath=$event->handleImageUpload($_FILES['image1']);
+                if($imagePath){
+                    $data['image1']=$imagePath;
+                }else{
+                    header("Location: /create-event2");
+                    exit;
+                }
+            }else{
+                $data['image1'] ='assets/images/insert-image.png';
+            }
+            if(isset($_FILES['image2']) && $_FILES['image2']['error'] === 0){
+                $imagePath=$event->handleImageUpload($_FILES['image2']);
+                if($imagePath){
+                    $data['image2']=$imagePath;
+                }else{
+                    header("Location: /create-event2");
+                    exit;
+                }
+            }else{
+                $data['image2'] ='assets/images/insert-image.png';
+            }
             $event->createEvent(
                 $data['eventname'],
                 $eventStartDateTime,  // Send the combined start datetime
@@ -119,6 +174,63 @@ class EventController {
             }
         }
     }
+    public function RegisterForEvent($EventID){
+        // Initialize the event model
+        $eventModel = new Event();
+        
+        // Register the user for the event
+        $eventModel->registerForEvent($EventID, $_SESSION['user']['UserID']);
+        
+        // Redirect back to the event details page
+        header('Location: /event/' . $EventID);
+        exit();
+    }
+    public function UnregisterForEvent($EventID){
+        // Initialize the event model
+        $eventModel = new Event();
+        
+        // Unregister the user from the event
+        $eventModel->unregisterForEvent($EventID, $_SESSION['user']['UserID']);
+        
+        // Redirect back to the event details page
+        header('Location: /event/' . $EventID);
+        exit();
+    }
+    public function ShowEventAttendees($EventID){
+        // Initialize the event model
+        $eventModel = new Event();
+        
+        // Fetch the event details by ID
+        $event = $eventModel->getEventById($EventID);
+        
+        // Fetch the attendees for the event
+        $attendees = $eventModel->getAttendees($EventID);
+        
+        // Render the view with event details and attendees
+        render('event/event-attendees', [
+            'event' => $event,
+            'attendees' => $attendees
+        ]);
+    }
+    public function RemoveAttendee(){
+        // Check if the form is submitted
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
+            // Initialize the event model
+            $eventModel = new Event();
+            
+            // Remove the attendee from the event
+            $eventModel->unregisterForEvent($_POST['event_id'], $_POST['user_id']);
+            
+            // Redirect back to the event attendees page
+            header('Location: /event-attendees/' . $_POST['event_id']);
+            exit();
+        }
+    }
+
+
     
     
 function uploadFile($file) {
@@ -155,237 +267,60 @@ function uploadFile($file) {
     
         return null;
     }
+    public function ShowEventSearch() {
+        // Set the search query if not already set
+        if (!isset($_SESSION['searchQuery_event'])) {
+            $_SESSION['searchQuery_event'] = ''; // Default to empty if no search
+        }
+    
+        // Retrieve "From" and "To" dates from session or POST data
+        $fromDate = isset($_SESSION['from-date']) ? $_SESSION['from-date'] : '';
+        $toDate = isset($_SESSION['to-date']) ? $_SESSION['to-date'] : '';
+        
+        // Initialize the model
+        $eventModel = new Event();
+        
+        // Fetch events based on the search query and date range
+        $events = $eventModel->searchEvents($_SESSION['searchQuery_event'], $fromDate, $toDate);
+        
+        foreach ($events as &$event) {
+            // Add attendance count to the event
+            $event['attendanceCount'] = $eventModel->getAttendanceCount($event['EventID']);
+        }
+    
+        // Render the view with event data and filter values
+        render('event/event-search', [
+            'events' => $events,
+            'searchQuery_event' => $_SESSION['searchQuery_event'],
+            'fromDate' => $fromDate,
+            'toDate' => $toDate
+        ]);
+    }  
+    public function postEventSearch() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
+            // Store the search query and date filters in the session
+            $searchQuery = $_POST['search_query'] ?? '';
+            $_SESSION['searchQuery_event'] = trim($searchQuery);
+            
+            // Store the "From" and "To" dates in the session
+            $fromDate = $_POST['from-date'] ?? '';
+            $toDate = $_POST['to-date'] ?? '';
+            
+            $_SESSION['from-date'] = $fromDate;
+            $_SESSION['to-date'] = $toDate;
+            
+            // Redirect back to the search page
+            header('Location: /event-search');
+            exit();
+        }
+    }
     
     
     
-    
-    // Load view
 }
 
-    // public function create_1() {
-    //     // Initialize data with empty values and error messages
-    //     $data = [
-    //         'eventname' => '',
-    //         'eventdate' => '',
-    //         'eventtime' => '',
-    //         'locationname' => '',
-    //         'locationaddress' => '',
-    //         'locationcapacity' => '',
-    //         'eventname_err' => '',
-    //         'eventdate_err' => '',
-    //         'eventtime_err' => '',
-    //         'locationname_err' => '',
-    //         'locationaddress_err' => '',
-    //         'locationcapacity_err' => ''
-    //     ];
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //         // Sanitize POST data
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-    //         $data['eventname'] = trim($_POST['eventname']);
-    //         $data['eventdate'] = trim($_POST['eventdate']);
-    //         $data['eventtime'] = trim($_POST['eventtime']);
-    //         $data['locationname'] = trim($_POST['locationname']);
-    //         $data['locationaddress'] = trim($_POST['locationaddress']);
-    //         $data['locationcapacity'] = trim($_POST['locationcapacity']);
-
-    //         // Validate inputs
-    //         if (empty($data['eventname'])) {
-    //             $data['eventname_err'] = 'Event name is required.';
-    //         }
-    //         if (empty($data['eventdate'])) {
-    //             $data['eventdate_err'] = 'Event date is required.';
-    //         }
-    //         if (empty($data['eventtime'])) {
-    //             $data['eventtime_err'] = 'Event time is required.';
-    //         }
-    //         if (empty($data['locationname'])) {
-    //             $data['locationname_err'] = 'Location name is required.';
-    //         }
-    //         if (empty($data['locationaddress'])) {
-    //             $data['locationaddress_err'] = 'Location address is required.';
-    //         }
-    //         if (!is_numeric($data['locationcapacity']) || $data['locationcapacity'] < 0) {
-    //             $data['locationcapacity_err'] = 'Location capacity must be a valid number.';
-    //         }
-
-    //         // Check for errors
-    //         if (empty($data['eventname_err']) && empty($data['eventdate_err']) && empty($data['eventtime_err']) &&
-    //             empty($data['locationname_err']) && empty($data['locationaddress_err']) && empty($data['locationcapacity_err'])) {
-    //             // Store the data temporarily in the session
-    //             $_SESSION['event_step1'] = [
-    //                 'eventname' => $data['eventname'],
-    //                 'eventdate' => $data['eventdate'],
-    //                 'eventtime' => $data['eventtime'],
-    //                 'locationname' => $data['locationname'],
-    //                 'locationaddress' => $data['locationaddress'],
-    //                 'locationcapacity' => $data['locationcapacity']
-    //             ];
-
-    //             // Redirect to the second step
-    //             header("Location: /event/create-2");
-    //             exit;
-    //         }
-    //     }
-
-    //     // Render the first step form with validation errors
-    //     $_SESSION['event_step1_errors'] = $data;
-    //     header("Location: /event/create-1");
-    // }
-
-    // // Step 2: Create Event - Additional Information
-    // public function create_2() {
-    //     // Check if Step 1 data exists
-    //     if (!isset($_SESSION['event_step1'])) {
-    //         header("Location: /event/create-1");
-    //         exit;
-    //     }
-
-    //     $data = [
-    //         'pictures' => [],
-    //         'maxParticipants' => '',
-    //         'frequency' => '',
-    //         'categories' => '',
-    //         'finishdate' => '',
-    //         'descryption' => '',
-    //         'maxParticipants_err' => '',
-    //         'frequency_err' => '',
-    //         'categories_err' => '',
-    //         'descryption_err' => ''
-    //     ];
-
-    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //         // Sanitize POST data
-    //         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-    //         // Assume file upload handling here
-    //         $data['pictures'] = $_FILES['pictures'] ?? []; // Not processed in this example
-    //         $data['maxParticipants'] = trim($_POST['maxParticipants']);
-    //         $data['frequency'] = trim($_POST['frequency']);
-    //         $data['categories'] = trim($_POST['categories']);
-    //         $data['finishdate'] = trim($_POST['finishdate']);
-    //         $data['descryption'] = trim($_POST['descryption']);
-
-    //         // Validate inputs
-    //         if (empty($data['maxParticipants']) || !is_numeric($data['maxParticipants']) || $data['maxParticipants'] < 0) {
-    //             $data['maxParticipants_err'] = 'Max participants must be a valid number.';
-    //         }
-    //         if (!is_numeric($data['frequency']) || $data['frequency'] < 0) {
-    //             $data['frequency_err'] = 'Frequency must be a valid number.';
-    //         }
-    //         if (empty($data['categories'])) {
-    //             $data['categories_err'] = 'Category is required.';
-    //         }
-    //         if (empty($data['descryption'])) {
-    //             $data['descryption_err'] = 'Description is required.';
-    //         }
-
-    //         // Check for errors
-    //         if (empty($data['maxParticipants_err']) && empty($data['frequency_err']) && empty($data['categories_err']) && empty($data['descryption_err'])) {
-    //             // Combine Step 1 and Step 2 data
-    //             $step1Data = $_SESSION['event_step1'];
-    //             $finalData = array_merge($step1Data, $data);
-
-    //             // Save to the database
-    //             if ($this->eventModel->createEvent($finalData)) {
-    //                 // Clear session data
-    //                 unset($_SESSION['event_step1']);
-
-    //                 // Redirect to event list or success page
-    //                 header("Location: /events");
-    //                 exit;
-    //             } else {
-    //                 die("Something went wrong while saving the event.");
-    //             }
-    //         }
-    //     }
-
-    //     // Render the second step form with validation errors
-    //     $_SESSION['event_step2_errors'] = $data;
-    //     header("Location: /event/create-2");
-    // }
-
-//         public function register_1()
-//     {
-//         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-//             $data = [
-//                 'eventName' => trim($_POST['eventName']),
-//                 'frequency' => trim($_POST['frequency']),
-//                 'maxParticipants' => trim($_POST['maxParticipants']),
-//                 'description' => trim($_POST['description']),
-//                 'userID' => $_SESSION['user_id'] // Assuming user session is managed
-//             ];
-
-//             $errors = [];
-
-//             if (empty($data['eventName'])) $errors['eventName_err'] = 'Event name is required.';
-//             if (empty($data['frequency'])) $errors['frequency_err'] = 'Frequency is required.';
-//             if (empty($data['maxParticipants'])) $errors['maxParticipants_err'] = 'Max participants is required.';
-//             if (empty($data['description'])) $errors['description_err'] = 'Description is required.';
-
-//             if (empty($errors)) {
-//                 $_SESSION['event_template'] = $data;
-//                 header("Location: /event/form2");
-//                 exit;
-//             } else {
-//                 $_SESSION['event_errors'] = $errors;
-//                 header("Location: /event/form1");
-//                 exit;
-//             }
-//         }
-
-//         render('event/form1', []);
-//     }
-
-//     public function register_2()
-//     {
-//         if (!isset($_SESSION['event_template'])) {
-//             header("Location: /event/form1");
-//             exit;
-//         }
-
-//         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-//             $data = [
-//                 'startDate' => trim($_POST['startDate']),
-//                 'endDate' => trim($_POST['endDate']),
-//                 'availablePlaces' => trim($_POST['availablePlaces']),
-//                 'isActive' => isset($_POST['isActive']) ? 1 : 0
-//             ];
-
-//             $errors = [];
-
-//             if (empty($data['startDate'])) $errors['startDate_err'] = 'Start date is required.';
-//             if (empty($data['endDate'])) $errors['endDate_err'] = 'End date is required.';
-//             if (empty($data['availablePlaces'])) $errors['availablePlaces_err'] = 'Available places are required.';
-
-//             if (empty($errors)) {
-//                 $templateData = $_SESSION['event_template'];
-
-//                 $templateModel = new EventTemplate();
-//                 $templateID = $templateModel->create($templateData);
-
-//                 if ($templateID) {
-//                     $data['templateID'] = $templateID;
-//                     $instanceModel = new EventInstance();
-//                     if ($instanceModel->create($data)) {
-//                         unset($_SESSION['event_template']);
-//                         header("Location: /event/success");
-//                         exit;
-//                     }
-//                 }
-//             } else {
-//                 $_SESSION['event_errors'] = $errors;
-//                 header("Location: /event/form2");
-//                 exit;
-//             }
-//         }
-
-//         render('event/form2', []);
-//     }
-// }
+  
 ?>
