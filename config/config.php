@@ -5,7 +5,7 @@
             'host' => 'localhost',
             'username'=> 'root',
             'password' => '',
-            'port' => '3306',
+            'port' => '3307',
             'charset' => 'utf8'
         ],
         'app' => [

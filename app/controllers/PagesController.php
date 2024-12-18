@@ -20,4 +20,8 @@ class PagesController
         render('TAC/index');
     }
 
+    public function kavi($id)
+    {
+        echo "im here ". $id;
+    }
 }   

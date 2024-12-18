@@ -9,7 +9,7 @@ spl_autoload_register(function($class) {
     $paths=[
         __DIR__ . '/controllers/' . $class ,
         __DIR__ . '/models/' . $class ,
-
+        __DIR__ . '/core/' . $class ,
 
     ];
     foreach($paths as $path){

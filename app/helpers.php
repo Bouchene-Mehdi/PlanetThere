@@ -38,8 +38,9 @@ function getCurrentRoute() {
     // Parse the current URL
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-    // Trim leading and trailing slashes
-    return trim($uri, '/');
+    // Trim leading and trailing slashes, and return the first part of the URL
+    $segments = explode('/', trim($uri, '/'));
+    return $segments[0]; // return the first segment (page name)
 }
 
 function render($view, $data = [], $layout = 'layout'){
@@ -70,4 +71,38 @@ function config($key){
     return $value;
 }
 
+function uploadFile($file) {
+// Define allowed file types and max file size
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    $maxFileSize = 5 * 1024 * 1024; // 5 MB
+
+    // Check if the file is valid
+    if ($file['error'] === UPLOAD_ERR_OK) {
+        $fileType = $file['type'];
+        $fileSize = $file['size'];
+
+        if (!in_array($fileType, $allowedTypes)) {
+            echo 'Invalid file type.';
+            return null;
+        }
+        if ($fileSize > $maxFileSize) {
+            echo 'File size exceeds the limit.';
+            return null;
+        }
+
+        // Generate unique file name and move the uploaded file
+        $fileName = uniqid('event_', true) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
+        $uploadDir = 'uploads/images/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $filePath = $uploadDir . $fileName;
+        move_uploaded_file($file['tmp_name'], $filePath);
+
+        return $filePath;
+    }
+
+    return null;
+}
 ?>
