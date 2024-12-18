@@ -19,8 +19,8 @@
         <?php foreach ($_SESSION['users'] as $user): ?>
             <div class="profile-card">
             <a href="/profile/<?php echo urlencode($user['username']); ?>">
-                    <img src="/assets/images/profile-image.JPG" alt="Profile Picture" class="profile-pic">
-                    <h2><?php echo htmlspecialchars($user['firstName'] . ' ' . $user['lastName']); ?></h2>
+                <img src="<?php echo $user['ProfileImage']; ?>" class="profile-pic">
+                <h2><?php echo htmlspecialchars($user['firstName'] . ' ' . $user['lastName']); ?></h2>
                     <p><?php echo htmlspecialchars($user['username']); ?></p>
                 </a>
             </div>

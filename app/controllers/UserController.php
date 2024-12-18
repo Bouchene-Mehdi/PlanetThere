@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../EmailHelper.php';
+require_once __DIR__ . '/../models/Event.php';
 class UserController 
 {
 
@@ -14,10 +15,34 @@ class UserController
         render('user/account');
     }
     public function UserEventHistory(){
-        render('user/events-history');
+        $userId = $_SESSION['user']['UserID'];  // Logged-in user's ID
+        $eventModel = new Event();
+        $registeredEvents = $eventModel->getRegisteredEvents($userId);
+        $managedEvents=$eventModel->getManagedEvents($userId);
+        foreach ($registeredEvents as $key => $event) {
+            $registeredEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($event['EventID']);
+        }
+        foreach ($managedEvents as $key => $event) {
+            $managedEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($event['EventID']);
+        }
+        render('user/events-history', [
+            'registeredEvents' => $registeredEvents,
+            'managedEvents' => $managedEvents,
+        ]);
     }
     public function UserProfileSettings(){
-        render('user/profile-settings'); 
+        $userModel = new User();
+        $userId = $_SESSION['user']['UserID'];  // Logged-in user's ID
+        $followedList = $userModel->getFollowed($userId);
+        $followersList = $userModel->getFollowers($userId);
+        $followedNumber=count($followedList);
+        $followersNumber=count($followersList);
+        // Pass data to the view
+        render('user/profile-settings', [
+            'followers' => $followersNumber,
+            'following' => $followedNumber,
+        ]);  
+        
     }
     public function ShowSignup_1_form(){
         render('user/signup-1');
@@ -43,7 +68,7 @@ class UserController
         $user = $userModel->getUserByUsername($username);
 
         // Vérifier si un username est passé en paramètre
-        if ($username) {
+        if ($username) {    
             $_SESSION['isFollowing']=$userModel->isFollowing($_SESSION['user']['UserID'],$user['UserID']);
             $_SESSION['isBlocked']=$userModel->isBlocked($_SESSION['user']['UserID'],$user['UserID']);
 
@@ -64,9 +89,21 @@ class UserController
         if ($user) {
             // Stocker les données de l'utilisateur dans la session
             $_SESSION['user_profile'] = $user;
+            $eventModel = new Event();
+            $managedEvents=$eventModel->getManagedEvents($user['UserID']);
+            $registeredEvents=$eventModel->getRegisteredEvents($user['UserID']);
+            foreach ($managedEvents as $key => $event) {
+                $managedEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($event['EventID']);
+            }
+            foreach ($registeredEvents as $key => $event) {
+                $registeredEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($event['EventID']);
+            }
     
             // Afficher la page de profil ou effectuer une autre action
-            render('/user/profile');
+            render('/user/profile', [
+                'managedEvents' => $managedEvents,
+                'registeredEvents' => $registeredEvents,
+            ]);
 
         } else {
             // Définir un message d'erreur si l'utilisateur n'est pas trouvé
@@ -100,6 +137,7 @@ class UserController
         header("Location: /profile/" . urlencode($_SESSION['user_profile']['Username']));
     }
     public function toggleBlock($targetUserId) {
+
     $userId = $_SESSION['user']['UserID'];  // Assuming the user is logged in and their ID is stored in the session
     $userModel = new User();
 
@@ -148,7 +186,7 @@ class UserController
     public function ShowUserSettings(){
         render('user/settings');
     }
-        public function ShowFriends(){
+    public function ShowFriends(){
             $userId = $_SESSION['user']['UserID'];  // Logged-in user's ID
             $userModel = new User();
         
@@ -271,6 +309,7 @@ class UserController
                 $data['dob_err'] = 'Date of birth is required.';
             }
 
+
             // If no errors, proceed to registration
             if (empty($data['first_name_err']) && empty($data['last_name_err']) && empty($data['phone_err']) && empty($data['dob_err'])) {
                 // Combine page 1 and page 2 data
@@ -279,9 +318,22 @@ class UserController
 
                 //Simulate user registration (replace this with actual logic)
                 $userModel = new User();
+                if(isset($_FILES['file-upload']) && $_FILES['file-upload']['error'] === 0){
+                    $imagePath=$userModel->handleImageUpload($_FILES['file-upload']);
+                    if($imagePath){
+                        $finalData['profile_picture']=$imagePath;
+                    }else{
+                        header("Location: /signup-2");
+                        exit;
+                    }
+                }else{
+                    $finalData['profile_picture']='assets/images/insert-image.png';
+                }
+                
                 if ($userModel->register($finalData)) {
                     unset($_SESSION['page1_data']);
                     echo "Registration successful! and added to db";
+                    header("Location: /login");
                     exit;
                 } else {
                     die("Something went wrong.");

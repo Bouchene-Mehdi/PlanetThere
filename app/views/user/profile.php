@@ -7,7 +7,7 @@
         <header class="combined-header">
             <div class="profile-header">
                 <!-- Profil e Picture -->
-                <img src="../assets/images/profile-image.JPG" 
+                <img src="../<?php echo $_SESSION['user_profile']['ProfileImage']; ?>" 
                      alt="Profile Picture" 
                      class="profile-picture">
                 <div class="profile-text">
@@ -82,171 +82,76 @@
             </div>
         </header>
     </div>
+    <?php if (!empty($managedEvents)): ?>
 
     <!-- Events Section -->
     <section class="events-section">
-        <h2 class="section-title">Managed <span class="highlight">Events</span></h2>
-        <div class="events-container">
-            <div class="events-grid">
-                <!-- Event Card Template -->
+    <h2 class="section-title">Managed <span class="highlight">Events</span></h2>
+    <div class="events-container">
+        <div class="events-grid">
+            <?php foreach ($managedEvents as $event): ?>
                 <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
+                    <img src="<?= htmlspecialchars($event['image1'] ?? 'default-image.jpg') ?>" 
+                         alt="<?= htmlspecialchars($event['EventName']) ?>" 
+                         class="event-image">
+                    <h3 class="event-title"><?= htmlspecialchars($event['EventName']) ?></h3>
                     <div class="event-details">
                         <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
+                            <time class="event-date"><?= htmlspecialchars($event['StartDate']) ?> - <?= htmlspecialchars($event['EndDate']) ?></time>
+                            <address class="event-location"><?= htmlspecialchars($event['LocationName']) ?>, <?= htmlspecialchars($event['LocationAddress']) ?></address>
                         </div>
                         <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
+                            <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
+                            <span class="attendance-count"><?= htmlspecialchars($event['AttendeesCount']) ?>/<?= htmlspecialchars($event['MaxParticipants']) ?></span>
                         </div>
                     </div>
                 </article>
-
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- More event cards can go here -->
-
-            </div>
-
+            <?php endforeach; ?>
         </div>
-        <button class="load-more-btn">Load more...</button>
-    </section>
+    </div>
+</section>
+<?php endif ?>
 
-
-    <!-- Events Section -->
-    <section class="events-section">
-        <h2 class="section-title">Attended <span class="highlight">Events</span></h2>
-        <div class="events-container">
-            <div class="events-grid">
-                <!-- Event Card Template -->
+<?php if (!empty($registeredEvents)): ?>
+    <div class="spacer"></div>
+<section class="events-section">
+    <h2 class="section-title">Registered <span class="highlight">Events</span></h2>
+    <div class="events-container">
+        <div class="events-grid">
+            <?php foreach ($registeredEvents as $event): ?>
                 <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
+                    <img src="<?= htmlspecialchars($event['image2'] ?? 'default-image.jpg') ?>" 
+                         alt="<?= htmlspecialchars($event['EventName']) ?>" 
+                         class="event-image">
+                    <h3 class="event-title"><?= htmlspecialchars($event['EventName']) ?></h3>
                     <div class="event-details">
                         <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
+                            <time class="event-date"><?= htmlspecialchars($event['StartDate']) ?> - <?= htmlspecialchars($event['EndDate']) ?></time>
+                            <address class="event-location"><?= htmlspecialchars($event['LocationName']) ?>, <?= htmlspecialchars($event['LocationAddress']) ?></address>
                         </div>
                         <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
+                            <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
+                            <span class="attendance-count"><?= htmlspecialchars($event['AttendeesCount']) ?>/<?= htmlspecialchars($event['MaxParticipants']) ?></span>
                         </div>
                     </div>
                 </article>
-
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- More event cards can go here -->
-
-            </div>
-
+            <?php endforeach; ?>
         </div>
-        <button class="load-more-btn">Load more...</button>
-    </section>
+    </div>
+</section>
+<?php endif ?>
+
+    <div class="spacer"></div>
+
+</main>
+
+
 </div>
+<style>
+    .spacer {
+        height: 50px; /* Adjust the height as needed */
+    }
+</style>
+
 
 

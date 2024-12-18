@@ -16,6 +16,7 @@ $router->get('/forgot-2', 'UserController@ShowForgot_2');
 $router->get('/login', 'UserController@ShowLogin');
 $router->get('/profile', 'UserController@ShowProfile');
 $router->get('/profile/{username}', 'UserController@showUserProfileByUsername');
+
 $router->get('/log-out', 'UserController@logout');
 $router->get('/delete-account', 'UserController@deleteAccount');
 $router->get('/account', 'UserController@UserAccount');
@@ -27,6 +28,9 @@ $router->get('/user/login', 'UserController@showLoginForm');
 $router->get('/event-search', 'EventController@ShowEventSearch');
 $router->get('/create-event1', 'EventController@ShowEventCreate1');
 $router->get('/create-event2', 'EventController@ShowEventCreate2');
+$router->get('/event/{eventID}', 'EventController@ShowEventDetails');
+$router->get('/event-attendees/{eventID}', 'EventController@ShowEventAttendees');
+
 
 
 // POST routes
@@ -42,6 +46,10 @@ $router->post('/user/toggleFollow/{targetUserId}', 'UserController@toggleFollow'
 $router->post('/user/toggleBlock/{targetUserId}', 'UserController@toggleBlock');
 $router->post('/event/create-1', 'EventController@createEventStep1');
 $router->post('/event/create-2', 'EventController@createEventStep2');
+$router->post('/event/search', 'EventController@postEventSearch');
+$router->post('/event/register/{eventID}', 'EventController@RegisterForEvent');
+$router->post('/event/unregister/{eventID}', 'EventController@UnregisterForEvent');
+$router->post('/event/removeAttendee', 'EventController@RemoveAttendee');
 
 
 

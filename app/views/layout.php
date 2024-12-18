@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/global.css'; ?>" />
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/footer.css'; ?>" />
 
+
     <link rel="stylesheet" href="<?php 
         switch (getCurrentRoute()) {
             case '':
@@ -72,6 +73,12 @@
                 break;
             case 'profile':
                 echo $pathPrefix . 'assets/css/user-profile.css';
+                break;
+            case 'event':
+                echo $pathPrefix . 'assets/css/event-view.css';
+                break;
+            case 'event-attendees':
+                echo $pathPrefix . 'assets/css/event-attendees.css';
                 break;
             default:
                 echo $pathPrefix . 'assets/css/global.css';

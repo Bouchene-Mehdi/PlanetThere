@@ -305,16 +305,6 @@ main {
 	justify-content: center;
 }
 
-.pic-upload-section {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-}
-
-.upload-button {
-	margin: 0px;
-}
-
 .pic-upload-section h2 {
 	font-family: 'Product Sans', sans-serif;
 	font-weight: normal;
