@@ -1,3 +1,17 @@
 <?php
- const BASE_URL = 'http://localhost/PlanetThere/';
+ return [
+        'database' => [
+            'name' => 'planetthere_new',
+            'host' => 'localhost',
+            'username'=> 'root',
+            'password' => '',
+            'port' => '3306',
+            'charset' => 'utf8'
+        ],
+        'app' => [
+            'name' => 'PlanetThere',
+            'base_url' => 'http://localhost/PlanetThere/',
+            'debug' => true
+        ]
+    ];
 ?>

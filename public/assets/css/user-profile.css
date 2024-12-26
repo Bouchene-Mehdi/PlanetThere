@@ -1,0 +1,244 @@
+/* user-profile.css */
+
+/*Container for the background color*/
+.content-container {
+	width: 100%;
+	background-color: #f5f7fa;
+	min-height: 75vh;
+}
+
+/* Profile Section */
+
+/* Header to store the elements of the profile section */
+.combined-header {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: start;
+	gap: 20px; /* Ensure spacing between the profile content and actions */
+	margin: 0 70px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+/* Profile Section */
+.profile-section {
+	width: 55%;
+	padding-left: 20px;
+	padding-top: 20px;
+}
+
+/* Profile Header */
+.profile-header {
+	display: flex;
+	align-items: flex-start; /* Align image and text to the start */
+	gap: 20px;
+	width: 100%;
+}
+
+/* Profile Image */
+.profile-header img {
+	aspect-ratio: 1 / 1;
+	width: 30%;
+	height: 30%;
+	border-radius: 50%;
+	border: 5px solid #009688;
+	object-fit: cover;
+}
+
+/* Profile Text (Name, Email, Phone) */
+.profile-text {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+	gap: 8px; /* Ensure proper spacing between text elements */
+}
+
+.profile-header h1 {
+	font-size: 2em;
+	color: #333;
+	margin-top: 0;
+	margin-bottom: 1px;
+}
+
+.profile-header .name {
+	font-size: 1.7em;
+	color: #333;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.profile-header .email,
+.profile-header .phone-number {
+	font-size: 1.5em;
+	color: #777;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* Profile Actions (Follow, Block buttons) */
+.profile-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 15px; /* Provide space between buttons */
+}
+
+.follow-btn,
+.block-btn {
+	margin-top: 20px;
+	margin-right: 30px;
+	padding: 15px 50px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 0.9em;
+	color: #fff;
+}
+
+.follow-btn {
+	margin-top: 10px;
+	background-color: #009688;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.follow-btn:hover {
+	background-color: #00796b;
+}
+
+.block-btn {
+	background-color: #e57373;
+}
+
+.block-btn:hover {
+	background-color: #d32f2f;
+}
+
+/*Events Section*/
+
+.events-section {
+	width: 88%;
+	margin-top: 5px;
+	/*padding: 0 20px;*/
+	display: flex;
+	flex-direction: column;
+	justify-self: center;
+}
+
+.section-title {
+	margin-left: 20px;
+	color: #000;
+	font: 400 2em 'Product Sans', sans-serif;
+	font-weight: bold;
+}
+
+.section-title .highlight {
+	color: #009688;
+}
+
+.events-container {
+	margin-top: 10px;
+}
+
+.events-grid {
+	width: inherit;
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+/* Add a responsive layout for smaller screens */
+@media (max-width: 1200px) {
+	.events-grid {
+		grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+	}
+}
+
+@media (max-width: 900px) {
+	.events-grid {
+		grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+	}
+}
+
+@media (max-width: 600px) {
+	.events-grid {
+		grid-template-columns: 1fr; /* 1 column on very small screens */
+	}
+}
+
+/* Event Card */
+.event-card {
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	padding: 20px;
+	width: 88%;
+	height: 88%;
+}
+
+.event-image {
+	aspect-ratio: 1.45;
+	object-fit: cover;
+	width: 100%;
+	border-radius: 8px 8px 0 0;
+}
+
+.event-title {
+	color: #000;
+	margin-top: 15px;
+	font-size: 1em;
+	font-weight: 400;
+}
+
+.event-details {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	margin-top: auto;
+}
+
+.event-info {
+	display: flex;
+	flex-direction: column;
+	font-size: 0.8em;
+}
+
+.event-date {
+	color: #009688;
+}
+
+.event-location {
+	color: #7f7f7f;
+	margin-top: 4px;
+}
+
+/* Event attendance styling */
+.event-attendance {
+	display: flex;
+	align-items: center;
+	color: #7f7f7f;
+	font-size: 0.9em;
+}
+
+.attendance-icon {
+	width: 24px;
+	margin-right: 8px;
+}
+
+.load-more-btn {
+	margin: 20px auto;
+	margin-top: 30px;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: #009688;
+	color: white;
+	cursor: pointer;
+	font-size: 1em;
+}
+
+.load-more-btn:hover {
+	background-color: #00796b;
+}

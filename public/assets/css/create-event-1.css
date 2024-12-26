@@ -1,0 +1,266 @@
+@font-face {
+	font-family: 'Product Sans';
+	src: url('../fonts/ProductSansRegular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background-color: #f5f5f5;
+}
+.nav-bar {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #f5f7fa;
+}
+
+.logo {
+	object-fit: contain;
+	object-position: center;
+	width: 90px;
+	z-index: 0;
+	margin-left: 10px;
+	align-self: center;
+}
+
+.brand-logo {
+	width: 180px;
+	height: auto;
+	align-self: center;
+	object-fit: contain;
+	margin-left: 5px;
+	margin-right: auto;
+}
+
+.nav-menu {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+	font-size: 0.9em;
+	justify-content: space-between;
+	font: 400 0.7em, 'Poppins', sans-serif;
+}
+
+.signup-btn {
+	border-radius: 12px;
+	background: #009688;
+	gap: 10px;
+	color: #f5f5f5;
+	white-space: nowrap;
+	text-align: center;
+	margin: auto 0;
+	margin-right: 20px;
+	padding: 12px 34px;
+	border: none;
+}
+
+.nav-links {
+	list-style: none;
+	display: flex;
+	gap: 30px 68px; /* Proper spacing between links */
+	padding: 0;
+	margin: 0;
+	min-width: 240px;
+}
+
+.profile-link {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+}
+
+.profile-image {
+	aspect-ratio: 1 / 1;
+	margin-left: auto;
+	margin-right: 20px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	border: 2px solid #009688;
+	cursor: pointer;
+	object-fit: cover;
+}
+
+.Join-us-section {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: url('../images/eventCreation-backgroundPicture.png');
+	background-size: cover;
+	width: 600px;
+	align-items: center;
+	background-blend-mode: overlay;
+	order: 1;
+}
+.Join-us-section::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay color */
+	pointer-events: none; /* Allows clicks through the overlay */
+}
+
+.join-us-section-text {
+	display: flex;
+	flex-direction: column;
+	gap: 73px;
+	text-align: center;
+	z-index: 999;
+	margin-bottom: 200px;
+}
+
+.join-us-today {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 42px;
+	font-weight: bold;
+	color: white;
+}
+
+.Join-us-section p {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 18px;
+	font-weight: lighter;
+	color: white;
+}
+
+fieldset {
+	border: none;
+}
+
+input {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 14px;
+	padding: 17px 7px 17px 7px;
+	border-radius: 10px;
+	border: none;
+	box-shadow: 2px 5px 10px rgba(199, 199, 199);
+}
+
+.event-creation-section {
+	flex: 1;
+	background-color: #edeff2;
+	padding-bottom: 41px;
+	order: 2;
+	padding-bottom: 100px;
+}
+
+.event-creation-form {
+	display: grid;
+	grid-template-columns: 300px 300px;
+	margin-top: 50px;
+	justify-content: center;
+	justify-items: stretch;
+	grid-row-gap: 50px;
+	grid-column-gap: 90px;
+}
+
+.event-date,
+.event-time {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.event-date {
+	grid-column: 1/2;
+}
+
+.event-time {
+	grid-column: 2/3;
+}
+.location-address-field,
+.Location-capasity-field,
+.event-name-field,
+.location-name-field {
+	grid-column: 1/3;
+	display: flex;
+	flex-direction: column;
+
+	gap: 18px;
+}
+
+.legend-section {
+	grid-column: 1/3;
+	justify-self: center;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	margin-bottom: 20px;
+}
+.legend {
+	font-family: 'Product Sans', sans-serif;
+	font-weight: 900;
+	font-size: 40px;
+}
+
+.legend-subtext {
+	color: #7f7f7f;
+	font-family: 'Product Sans', sans-serif;
+	text-align: center;
+	font-size: 20px;
+}
+
+.sign-up-button {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 16px;
+	width: 286px;
+	height: 44px;
+	grid-column: 1/3;
+	color: white;
+	background-color: rgb(0, 150, 136);
+	border: none;
+	border-radius: 5px;
+	justify-self: center;
+	transition: background-color 0.5s;
+	margin-top: 100px;
+}
+
+.sign-up-button:hover {
+	background-color: rgba(0, 150, 136, 0.7);
+	cursor: pointer;
+}
+
+main {
+	display: flex;
+	flex-direction: row;
+}
+
+.form-label {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.name-label {
+	text-transform: uppercase;
+}
+
+.footer-part {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.footer-part a {
+	color: #00a9b5;
+	text-decoration: none;
+	font-weight: 600;
+}

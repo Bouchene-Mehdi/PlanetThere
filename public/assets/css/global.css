@@ -1,34 +1,40 @@
 /* global.css */
 
 @font-face {
-    font-family: 'Product Sans';
-    src: url('../../assets/fonts/Product\ Sans\ Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'Product Sans';
+	src: url('../../assets/fonts/Product\ Sans\ Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 a {
-    text-decoration: none; 
-    color: #000;
+	text-decoration: none;
+	color: #000;
 }
 
 body {
-    margin: 0;
-    font-family: 'Product Sans', sans-serif;
-    font-size: 1em;
-    color: #000;
+	margin: 0;
+	font-family: 'Product Sans', sans-serif;
+	font-size: 1em;
+	color: #000;
+}
+
+.error-message {
+	color: red;
+	font-size: 0.9em;
+	margin-top: 5px;
 }
 
 @font-face {
-    font-family: 'Black Han Sans';
-    src: url('../../assets/fonts/BlackHanSans-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'Black Han Sans';
+	src: url('../../assets/fonts/BlackHanSans-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-    font-family: 'Poppins';
-    src: url('../../assets/fonts/Poppins-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+	font-family: 'Poppins';
+	src: url('../../assets/fonts/Poppins-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }

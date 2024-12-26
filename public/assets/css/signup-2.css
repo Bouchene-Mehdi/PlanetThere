@@ -1,0 +1,640 @@
+@font-face {
+	font-family: 'Product Sans';
+	src: url('../fonts/ProductSansRegular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+@font-face {
+	font-family: 'Product Sans';
+	src: url('../fonts/ProductSansRegular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+.Header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background-color: rgb(245, 247, 250);
+}
+.logo-section {
+	display: flex;
+	flex-direction: row;
+	width: 364px;
+}
+.logo {
+	width: 142px;
+	height: 144px;
+}
+.LogoText {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 39px;
+	font-weight: bold;
+	text-decoration: none;
+	align-self: center;
+}
+
+.LogoTextP1 {
+	color: black;
+}
+
+.LogoTextP2 {
+	color: rgb(0, 150, 136);
+}
+
+ul {
+	list-style: none;
+}
+
+.navigation-section {
+	display: flex;
+	margin-right: 50px;
+}
+
+.navig-links {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+	justify-content: space-between;
+	gap: 5px;
+	margin-top: 2px;
+}
+
+.navig-links li {
+	min-width: 131px;
+	padding: 15px 34px 15px 34px;
+}
+
+.nav-link {
+	font-family: 'Product Sans', sans-serif;
+	size: 14px;
+	color: black;
+	text-decoration: none;
+}
+
+.selected-link {
+	color: white;
+	background-color: rgb(0, 150, 136);
+	border-radius: 5px;
+}
+
+.selected-link a {
+	color: white;
+}
+
+.Join-us-section {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: url('../images/signup.jpg');
+	background-size: cover;
+	width: 600px;
+	align-items: center;
+	background-blend-mode: overlay;
+	min-height: 917px;
+}
+.Join-us-section::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay color */
+	pointer-events: none; /* Allows clicks through the overlay */
+}
+
+.join-us-section-text {
+	display: flex;
+	flex-direction: column;
+	gap: 73px;
+	text-align: center;
+	z-index: 999;
+}
+
+.join-us-today {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 42px;
+	font-weight: bold;
+	color: white;
+}
+
+.Join-us-section p {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 18px;
+	font-weight: lighter;
+	color: white;
+}
+
+fieldset {
+	border: none;
+}
+
+input {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 14px;
+	padding: 17px 7px 17px 7px;
+	border-radius: 10px;
+	border: none;
+	box-shadow: 2px 5px 10px rgba(199, 199, 199);
+}
+
+.registration-section {
+	flex: 1;
+	background-color: #edeff2;
+	padding-bottom: 41px;
+}
+
+.registration-form {
+	display: grid;
+	grid-template-columns: 322px 322px;
+	margin-top: 50px;
+	justify-content: center;
+	justify-items: stretch;
+	grid-row-gap: 60px;
+	grid-column-gap: 30px;
+}
+
+.Last-name-field,
+.First-name-field {
+	display: flex;
+	flex-direction: column;
+	max-width: 292px;
+	gap: 18px;
+}
+
+.Password-field,
+.Confirm-password-field,
+.Username-field,
+.Email-field,
+.dobField,
+.phone-field {
+	grid-column: 1/3;
+	display: flex;
+	flex-direction: column;
+	max-width: 644px;
+	gap: 18px;
+}
+
+.legend-section {
+	grid-column: 1/3;
+	justify-self: center;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	align-items: center;
+}
+
+.legend {
+	font-family: 'Product Sans', sans-serif;
+	font-weight: 900;
+	font-size: 40px;
+}
+
+.legend-subtext {
+	color: #7f7f7f;
+	font-family: 'Product Sans', sans-serif;
+	text-align: center;
+	font-size: 20px;
+}
+
+.sign-up-button {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 16px;
+	width: 286px;
+	height: 44px;
+	grid-column: 1/3;
+	color: white;
+	background-color: rgb(0, 150, 136);
+	border: none;
+	border-radius: 5px;
+	justify-self: center;
+	transition: background-color 0.5s;
+	margin-top: 70px;
+}
+
+.sign-up-button:hover {
+	background-color: rgba(0, 150, 136, 0.7);
+	cursor: pointer;
+}
+
+main {
+	display: flex;
+	flex-direction: row;
+}
+
+.form-label {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.name-label {
+	text-transform: uppercase;
+}
+
+.footer-part {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.footer-part a {
+	color: #00a9b5;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.registration-section p {
+	font-family: 'Product Sans', sans-serif;
+
+	font-weight: 500;
+	text-align: center;
+	grid-column: 1/3;
+}
+
+#dateofbirth {
+	appearance: none;
+}
+
+.file-upload-button {
+	display: inline-block;
+	font-family: 'Product Sans', sans-serif;
+	font-size: 16px;
+	width: 170px;
+	padding: 15px 0px 15px 0px;
+	color: white;
+	background-color: rgb(0, 150, 136);
+	border: none;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.file-upload-button:hover {
+	background-color: rgba(0, 150, 136, 0.7);
+	cursor: pointer;
+}
+
+#file-upload {
+	max-width: 250px;
+}
+
+.upload-button {
+	margin-left: 75px;
+	display: flex;
+	justify-content: center;
+}
+
+.pic-upload-section h2 {
+	font-family: 'Product Sans', sans-serif;
+	font-weight: normal;
+	font-size: 20px;
+	text-align: center;
+}
+
+.pic-upload-section p {
+	font-family: 'Product Sans', sans-serif;
+	font-weight: normal;
+	color: #696868;
+	text-align: center;
+	font-size: 16px;
+}
+
+.uppload-description p {
+	margin: 0px;
+}
+
+.image-sec {
+	justify-self: center;
+}
+.Header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background-color: rgb(245, 247, 250);
+}
+.logo-section {
+	display: flex;
+	flex-direction: row;
+	width: 364px;
+}
+.logo {
+	width: 142px;
+	height: 144px;
+}
+.LogoText {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 39px;
+	font-weight: bold;
+	text-decoration: none;
+	align-self: center;
+}
+
+.LogoTextP1 {
+	color: black;
+}
+
+.LogoTextP2 {
+	color: rgb(0, 150, 136);
+}
+
+ul {
+	list-style: none;
+}
+
+.navigation-section {
+	display: flex;
+	margin-right: 50px;
+}
+
+.navig-links {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+	justify-content: space-between;
+	gap: 5px;
+	margin-top: 2px;
+}
+
+.navig-links li {
+	min-width: 131px;
+	padding: 15px 34px 15px 34px;
+}
+
+.nav-link {
+	font-family: 'Product Sans', sans-serif;
+	size: 14px;
+	color: black;
+	text-decoration: none;
+}
+
+.selected-link {
+	color: white;
+	background-color: rgb(0, 150, 136);
+	border-radius: 5px;
+}
+
+.selected-link a {
+	color: white;
+}
+
+.Join-us-section {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: url('../images/signup.jpg');
+	background-size: cover;
+	width: 600px;
+	align-items: center;
+	background-blend-mode: overlay;
+	min-height: 917px;
+}
+.Join-us-section::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay color */
+	pointer-events: none; /* Allows clicks through the overlay */
+}
+
+.join-us-section-text {
+	display: flex;
+	flex-direction: column;
+	gap: 73px;
+	text-align: center;
+	z-index: 999;
+}
+
+.join-us-today {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 42px;
+	font-weight: bold;
+	color: white;
+}
+
+.Join-us-section p {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 18px;
+	font-weight: lighter;
+	color: white;
+}
+
+fieldset {
+	border: none;
+}
+
+input {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 14px;
+	padding: 17px 7px 17px 7px;
+	border-radius: 10px;
+	border: none;
+	box-shadow: 2px 5px 10px rgba(199, 199, 199);
+}
+
+.registration-section {
+	flex: 1;
+	background-color: #edeff2;
+	padding-bottom: 41px;
+}
+
+.registration-form {
+	display: grid;
+	grid-template-columns: 322px 322px;
+	margin-top: 50px;
+	justify-content: center;
+	justify-items: stretch;
+	grid-row-gap: 60px;
+	grid-column-gap: 30px;
+}
+
+.Last-name-field,
+.First-name-field {
+	display: flex;
+	flex-direction: column;
+	max-width: 292px;
+	gap: 18px;
+}
+
+.Password-field,
+.Confirm-password-field,
+.Username-field,
+.Email-field,
+.dobField,
+.phone-field {
+	grid-column: 1/3;
+	display: flex;
+	flex-direction: column;
+	max-width: 644px;
+	gap: 18px;
+}
+
+.legend-section {
+	grid-column: 1/3;
+	justify-self: center;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	align-items: center;
+}
+
+.legend {
+	font-family: 'Product Sans', sans-serif;
+	font-weight: 900;
+	font-size: 40px;
+}
+
+.legend-subtext {
+	color: #7f7f7f;
+	font-family: 'Product Sans', sans-serif;
+	text-align: center;
+	font-size: 20px;
+}
+
+.sign-up-button {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 16px;
+	width: 286px;
+	height: 44px;
+	grid-column: 1/3;
+	color: white;
+	background-color: rgb(0, 150, 136);
+	border: none;
+	border-radius: 5px;
+	justify-self: center;
+	transition: background-color 0.5s;
+	margin-top: 70px;
+}
+
+.sign-up-button:hover {
+	background-color: rgba(0, 150, 136, 0.7);
+	cursor: pointer;
+}
+
+main {
+	display: flex;
+	flex-direction: row;
+}
+
+.form-label {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.name-label {
+	text-transform: uppercase;
+}
+
+.footer-part {
+	font-family: 'Product Sans', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.footer-part a {
+	color: #00a9b5;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.registration-section p {
+	font-family: 'Product Sans', sans-serif;
+
+	font-weight: 500;
+	text-align: center;
+	grid-column: 1/3;
+}
+
+#dateofbirth {
+	appearance: none;
+}
+
+.file-upload-button {
+	display: inline-block;
+	font-family: 'Product Sans', sans-serif;
+	font-size: 16px;
+	width: 170px;
+	padding: 15px 0px 15px 0px;
+	color: white;
+	background-color: rgb(0, 150, 136);
+	border: none;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.file-upload-button:hover {
+	background-color: rgba(0, 150, 136, 0.7);
+	cursor: pointer;
+}
+
+#file-upload {
+	max-width: 250px;
+}
+
+.upload-button {
+	margin-left: 75px;
+	display: flex;
+	justify-content: center;
+}
+
+.pic-upload-section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.upload-button {
+	margin: 0px;
+}
+
+.pic-upload-section h2 {
+	font-family: 'Product Sans', sans-serif;
+	font-weight: normal;
+	font-size: 20px;
+	text-align: center;
+}
+
+.pic-upload-section p {
+	font-family: 'Product Sans', sans-serif;
+	font-weight: normal;
+	color: #696868;
+	text-align: center;
+	font-size: 16px;
+}
+
+.uppload-description p {
+	margin: 0px;
+}
+
+.image-sec {
+	justify-self: center;
+}
