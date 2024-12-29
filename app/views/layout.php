@@ -98,18 +98,22 @@
 
     <body>
     <?php
-    // Use the cookie to decide which navbar to load
+    // Use the cookie to decide which navbar and footer to load
     $screenType = isset($_COOKIE['screenType']) ? $_COOKIE['screenType'] : 'large';
     if ($screenType === 'small') {
 //        require views_path('partials/navbar-small.php');
     } else {
-//        require views_path('partials/navbar-large.php');
+        require views_path('partials/navbar-large.php');
     }
     ?>
     <?php echo $content; ?>
     <?php
-    // Include the footer dynamically
-//    require views_path('partials/footer.php');
+    // Include the correct footer dynamically
+    if ($screenType === 'small') {
+//        require views_path('partials/footer-small.php');
+    } else {
+        require views_path('partials/footer-large.php');
+    }
     ?>
     </body>
 
