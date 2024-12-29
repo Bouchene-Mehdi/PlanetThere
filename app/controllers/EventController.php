@@ -34,21 +34,37 @@ class EventController {
         $user=$userModel->getUserById($event['EventManagerID']);
         $_SESSION['IsRegistered'] = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
 
-        
 
             // Utiliser le username fourni
     
         // Fetch the attendance count for the event
         $attendanceCount = $eventModel->getAttendanceCount($EventID);
-    
-        
-        // Render the view with event details
-        render('event/event-details', [
-            'event' => $event,
-            'attendanceCount' => $attendanceCount,
-            'user'=>$user,
-            'categories'=>$categories
-        ]);
+
+        // Determine if event is finished
+        $currentDate = new DateTime();
+        $endDate = new DateTime($event['EndDate']);
+
+        if ($endDate > $currentDate) {
+            // Render the view with event details
+            render('event/event-details', [
+                'event' => $event,
+                'attendanceCount' => $attendanceCount,
+                'user'=>$user,
+                'categories'=>$categories
+            ]);
+        } else {
+//            // Render the event review view
+            render('event/event-review',
+            [
+                'event' => $event,
+                'attendanceCount' => $attendanceCount,
+                'user'=>$user,
+                'categories'=>$categories
+            ]);
+        }
+
+
+
     }
     // EventController.php (Create Event Step 1)
     public function createEventStep1() {

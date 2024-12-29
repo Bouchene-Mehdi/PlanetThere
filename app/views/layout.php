@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/navbar.css'; ?>" />
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/global.css'; ?>" />
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/footer.css'; ?>" />
+    <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/fonts/fontawesome-free-6.7.2-web/css/all.min.css' ?>" />
+
 
 
     <link rel="stylesheet" href="<?php 
@@ -103,7 +105,9 @@
     if ($screenType === 'small') {
 //        require views_path('partials/navbar-small.php');
     } else {
+//        COMMENT THIS OUT TO GET RID OF NAVBAR
         require views_path('partials/navbar-large.php');
+//        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     ?>
     <?php echo $content; ?>
@@ -112,7 +116,9 @@
     if ($screenType === 'small') {
 //        require views_path('partials/footer-small.php');
     } else {
+//        COMMENT THIS OUT TO GET RID OF FOOTER
         require views_path('partials/footer-large.php');
+//        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     ?>
     </body>
