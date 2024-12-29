@@ -9,16 +9,18 @@
 .event-header {
 	padding-bottom: 20px;
 	text-align: center;
+	width: 100%;
 }
 
-.event-header h1 {
-	padding-top: 20px;
+.event-name {
+	padding-top: 60px;
+	padding-bottom: 60px;
 	margin-top: 0;
 	justify-self: center;
 	font-family: 'Product Sans', 'sans-serif';
 	font-style: normal;
 	font-weight: 700;
-	font-size: 48px;
+	font-size: 4em;
 	line-height: 58px;
 	display: flex;
 	align-items: center;
@@ -40,6 +42,7 @@
 	border-radius: 15px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	border: 1px solid #e0e0e0;
+	flex-wrap: wrap; /* Allow wrapping when screen is small */
 }
 
 .event-author {
@@ -52,6 +55,7 @@
 .author-photo {
 	aspect-ratio: 1/1;
 	height: 70%;
+	max-height: 70px;
 	border-radius: 50%;
 	border: 3px solid #00c3a9;
 	margin-right: 20px;
@@ -66,12 +70,22 @@
 	margin-left: 5px;
 }
 
+.event-header-extra{
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	/*flex-wrap: wrap;*/
+	justify-content: space-evenly;
+}
+
 .event-header-attendance {
 	display: flex;
+	justify-self: left;
 	align-items: center;
 	color: #7f7f7f;
 	font-size: 0.9em;
 }
+
 .follow-form {
 	display: contents; /* Keep the form inline with other elements */
 	margin: 0; /* Remove any default margin */
@@ -85,22 +99,64 @@
 .btn-finished {
 	margin-right: 60px;
 	padding: 15px 25px;
-	width: 300px;
+	width: 20vw;
 	background-color: #009688;
 	color: #ffffff;
 	border: none;
 	border-radius: 10px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	font-size: 18px;
+	font-size: 1em;
 	font-weight: bold;
-	display: inline-block;
-	cursor: pointer;
 	text-transform: uppercase;
+}
+
+.btn-attend{
+	margin-right: 0px;
 }
 
 .btn-finished {
 	background-color: #a94442;
 }
+
+/* Media query for smaller screens */
+@media (max-width: 933px) {
+	.event-author-header {
+		flex-direction: column; /* Stack elements vertically */
+		height: auto; /* Adjust height to fit content */
+	}
+
+	.event-author,
+	.event-header-extra {
+		width: 100%; /* Make both columns take full width on small screens */
+		margin-bottom: 10px; /* Space between the two rows */
+	}
+
+	.event-author {
+		justify-content: space-evenly; /* Center the author info */
+		margin: 10px 0;
+	}
+
+	.author-photo {
+		height: 35%;
+	}
+
+	.event-header-extra{
+		width: 100%;
+		justify-content: space-evenly;
+	}
+
+	.event-header-attendance {
+		justify-content: center; /* Center the attendance info */
+	}
+
+	.btn-attend {
+		width: auto; /* Adjust button width to fit content */
+		margin-bottom: 10px;
+		margin-right: 0;
+		margin-left: 0;
+	}
+
+}
+
 
 .btn-edit {
 	position: absolute; /* Position relative to the container */
@@ -192,11 +248,29 @@
 
 .carousel-image {
 	min-width: 700px;
+	height: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	object-position: cover;
+	object-fit: cover;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* Media Query for smaller screens */
+@media (max-width: 700px) {
+	.carousel {
+		aspect-ratio: auto; /* Allow the carousel to adjust height naturally */
+		height: auto; /* Remove fixed height constraints */
+	}
+
+	.carousel-image {
+		min-width: 0;
+		width: 100%; /* Use full width of container */
+		max-width: 100%; /* Prevent overflow */
+		height: auto; /* Maintain aspect ratio */
+		object-fit: contain; /* Ensure the whole image is visible */
+	}
+}
+
 
 /* Event Details */
 .event-text-details {
@@ -223,7 +297,8 @@
 
 .event-description h3,
 p {
-	margin: 0 10px 20px 20px;
+	margin: 0 20px 10px 20px;
+
 	text-align: justify;
 	font-family: 'Product Sans', 'sans-serif';
 }

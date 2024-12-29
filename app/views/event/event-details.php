@@ -2,37 +2,39 @@
 <div class="main-content">
   <!-- Title and Author Section -->
   <section class="event-header">
-    <h1><?= htmlspecialchars($event['EventName']); ?></h1>
+    <div class="event-name"><?= htmlspecialchars($event['EventName']); ?></div>
     <div class="event-author-header">
       <div class="event-author">
         <img src="../<?php echo $user['ProfileImage']?> " alt="Organizer" class="author-photo" />
         <h2 class="author-by">BY <span class="author-name"><?= htmlspecialchars($user['FirstName']) . ' '.htmlspecialchars($user['LastName']) ;  ?></span></h2>
-        </div>  
-      <div class="event-header-attendance">
-        <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
-        <span class="attendance-count"><?= $attendanceCount . '/' . $event['MaxParticipants']; ?></span>
+        </div>
+      <div class="event-header-extra">
+        <div class="event-header-attendance">
+          <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
+          <span class="attendance-count"><?= $attendanceCount . '/' . $event['MaxParticipants']; ?></span>
+        </div>
+          <?php if ($_SESSION['user']['UserID'] == $user['UserID']): ?>
+              <!-- Form to show "ATTENDANTS" if the user is the event manager -->
+              <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
+                  <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
+                  <button type="submit" class="btn-attend">SEE ATTENDANTS</button>
+              </form>
+          <?php else: ?>
+              <?php if (isset($_SESSION['IsRegistered']) && $_SESSION['IsRegistered']): ?>
+                  <!-- Form to Unregister (Unapply) -->
+                  <form action="/event/unregister/<?php echo $event['EventID'] ?>" method="POST" class="follow-form">
+                      <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
+                      <button type="submit" class="btn-attend">UNREGISTER</button>
+                  </form>
+              <?php else: ?>
+                  <!-- Form to Register (Apply) -->
+                  <form action="/event/register/<?php echo $event['EventID'] ?>" method="POST" class="follow-form">
+                      <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
+                      <button type="submit" class="btn-attend">APPLY&nbspHere</button>
+                  </form>
+              <?php endif; ?>
+          <?php endif; ?>
       </div>
-      <?php if ($_SESSION['user']['UserID'] == $user['UserID']): ?>
-    <!-- Form to show "ATTENDANTS" if the user is the event manager -->
-    <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
-        <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-        <button type="submit" class="btn-attend">SEE ATTENDANTS</button>
-    </form>
-    <?php else: ?>
-        <?php if (isset($_SESSION['IsRegistered']) && $_SESSION['IsRegistered']): ?>
-            <!-- Form to Unregister (Unapply) -->
-            <form action="/event/unregister/<?php echo $event['EventID'] ?>" method="POST" class="follow-form">
-                <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-                <button type="submit" class="btn-attend">UNREGISTER HERE</button>
-            </form>
-        <?php else: ?>
-            <!-- Form to Register (Apply) -->
-            <form action="/event/register/<?php echo $event['EventID'] ?>" method="POST" class="follow-form">
-                <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-                <button type="submit" class="btn-attend">REGISTER HERE</button>
-            </form>
-        <?php endif; ?>
-    <?php endif; ?>
     </div>
   </section>
 

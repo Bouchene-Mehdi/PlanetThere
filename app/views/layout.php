@@ -85,18 +85,32 @@
                 break;
         }
     ?>" />
-	</head>
-	<body>
 
-        <?php 
-            // Include the navbar dynamically
-            require views_path('partials/navbar.php'); 
+    <!-- Add a script to detect the screen size -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const smallScreen = window.matchMedia("(max-width: 768px)").matches;
+            document.cookie = `screenType=${smallScreen ? 'small' : 'large'}; path=/`;
+        });
+    </script>
 
-        ?>
-        <?php echo $content; ?>
-        <?php 
-            // Include the footer dynamically
-            require views_path('partials/footer.php'); 
-        ?>
-	</body>
+    </head>
+
+    <body>
+    <?php
+    // Use the cookie to decide which navbar to load
+    $screenType = isset($_COOKIE['screenType']) ? $_COOKIE['screenType'] : 'large';
+    if ($screenType === 'small') {
+//        require views_path('partials/navbar-small.php');
+    } else {
+//        require views_path('partials/navbar-large.php');
+    }
+    ?>
+    <?php echo $content; ?>
+    <?php
+    // Include the footer dynamically
+//    require views_path('partials/footer.php');
+    ?>
+    </body>
+
 </html>
