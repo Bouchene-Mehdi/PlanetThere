@@ -74,16 +74,33 @@
       <p><?= nl2br(htmlspecialchars($event['Description'])); ?></p>
     </div>
   </section>
-
-
-
-
-        <!-- More event cards can go here -->
-
-      </div>
-
-    </div>
-  </section>
+    <!-- More Events Section -->
+    <section class="events-section">
+        <h2 class="section-title">More <span class="highlight">Events</span></h2>
+        <div class="events-container">
+            <div class="events-grid">
+                <?php foreach ($moreEvents as $event): ?>
+                    <article class="event-card">
+                        <a href="/event/<?php echo $event['EventID']; ?>">
+                            <img src="<?php echo $event['image1']; ?>" alt="<?php echo htmlspecialchars($event['EventName']); ?>" class="event-image" />
+                            <h3 class="event-title"><?php echo htmlspecialchars($event['EventName']); ?></h3>
+                            <div class="event-details">
+                                <div class="event-info">
+                                    <time class="event-date"><?php echo date("l, F j, Y g:i A", strtotime($event['StartDate'])); ?></time>
+                                    <address class="event-location"><?php echo htmlspecialchars($event['LocationName']); ?></address>
+                                </div>
+                                <div class="event-attendance">
+                                    <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon" />
+                                    <span class="attendance-count"><?php echo $event['AttendeesCount']; ?>/<?php echo $event['MaxParticipants']; ?></span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+</div>
   <script>
   // Array of images (populate this from PHP dynamically if needed)
   const images = [

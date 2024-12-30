@@ -28,7 +28,10 @@ class EventController {
         $categoryModel = new Category();
         $categories = $categoryModel->getCategryById($event['CategoryID']);
         $userModel = new User();
-
+        $moreEvents = $eventModel->get_5_UpcomingEvents();
+        foreach ($moreEvents as $key => $event){
+            $moreEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($event['EventID']);
+        }
         // Vérifier si un username est passé en paramètre
 
         $user=$userModel->getUserById($event['EventManagerID']);
@@ -50,16 +53,28 @@ class EventController {
                 'event' => $event,
                 'attendanceCount' => $attendanceCount,
                 'user'=>$user,
-                'categories'=>$categories
+                'categories'=>$categories,
+                'moreEvents'=>$moreEvents
             ]);
         } else {
 //            // Render the event review view
+            $reviews = $eventModel->getEventReviews($EventID);
+            foreach ($reviews as &$review) {
+                // Fetch user details by UserID
+                $user = $userModel->GetUserById($review['UserID']);
+                $review['UserProfileImage'] = $user['ProfileImage'];
+                $review['UserFirstName'] = $user['FirstName'];
+                $review['UserLastName'] = $user['LastName'];
+            }
+
             render('event/event-review',
             [
                 'event' => $event,
                 'attendanceCount' => $attendanceCount,
                 'user'=>$user,
-                'categories'=>$categories
+                'categories'=>$categories,
+                'reviews'=>$reviews,
+                'moreEvents'=>$moreEvents
             ]);
         }
 
@@ -190,6 +205,51 @@ class EventController {
             }
         }
     }
+
+    public function submitEventReview() {
+        // Check if the user is logged in
+        if (!isset($_SESSION['user'])) {
+            header('Location: /login');  // Redirect to login page if user is not logged in
+            exit();
+        }
+
+        // Check if the review form is submitted
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // Collect review data from POST request
+            $rating = $_POST['rating'] ?? null;
+            $comment = $_POST['comment'] ?? '';
+            $EventID = $_POST['event_id'] ?? null;
+
+            // Validate the inputs
+            if (empty($rating) || empty($comment)) {
+                $_SESSION['errors']['review'] = 'Please provide both a rating and a comment.';
+                header('Location: /event/' . $EventID . '/review');  // Redirect back to the event review page
+                exit();
+            }
+
+            // Ensure rating is valid (e.g., between 1 and 5)
+            if ($rating < 1 || $rating > 5) {
+                $_SESSION['errors']['rating'] = 'Rating must be between 1 and 5.';
+                header('Location: /event/' . $EventID . '/review');
+                exit();
+            }
+
+            // Initialize the Event model (or a separate Review model if you have one)
+            $eventModel = new Event();
+
+            // Save the review to the database
+            $userID = $_SESSION['user']['UserID'];  // Assuming user ID is stored in the session
+            $eventModel->submitEventReview( $userID,$EventID, $comment,  $rating);
+
+            // Redirect back to the event details page, where the review will be displayed
+            header('Location: /event/' . $EventID);
+            exit();
+        }
+    }
+
     public function RegisterForEvent($EventID){
         // Initialize the event model
         $eventModel = new Event();
@@ -245,7 +305,6 @@ class EventController {
             exit();
         }
     }
-
 
     
     
@@ -333,10 +392,9 @@ function uploadFile($file) {
             exit();
         }
     }
-    
-    
-    
+
+
+
 }
 
-  
 ?>

@@ -44,14 +44,13 @@
             <div class="carousel-image-container">
                 <?php if (!empty($event['image1']) && !empty($event['image2'])): ?>
                     <img id="carousel-image" class="carousel-image"
-                         src="<?= htmlspecialchars($event['image1']); ?>"
+                         src="<?= htmlspecialchars($event['image1']); ?> "
                          alt="Event Image 1" />
                 <?php endif; ?>
             </div>
             <button class="carousel-control next" onclick="nextImage()">&#9654;</button> <!-- Next Button -->
         </div>
     </section>
-
 
     <!-- Event Details Section -->
     <section class="event-text-details">
@@ -77,152 +76,102 @@
     <!-- Feedback Section -->
     <section class="feedback-section">
         <h1>Give us your <span class="highlight">Feedback!</span></h1>
-        <div class="star-rating">
-            <i class="fa fa-star" data-rating="1"></i>
-            <i class="fa fa-star" data-rating="2"></i>
-            <i class="fa fa-star" data-rating="3"></i>
-            <i class="fa fa-star" data-rating="4"></i>
-            <i class="fa fa-star" data-rating="5"></i>
-        </div>
-        <textarea
-            class="feedback-input"
-            placeholder="Tell us what you think about the event..."
-        ></textarea>
-        <button class="btn-submit" onclick="submitReview()">Submit</button>
+        <form id="feedbackForm" action="/event/review" method="POST">
+            <div class="star-rating">
+                <i class="fa fa-star" data-rating="1"></i>
+                <i class="fa fa-star" data-rating="2"></i>
+                <i class="fa fa-star" data-rating="3"></i>
+                <i class="fa fa-star" data-rating="4"></i>
+                <i class="fa fa-star" data-rating="5"></i>
+            </div>
+            <textarea
+                    name="comment"
+                    id="feedback"
+                    class="feedback-input"
+                    placeholder="Tell us what you think about the event..."
+            ></textarea>
+            <input type="hidden" name="event_id" value="<?= htmlspecialchars($event['EventID']); ?>">
+            <input type="hidden" name="rating" id="rating" value="0">
+            <button type="submit" class="btn-submit">Submit</button>
+        </form>
     </section>
 
     <section class="comments-section">
         <h2>Check what others <span class="highlight">Think!</span></h2>
 
-        <!-- Comment 1 -->
-        <div class="comment-card">
-            <div class="comment-header">
-                <img src="../../public/assets/images/profile-image.JPG" alt="User Avatar" class="user-avatar">
-                <div class="user-info">
-                    <h3>JANE DOE</h3>
-                    <p class="comment-text">AMAZING! I CODED MY WEBSITE IN 2 MINUTES</p>
-                </div>
-                <span class="comment-date">Friday, October 6, 8:30PM</span>
-            </div>
-            <div class="comment-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-            </div>
-        </div>
+        <?php foreach ($reviews as $review): ?>
+            <!-- Comment Card -->
+            <div class="comment-card">
+                <div class="comment-header">
+                    <!-- User Avatar -->
+                    <img src="<?= htmlspecialchars($review['UserProfileImage']); ?>" alt="User Avatar" class="user-avatar">
 
-        <!-- Repeat the comment cards for more comments -->
-        <div class="comment-card">
-            <div class="comment-header">
-                <img src="../../public/assets/images/profile-image.JPG" alt="User Avatar" class="user-avatar">
-                <div class="user-info">
-                    <h3>JANE DOE</h3>
-                    <p class="comment-text">AMAZING! I CODED MY WEBSITE IN 2 MINUTES AMAZING!
-                        AMAZING! I CODED MY WEBSITE IN 2 MINUTES
-                        AMAZING! I CODED MY WEBSITE IN 2 MINUTES
-                        AMAZING! I CODED MY WEBSITE IN 2 MINUTES
-                        AMAZING! I CODED MY WEBSITE IN 2 MINUTES
-                        AMAZING! I CODED MY WEBSITE IN 2 MINUTES
-                        AMAZING! I CODED MY WEBSITE IN 2 MINUTES
-                        AMAZING! I CODED MY WEBSITE IN 2 MINUTES</p>
+                    <div class="user-info">
+                        <!-- User Name -->
+                        <h3><?= htmlspecialchars($review['UserFirstName'] . ' ' . $review['UserLastName']); ?></h3>
+                        <!-- Review Text -->
+                        <p class="comment-text"><?= nl2br(htmlspecialchars($review['Comment'])); ?></p>
+                    </div>
+
+                    <span class="comment-date"><?= date('l, F j, Y, g:i A', strtotime($review['Date'])); ?></span>
                 </div>
-                <span class="comment-date">Friday, October 6, 8:30PM</span>
+
+                <div class="comment-stars">
+                    <?php
+                    // Assuming $review['Rating'] contains the numeric rating (1-5)
+                    for ($i = 1; $i <= 5; $i++):
+                        $starClass = ($review['Score'] >= $i) ? 'fa-solid' : 'fa-regular';
+                        ?>
+                        <i class="fa <?= $starClass; ?> fa-star"></i>
+                    <?php endfor; ?>
+                </div>
             </div>
-            <div class="comment-stars">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-            </div>
-        </div>
-        <button class="load-more-btn">Load more...</button>
-        <!-- Add more cards as needed -->
+        <?php endforeach; ?>
     </section>
 
+
+    <!-- More Events Section -->
     <section class="events-section">
         <h2 class="section-title">More <span class="highlight">Events</span></h2>
         <div class="events-container">
             <div class="events-grid">
-                <!-- Event Card Template -->
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../../public/assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../../public/assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../../public/assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="event-card">
-                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cc499bbedf0609ec93762b52772d6626357fbaeb3d229e969a33301555d08f3b"
-                         alt="Language Exchange Picnic" class="event-image">
-                    <h3 class="event-title">Language Exchange Picnic - Let's Practice Together</h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date">Friday, October 18, 6.00 PM</time>
-                            <address class="event-location">Tuilieres Garden, Paris</address>
-                        </div>
-                        <div class="event-attendance">
-                            <img src="../../public/assets/images/attendance-icon.svg"
-                                 alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count">18/20</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- More event cards can go here -->
-
+                <?php foreach ($moreEvents as $event): ?>
+                    <article class="event-card">
+                        <a href="/event/<?php echo $event['EventID']; ?>">
+                            <img src="<?php echo $event['image1']; ?>" alt="<?php echo htmlspecialchars($event['EventName']); ?>" class="event-image" />
+                            <h3 class="event-title"><?php echo htmlspecialchars($event['EventName']); ?></h3>
+                            <div class="event-details">
+                                <div class="event-info">
+                                    <time class="event-date"><?php echo date("l, F j, Y g:i A", strtotime($event['StartDate'])); ?></time>
+                                    <address class="event-location"><?php echo htmlspecialchars($event['LocationName']); ?></address>
+                                </div>
+                                <div class="event-attendance">
+                                    <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon" />
+                                    <span class="attendance-count"><?php echo $event['AttendeesCount']; ?>/<?php echo $event['MaxParticipants']; ?></span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                <?php endforeach; ?>
             </div>
-
         </div>
-        <button class="load-more-btn">Load more...</button>
     </section>
 </div>
+
+<script>
+    const stars = document.querySelectorAll('.star-rating .fa');
+    const ratingInput = document.getElementById('rating');
+
+    stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+            ratingInput.value = index + 1; // Set the hidden input value for rating
+            stars.forEach((s, i) => {
+                s.classList.toggle('fa-star', i <= index); // Filled star
+                s.classList.toggle('fa-star-o', i > index); // Empty star
+            });
+        });
+    });
+</script>
 
 <script>
     // Array of images (populate this from PHP dynamically if needed)
@@ -250,51 +199,8 @@
         showImage(currentIndex);
     }
 
-    function submitReview() {
-        const selectedRating = document.querySelectorAll('.fa-solid').length; // Count solid stars
-        const comment = document.querySelector('.feedback-input').value.trim();
-
-        if (selectedRating === 0) {
-            alert("Please select a rating!");
-            return;
-        }
-
-        if (comment === "") {
-            alert("Please enter a comment!");
-            return;
-        }
-
-        const eventID = <?= json_encode($event['EventID']); ?>;
-        const userID = <?= json_encode($_SESSION['user']['UserID']); ?>;
-
-        fetch("/submit-review.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                rating: selectedRating,
-                comment: comment,
-                eventID: eventID,
-                userID: userID
-            }),
-        })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    alert("Thank you for your feedback!");
-                    location.reload(); // Reload the page to update UI or show the success message
-                } else {
-                    alert("Failed to submit feedback: " + result.message);
-                }
-            })
-            .catch(error => {
-                console.error("Error submitting feedback:", error);
-                alert("An error occurred. Please try again.");
-            });
-    }
-
 </script>
+
 
 <div class="spacer"></div>
 
