@@ -24,17 +24,18 @@ class EventController {
         
         // Fetch the event details by ID
         $event = $eventModel->getEventById($EventID);
-        $userModel= new User();
+
         $categoryModel = new Category();
         $categories = $categoryModel->getCategryById($event['CategoryID']);
         $userModel = new User();
         $moreEvents = $eventModel->get_5_UpcomingEvents();
-        foreach ($moreEvents as $key => $event){
-            $moreEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($event['EventID']);
+
+        foreach ($moreEvents as $key => $displayEvent){
+            $moreEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($displayEvent['EventID']);
         }
         // Vérifier si un username est passé en paramètre
 
-        $user=$userModel->getUserById($event['EventManagerID']);
+        $manager=$userModel->getUserById($event['EventManagerID']);
         $_SESSION['IsRegistered'] = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
 
 
@@ -47,34 +48,47 @@ class EventController {
         $currentDate = new DateTime();
         $endDate = new DateTime($event['EndDate']);
 
+
         if ($endDate > $currentDate) {
             // Render the view with event details
+
             render('event/event-details', [
                 'event' => $event,
                 'attendanceCount' => $attendanceCount,
-                'user'=>$user,
+                'manager'=>$manager,
                 'categories'=>$categories,
                 'moreEvents'=>$moreEvents
             ]);
         } else {
 //            // Render the event review view
             $reviews = $eventModel->getEventReviews($EventID);
+
+
+            //Flag to check if the user has left a review
+            // that is: was registered for the event and didn't leave a review yet
+            $canReview = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
+
+
             foreach ($reviews as &$review) {
                 // Fetch user details by UserID
-                $user = $userModel->GetUserById($review['UserID']);
-                $review['UserProfileImage'] = $user['ProfileImage'];
-                $review['UserFirstName'] = $user['FirstName'];
-                $review['UserLastName'] = $user['LastName'];
+                $reviewUser = $userModel->GetUserById($review['UserID']);
+                $review['UserProfileImage'] = $reviewUser['ProfileImage'];
+                $review['UserFirstName'] = $reviewUser['FirstName'];
+                $review['UserLastName'] = $reviewUser['LastName'];
+                if ($reviewUser['UserID'] === $_SESSION['user']['UserID']) {
+                    $canReview = false;
+                }
             }
 
             render('event/event-review',
             [
                 'event' => $event,
                 'attendanceCount' => $attendanceCount,
-                'user'=>$user,
+                'manager'=>$manager,
                 'categories'=>$categories,
                 'reviews'=>$reviews,
-                'moreEvents'=>$moreEvents
+                'moreEvents'=>$moreEvents,
+                'canReview'=>$canReview
             ]);
         }
 

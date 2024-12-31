@@ -407,7 +407,7 @@ p {
 .comments-section h2 {
 	font-size: 36px;
 	font-weight: bold;
-	margin-bottom: 15px;
+	margin-bottom: 40px;
 }
 
 .comments-section .highlight {
@@ -432,7 +432,13 @@ p {
 	align-items: flex-start; /* Ensures the avatar stays at the top */
 }
 
-.comment-header .user-avatar {
+.comment-content{
+	margin-top:10px;
+	display: flex;
+	align-items: flex-start; /* Ensures the avatar stays at the top */
+}
+
+.comment-content .user-avatar {
 	flex-shrink: 0; /* Prevents avatar from resizing */
 	width: 70px;
 	height: 70px;
@@ -441,18 +447,18 @@ p {
 	border: 3px solid #00c3a9;
 }
 
-.comment-header .user-info {
+.comment-content .user-info {
 	flex-grow: 1; /* Allows the text to take available space */
 	text-align: left;
 }
 
-.comment-header .user-info h3 {
+.comment-content .user-info h3 {
 	margin: 0 0 0 20px;
 	font-size: 18px;
 	color: #333;
 }
 
-.comment-header .user-info .comment-text {
+.comment-content .user-info .comment-text {
 	font-size: 16px;
 	color: #555;
 	margin-top: 5px;
@@ -603,6 +609,12 @@ p {
 .attendance-icon {
 	width: 24px;
 	margin-right: 8px;
+}
+
+@media (max-width: 700px){
+	.events-grid{
+		justify-items: center;
+	}
 }
 
 .load-more-btn {

@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Planet There</title>
-		<?php 
+		<?php
     // Determine the path prefix based on the current route
     $segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
     $pathPrefix = (count($segments) > 1) ? '../' : '';  // If there are more than 1 segment, go up one level
@@ -17,7 +17,7 @@
 
 
 
-    <link rel="stylesheet" href="<?php 
+    <link rel="stylesheet" href="<?php
         switch (getCurrentRoute()) {
             case '':
                 echo $pathPrefix . 'assets/css/homepage.css';
@@ -117,7 +117,7 @@
 //        require views_path('partials/footer-small.php');
     } else {
 //        COMMENT THIS OUT TO GET RID OF FOOTER
-        require views_path('partials/footer-large.php');
+//        require views_path('partials/footer-large.php');
 //        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     ?>

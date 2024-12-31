@@ -4,34 +4,22 @@
         <div class="event-name"><?= htmlspecialchars($event['EventName']); ?></div>
         <div class="event-author-header">
             <div class="event-author">
-                <img src="../<?php echo $user['ProfileImage']?> " alt="Organizer" class="author-photo" />
-                <h2 class="author-by">BY <span class="author-name"><?= htmlspecialchars($user['FirstName']) . ' '.htmlspecialchars($user['LastName']) ;  ?></span></h2>
+                <img src="../<?php echo $manager['ProfileImage']?> " alt="Organizer" class="author-photo" />
+                <h2 class="author-by">BY <span class="author-name"><?= htmlspecialchars($manager['FirstName']) . ' '.htmlspecialchars($manager['LastName']) ;  ?></span></h2>
             </div>
             <div class="event-header-extra">
                 <div class="event-header-attendance">
                     <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
                     <span class="attendance-count"><?= $attendanceCount . '/' . $event['MaxParticipants']; ?></span>
                 </div>
-                <?php if ($_SESSION['user']['UserID'] == $user['UserID']): ?>
+                <?php if ($_SESSION['user']['UserID'] == $manager['UserID']): ?>
                     <!-- Form to show "ATTENDANTS" if the user is the event manager -->
                     <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
                         <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-                        <button type="submit" class="btn-attend">SEE ATTENDANTS</button>
+                        <button type="submit" class="btn-finished">SEE ATTENDANTS</button>
                     </form>
                 <?php else: ?>
-                    <?php if (isset($_SESSION['IsRegistered']) && $_SESSION['IsRegistered']): ?>
-                        <!-- Form to Unregister (Unapply) -->
-                        <form action="/event/unregister/<?php echo $event['EventID'] ?>" method="POST" class="follow-form">
-                            <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-                            <button type="submit" class="btn-attend">UNREGISTER</button>
-                        </form>
-                    <?php else: ?>
-                        <!-- Form to Register (Apply) -->
-                        <form action="/event/register/<?php echo $event['EventID'] ?>" method="POST" class="follow-form">
-                            <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-                            <button type="submit" class="btn-attend">APPLY&nbspHere</button>
-                        </form>
-                    <?php endif; ?>
+                    <button class="btn-finished">EVENT FINISHED</button>
                 <?php endif; ?>
             </div>
         </div>
@@ -74,6 +62,7 @@
     </section>
 
     <!-- Feedback Section -->
+    <?php if ($canReview): ?>
     <section class="feedback-section">
         <h1>Give us your <span class="highlight">Feedback!</span></h1>
         <form id="feedbackForm" action="/event/review" method="POST">
@@ -95,6 +84,7 @@
             <button type="submit" class="btn-submit">Submit</button>
         </form>
     </section>
+    <?php endif; ?>
 
     <section class="comments-section">
         <h2>Check what others <span class="highlight">Think!</span></h2>
@@ -103,17 +93,19 @@
             <!-- Comment Card -->
             <div class="comment-card">
                 <div class="comment-header">
-                    <!-- User Avatar -->
-                    <img src="<?= htmlspecialchars($review['UserProfileImage']); ?>" alt="User Avatar" class="user-avatar">
+                    <div class="comment-content">
+                        <!-- User Avatar -->
+                        <img src="<?= htmlspecialchars($review['UserProfileImage']); ?>" alt="User Avatar" class="user-avatar">
 
-                    <div class="user-info">
-                        <!-- User Name -->
-                        <h3><?= htmlspecialchars($review['UserFirstName'] . ' ' . $review['UserLastName']); ?></h3>
-                        <!-- Review Text -->
-                        <p class="comment-text"><?= nl2br(htmlspecialchars($review['Comment'])); ?></p>
+                        <div class="user-info">
+                            <!-- User Name -->
+                            <h3><?= htmlspecialchars($review['UserFirstName'] . ' ' . $review['UserLastName']); ?></h3>
+                            <!-- Review Text -->
+                            <p class="comment-text"><?= nl2br(htmlspecialchars($review['Comment'])); ?></p>
+                        </div>
                     </div>
-
                     <span class="comment-date"><?= date('l, F j, Y, g:i A', strtotime($review['Date'])); ?></span>
+
                 </div>
 
                 <div class="comment-stars">
@@ -130,28 +122,28 @@
     </section>
 
 
-    <!-- More Events Section -->
     <section class="events-section">
         <h2 class="section-title">More <span class="highlight">Events</span></h2>
         <div class="events-container">
             <div class="events-grid">
-                <?php foreach ($moreEvents as $event): ?>
-                    <article class="event-card">
-                        <a href="/event/<?php echo $event['EventID']; ?>">
-                            <img src="<?php echo $event['image1']; ?>" alt="<?php echo htmlspecialchars($event['EventName']); ?>" class="event-image" />
-                            <h3 class="event-title"><?php echo htmlspecialchars($event['EventName']); ?></h3>
-                            <div class="event-details">
-                                <div class="event-info">
-                                    <time class="event-date"><?php echo date("l, F j, Y g:i A", strtotime($event['StartDate'])); ?></time>
-                                    <address class="event-location"><?php echo htmlspecialchars($event['LocationName']); ?></address>
+                <?php foreach ($moreEvents as $displayEvent): ?>
+                    <?php if ($displayEvent['EventID'] != $event['EventID']): ?>
+                        <article class="event-card">
+                            <a href="/event/<?php echo $displayEvent['EventID']; ?>">
+                                <img src="<?php echo $displayEvent['image1']; ?>" alt="<?php echo htmlspecialchars($displayEvent['EventName']); ?>" class="event-image" />
+                                <h3 class="event-title"><?php echo htmlspecialchars($displayEvent['EventName']); ?></h3>
+                                <div class="event-details">
+                                    <div class="event-info">
+                                        <time class="event-date"><?php echo date("l, F j, Y g:i A", strtotime($displayEvent['StartDate'])); ?></time>
+                                        <address class="event-location"><?php echo htmlspecialchars($displayEvent['LocationName']); ?></address>
+                                    </div>
+                                    <div class="event-attendance">
+                                        <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon" />
+                                        <span class="attendance-count"><?php echo $displayEvent['AttendeesCount']; ?>/<?php echo $displayEvent['MaxParticipants']; ?></span>
+                                    </div>
                                 </div>
-                                <div class="event-attendance">
-                                    <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon" />
-                                    <span class="attendance-count"><?php echo $event['AttendeesCount']; ?>/<?php echo $event['MaxParticipants']; ?></span>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
+                            </a></article>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>
