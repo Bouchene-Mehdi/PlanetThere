@@ -5,13 +5,15 @@ class Route{
         'GET' => [],
         'POST' => []
     ];
+
     public function get($uri, $controller){
         $this->routes['GET'][$uri] = $controller;
     }
     public function post($uri, $controller){
         $this->routes['POST'][$uri] = $controller;
-    
+
     }
+
     public function formatRoutes($route){
         return '/'.trim($route, '/');
     }
@@ -26,7 +28,7 @@ class Route{
             $this->callAction($controller_in_question, $action, $params);
 
         }
-        
+
     }
     public function match($method, $requestUri){
         foreach($this->routes[$method] as $uri => $controller){
@@ -39,7 +41,7 @@ class Route{
                 ];
             }
         }
-        return false;   
+        return false;
      }
      protected function callAction($controller, $action, $parameters = []) {
         require_once __DIR__ . '/../controllers/'. '/'. $controller . '.php';

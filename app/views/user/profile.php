@@ -91,20 +91,22 @@
         <div class="events-grid">
             <?php foreach ($managedEvents as $event): ?>
                 <article class="event-card">
-                    <img src="<?= htmlspecialchars($event['image1'] ?? 'default-image.jpg') ?>" 
-                         alt="<?= htmlspecialchars($event['EventName']) ?>" 
-                         class="event-image">
-                    <h3 class="event-title"><?= htmlspecialchars($event['EventName']) ?></h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date"><?= htmlspecialchars($event['StartDate']) ?> - <?= htmlspecialchars($event['EndDate']) ?></time>
-                            <address class="event-location"><?= htmlspecialchars($event['LocationName']) ?>, <?= htmlspecialchars($event['LocationAddress']) ?></address>
+                    <a href="/event/<?php echo $event['EventID']; ?>">
+                        <img src="<?= htmlspecialchars($event['image1'] ?? 'default-image.jpg') ?>"
+                             alt="<?= htmlspecialchars($event['EventName']) ?>"
+                             class="event-image">
+                        <h3 class="event-title"><?= htmlspecialchars($event['EventName']) ?></h3>
+                        <div class="event-details">
+                            <div class="event-info">
+                                <time class="event-date"><?= htmlspecialchars($event['StartDate']) ?> - <?= htmlspecialchars($event['EndDate']) ?></time>
+                                <address class="event-location"><?= htmlspecialchars($event['LocationName']) ?>, <?= htmlspecialchars($event['LocationAddress']) ?></address>
+                            </div>
+                            <div class="event-attendance">
+                                <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
+                                <span class="attendance-count"><?= htmlspecialchars($event['AttendeesCount']) ?>/<?= htmlspecialchars($event['MaxParticipants']) ?></span>
+                            </div>
                         </div>
-                        <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count"><?= htmlspecialchars($event['AttendeesCount']) ?>/<?= htmlspecialchars($event['MaxParticipants']) ?></span>
-                        </div>
-                    </div>
+                    </a>
                 </article>
             <?php endforeach; ?>
         </div>
@@ -120,20 +122,22 @@
         <div class="events-grid">
             <?php foreach ($registeredEvents as $event): ?>
                 <article class="event-card">
-                    <img src="<?= htmlspecialchars($event['image2'] ?? 'default-image.jpg') ?>" 
-                         alt="<?= htmlspecialchars($event['EventName']) ?>" 
-                         class="event-image">
-                    <h3 class="event-title"><?= htmlspecialchars($event['EventName']) ?></h3>
-                    <div class="event-details">
-                        <div class="event-info">
-                            <time class="event-date"><?= htmlspecialchars($event['StartDate']) ?> - <?= htmlspecialchars($event['EndDate']) ?></time>
-                            <address class="event-location"><?= htmlspecialchars($event['LocationName']) ?>, <?= htmlspecialchars($event['LocationAddress']) ?></address>
+                    <a href="/event/<?php echo $event['EventID']; ?>">
+                        <img src="<?= htmlspecialchars($event['image2'] ?? 'default-image.jpg') ?>"
+                             alt="<?= htmlspecialchars($event['EventName']) ?>"
+                             class="event-image">
+                        <h3 class="event-title"><?= htmlspecialchars($event['EventName']) ?></h3>
+                        <div class="event-details">
+                            <div class="event-info">
+                                <time class="event-date"><?= htmlspecialchars($event['StartDate']) ?> - <?= htmlspecialchars($event['EndDate']) ?></time>
+                                <address class="event-location"><?= htmlspecialchars($event['LocationName']) ?>, <?= htmlspecialchars($event['LocationAddress']) ?></address>
+                            </div>
+                            <div class="event-attendance">
+                                <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
+                                <span class="attendance-count"><?= htmlspecialchars($event['AttendeesCount']) ?>/<?= htmlspecialchars($event['MaxParticipants']) ?></span>
+                            </div>
                         </div>
-                        <div class="event-attendance">
-                            <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
-                            <span class="attendance-count"><?= htmlspecialchars($event['AttendeesCount']) ?>/<?= htmlspecialchars($event['MaxParticipants']) ?></span>
-                        </div>
-                    </div>
+                    </a>
                 </article>
             <?php endforeach; ?>
         </div>

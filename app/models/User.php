@@ -1,7 +1,7 @@
 <?php
 class User {
     private $db;
-    private $uploadDir = 'C:/xampp/htdocs/PlanetThere/public/uploads/users/';
+    private $uploadDir = 'uploads/users/';
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
     }
