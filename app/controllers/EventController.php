@@ -38,11 +38,15 @@ class EventController {
         $manager=$userModel->getUserById($event['EventManagerID']);
         $_SESSION['IsRegistered'] = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
 
+        
+        $isFull = $eventModel->IsEventFull($event);
+
 
             // Utiliser le username fourni
     
         // Fetch the attendance count for the event
         $attendanceCount = $eventModel->getAttendanceCount($EventID);
+
 
         // Determine if event is finished
         $currentDate = new DateTime();
@@ -94,6 +98,18 @@ class EventController {
 
 
 
+    }
+    public function IsEventFull($EventID){
+        // Initialize the event model
+        $eventModel = new Event();
+        
+        // Fetch the event details by ID
+        $event = $eventModel->getEventById($EventID);
+        
+        // Check if the event is full
+        $isFull = $eventModel->IsEventFull($event);
+        // Return the result as JSON
+        return $isFull;
     }
     // EventController.php (Create Event Step 1)
     public function createEventStep1() {
@@ -281,6 +297,19 @@ class EventController {
         
         // Unregister the user from the event
         $eventModel->unregisterForEvent($EventID, $_SESSION['user']['UserID']);
+        if($eventModel->HasWaitlist($EventID)){
+            $eventModel->MoveFromWaitlist($EventID);
+        }
+        // Redirect back to the event details page
+        header('Location: /event/' . $EventID);
+        exit();
+    }
+    public function WaitlistForEvent($EventID){
+        // Initialize the event model
+        $eventModel = new Event();
+        
+        // Add the user to the waitlist for the event
+        $eventModel->addToWaitlist($EventID, $_SESSION['user']['UserID']);
         
         // Redirect back to the event details page
         header('Location: /event/' . $EventID);
