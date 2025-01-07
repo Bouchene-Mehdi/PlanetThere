@@ -252,23 +252,36 @@ class Event {
 
     }
     public function IsEventFull($eventID) {
-        $result= $this->getAttendanceCount($eventID);
+        // Get the attendance count
+        $attendanceCount = $this->getAttendanceCount($eventID);
+    
+        // Query to get the maximum participants for the event
         $query = 'SELECT MaxParticipants FROM events WHERE EventID = :eventID';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
         $stmt->execute();
         $maxParticipants = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['count'] == $maxParticipants['MaxParticipants'];
+    
+        // Ensure $maxParticipants is valid and contains the expected key
+        if ($maxParticipants && isset($maxParticipants['MaxParticipants'])) {
+            return $attendanceCount >= $maxParticipants['MaxParticipants'];
+        }
+    
+        // If event doesn't exist or is invalid, return false
+        return false;
     }
+    
     public function getAttendanceCount($eventID) {
         $query = 'SELECT COUNT(*) as count FROM registrations WHERE EventID = :eventID';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['count'];  // Return the count of registered users
+    
+        // Ensure $result is valid and contains the count
+        return ($result && isset($result['count'])) ? (int)$result['count'] : 0;
     }
-
+    
     public function getAttendees($eventID) {
         $query = 'SELECT * FROM users WHERE UserID IN (SELECT UserID FROM registrations WHERE EventID = :eventID)';
         $stmt = $this->db->prepare($query);
