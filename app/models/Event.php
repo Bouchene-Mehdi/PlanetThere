@@ -1,7 +1,7 @@
 <?php
 class Event {
     private $db;
-    private $uploadDir = 'C:/xampp/htdocs/PlanetThere/public/uploads/events/';
+    private $uploadDir = 'uploads/events/';
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
     }
@@ -306,5 +306,42 @@ class Event {
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getEventReviews($eventID){
+        $query = 'SELECT * FROM reviews WHERE EventID = :eventID';
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(array('eventID' => $eventID));
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function submitEventReview($userID, $eventID, $comment, $score) {
+        $query = 'INSERT INTO reviews (
+                     Score,
+                     Comment,
+                     EventID,
+                     UserID)
+                     VALUES (
+                     :score,
+                     :comment,
+                     :eventID,
+                     :userID    
+                     )';
+        $stmt = $this->db->prepare($query);
+
+        // Bind parameters to prevent SQL injection
+        $stmt->bindParam(':score', $score, PDO::PARAM_INT); // Assuming score is an integer
+        $stmt->bindParam(':comment', $comment, PDO::PARAM_STR); // Assuming comment is a string
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT); // Assuming eventID is an integer
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT); // Assuming userID is an integer
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            return true; // Successfully inserted the review
+        } else {
+            // Log or handle the error
+            error_log('Failed to insert event review: ' . implode(', ', $stmt->errorInfo()));
+            return false; // Insertion failed
+        }
     }
 }

@@ -35,6 +35,8 @@
 	margin-top: 10px;
 }
 
+
+
 .search-section {
 	justify-content: center;
 	border-radius: 20px;
@@ -59,7 +61,7 @@
 .search-field {
 	align-self: stretch;
 	display: flex;
-	min-width: 240px;
+	/*min-width: 240px;*/
 	min-height: 70px;
 	flex-direction: column;
 	justify-content: space-between;
@@ -89,7 +91,7 @@
 	border-radius: 5px;
 	background: #009688;
 	display: flex;
-	min-height: 70px;
+	/*min-height: 70px;*/
 	margin-left: 20px;
 	width: 70px;
 	height: 70px;
@@ -103,6 +105,44 @@
 	width: 24px;
 	align-self: stretch;
 	margin: auto 0;
+}
+
+@media (max-width: 900px){
+	.hero-title{
+		display: none;
+	}
+
+	.hero-section{
+		background-image: none;
+		padding: 0;
+		height: auto;
+	}
+
+	.search-section{
+		padding: 37px 20px;
+		width: 94%;
+		flex-direction: column;
+	}
+
+	.search-form {
+		display: flex; /* Ensure flex layout is applied */
+		flex-direction: column; /* Stacks children vertically */
+		gap: 15px; /* Adds spacing between rows */
+		width: 100%; /* Ensures the form spans the full width */
+	}
+
+	.search-dropdown{
+		width: inherit;
+	}
+
+	.search-btn {
+		width: 100%;
+		margin-left: 0;
+		margin-top: 10px;
+		border-radius: 20px;
+		height: 50px;
+	}
+
 }
 
 /* For all the events section */
@@ -125,6 +165,8 @@
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
+
+
 .event-card {
 	border-radius: 10px;
 	max-width: 300px;
@@ -133,6 +175,12 @@
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 	padding: 20px;
 	text-align: left;
+}
+
+@media (max-width: 700px){
+	.events-grid{
+		justify-items: center;
+	}
 }
 
 .event-image {
@@ -144,6 +192,8 @@
 	object-fit: cover;
 	border-radius: 10px;
 }
+
+
 
 .event-title {
 	color: #000;
@@ -207,11 +257,16 @@
 	width: 100%;
 	height: 70%;
 }
-@media (max-width: 991px) {
+
+@media (max-width: 1025px) {
 	.create-event-section {
 		max-width: 100%;
 		margin-top: 40px;
 		padding: 0 20px;
+	}
+
+	.create-event-image {
+		display: none;
 	}
 }
 
@@ -219,7 +274,7 @@
 	gap: 40px;
 	display: flex;
 }
-@media (max-width: 991px) {
+@media (max-width: 1025px) {
 	.create-event-container {
 		flex-direction: column;
 		align-items: stretch;
@@ -234,9 +289,9 @@
 	width: 40%;
 	margin-left: 0;
 }
-@media (max-width: 991px) {
+@media (max-width: 1025px) {
 	.create-event-image {
-		width: 100%;
+		display: none;
 	}
 }
 
@@ -248,7 +303,7 @@
 	margin-top: -60px;
 	flex-grow: 1;
 }
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
 	.create-event-img {
 		max-width: 100%;
 	}
@@ -261,22 +316,18 @@
 	width: 50%;
 	margin-left: 20px;
 }
-@media (max-width: 991px) {
+@media (max-width: 1024px) {
 	.create-event-content {
 		width: 100%;
 	}
 }
+
 
 .create-event-text {
 	display: flex;
 	flex-direction: column;
 	color: #f5f5f5;
 	justify-content: space-between;
-}
-@media (max-width: 991px) {
-	.create-event-text {
-		margin-top: 40px;
-	}
 }
 
 .create-event-title {
@@ -309,6 +360,28 @@
 	color: #f5f5f5;
 }
 
+@media (max-width: 1024px){
+	.create-event-content{
+		margin: 0;
+	}
+
+	.create-event-title {
+		font-size: 1.5em;
+		text-align: center;
+	}
+
+	.create-event-subtitle{
+		margin-top: -0.8em;
+		margin-bottom: 0;
+		text-align: center;
+	}
+
+	.create-event-btn{
+		align-self: center;
+		margin: 20px 0;
+	}
+}
+
 /* Popular Section */
 
 .section-title {
@@ -316,6 +389,13 @@
 	color: #000;
 	font: 400 2em 'Product Sans', sans-serif;
 	font-weight: bold;
+}
+
+@media (max-width: 720px){
+	.section-title {
+		margin-left: 0;
+		text-align: center;
+	}
 }
 
 .section-title .highlight {
