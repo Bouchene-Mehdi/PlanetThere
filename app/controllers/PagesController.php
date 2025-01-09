@@ -8,6 +8,8 @@ class PagesController
     {
         $database= Database::getInstance();
         $conn=$database->getConnection();
+        $categoryModel = new Category();
+        $categories = $categoryModel->getAllCategories();
 
         $eventModel = new Event();
         $upcomaingEvents = $eventModel->get_5_UpcomingEvents();
@@ -27,7 +29,8 @@ class PagesController
         [
             'upcomingEvents' => $upcomaingEvents,
             'popularEvents' => $popularEvents,
-            'stayfitEvents' => $stayfitEvents
+            'stayfitEvents' => $stayfitEvents,
+            'categories' => $categories
         ]);
     }
     public function about()
