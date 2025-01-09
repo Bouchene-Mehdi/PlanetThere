@@ -1,7 +1,7 @@
 <?php
 class Event {
     private $db;
-    private $uploadDir = 'C:/xampp/htdocs/PlanetThere/public/uploads/events/';
+    private $uploadDir = 'uploads/events/';
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
     }
@@ -217,6 +217,49 @@ class Event {
         $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
         return $stmt->execute();
     }
+    public function addToWaitlist($eventID, $userID) {
+        $query = 'INSERT INTO waitlisting (EventID, UserID) VALUES (:eventID, :userID)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+    public function HasWaitlist($eventID){
+        $query = 'SELECT * FROM waitlisting WHERE EventID = :eventID';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+    public function MoveFromWaitlist($eventID){
+        //take the user from the waitlisting with the earliest waitlisting date in and add it to the registrations
+        $query = 'SELECT * FROM waitlisting WHERE EventID = :eventID ORDER BY WaitlistDate ASC LIMIT 1';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $userID = $result['UserID'];
+        $query = 'INSERT INTO registrations (EventID, UserID) VALUES (:eventID, :userID)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $stmt->execute();
+        $query = 'DELETE FROM waitlisting WHERE EventID = :eventID AND UserID = :userID';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        return $stmt->execute();
+
+    }
+    public function IsEventFull($eventID) {
+        $result= $this->getAttendanceCount($eventID);
+        $query = 'SELECT MaxParticipants FROM events WHERE EventID = :eventID';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->execute();
+        $maxParticipants = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'] == $maxParticipants['MaxParticipants'];
+    }
     public function getAttendanceCount($eventID) {
         $query = 'SELECT COUNT(*) as count FROM registrations WHERE EventID = :eventID';
         $stmt = $this->db->prepare($query);
@@ -225,6 +268,7 @@ class Event {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['count'];  // Return the count of registered users
     }
+
     public function getAttendees($eventID) {
         $query = 'SELECT * FROM users WHERE UserID IN (SELECT UserID FROM registrations WHERE EventID = :eventID)';
         $stmt = $this->db->prepare($query);
@@ -249,5 +293,42 @@ class Event {
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getEventReviews($eventID){
+        $query = 'SELECT * FROM reviews WHERE EventID = :eventID';
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(array('eventID' => $eventID));
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function submitEventReview($userID, $eventID, $comment, $score) {
+        $query = 'INSERT INTO reviews (
+                     Score,
+                     Comment,
+                     EventID,
+                     UserID)
+                     VALUES (
+                     :score,
+                     :comment,
+                     :eventID,
+                     :userID    
+                     )';
+        $stmt = $this->db->prepare($query);
+
+        // Bind parameters to prevent SQL injection
+        $stmt->bindParam(':score', $score, PDO::PARAM_INT); // Assuming score is an integer
+        $stmt->bindParam(':comment', $comment, PDO::PARAM_STR); // Assuming comment is a string
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT); // Assuming eventID is an integer
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT); // Assuming userID is an integer
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            return true; // Successfully inserted the review
+        } else {
+            // Log or handle the error
+            error_log('Failed to insert event review: ' . implode(', ', $stmt->errorInfo()));
+            return false; // Insertion failed
+        }
     }
 }

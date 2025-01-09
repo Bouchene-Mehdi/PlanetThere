@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Planet There</title>
-		<?php 
+		<?php
     // Determine the path prefix based on the current route
     $segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
     $pathPrefix = (count($segments) > 1) ? '../' : '';  // If there are more than 1 segment, go up one level
@@ -13,9 +13,11 @@
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/navbar.css'; ?>" />
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/global.css'; ?>" />
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/footer.css'; ?>" />
+    <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/fonts/fontawesome-free-6.7.2-web/css/all.min.css' ?>" />
 
 
-    <link rel="stylesheet" href="<?php 
+
+    <link rel="stylesheet" href="<?php
         switch (getCurrentRoute()) {
             case '':
                 echo $pathPrefix . 'assets/css/homepage.css';
@@ -85,18 +87,40 @@
                 break;
         }
     ?>" />
-	</head>
-	<body>
 
-        <?php 
-            // Include the navbar dynamically
-            require views_path('partials/navbar.php'); 
+    <!-- Add a script to detect the screen size -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const smallScreen = window.matchMedia("(max-width: 768px)").matches;
+            document.cookie = `screenType=${smallScreen ? 'small' : 'large'}; path=/`;
+        });
+    </script>
 
-        ?>
-        <?php echo $content; ?>
-        <?php 
-            // Include the footer dynamically
-            require views_path('partials/footer.php'); 
-        ?>
-	</body>
+    </head>
+
+    <body>
+    <?php
+    // Use the cookie to decide which navbar and footer to load
+    $screenType = isset($_COOKIE['screenType']) ? $_COOKIE['screenType'] : 'large';
+    if ($screenType === 'small') {
+//        require views_path('partials/navbar-small.php');
+    } else {
+//        COMMENT THIS OUT TO GET RID OF NAVBAR
+        require views_path('partials/navbar-large.php');
+//        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
+    ?>
+    <?php echo $content; ?>
+    <?php
+    // Include the correct footer dynamically
+    if ($screenType === 'small') {
+//        require views_path('partials/footer-small.php');
+    } else {
+//        COMMENT THIS OUT TO GET RID OF FOOTER
+//        require views_path('partials/footer-large.php');
+//        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    }
+    ?>
+    </body>
+
 </html>
