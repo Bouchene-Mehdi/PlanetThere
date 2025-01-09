@@ -30,6 +30,7 @@ $router->get('/create-event1', 'EventController@ShowEventCreate1');
 $router->get('/create-event2', 'EventController@ShowEventCreate2');
 $router->get('/event/{eventID}', 'EventController@ShowEventDetails');
 $router->get('/event-attendees/{eventID}', 'EventController@ShowEventAttendees');
+$router->get('/event-waitlist/{eventID}', 'EventController@ShowEventWaitlist');
 
 
 
@@ -48,8 +49,12 @@ $router->post('/event/create-1', 'EventController@createEventStep1');
 $router->post('/event/create-2', 'EventController@createEventStep2');
 $router->post('/event/search', 'EventController@postEventSearch');
 $router->post('/event/register/{eventID}', 'EventController@RegisterForEvent');
+$router->post('/event/waitlist/{eventID}', 'EventController@WaitlistForEvent');
+$router->post('/event/unwaitlist/{eventID}', 'EventController@UnwaitlistForEvent');
 $router->post('/event/unregister/{eventID}', 'EventController@UnregisterForEvent');
 $router->post('/event/removeAttendee', 'EventController@RemoveAttendee');
+$router->post('/event/removeWaitlister', 'EventController@RemoveWaitlister');
+
 $router->post('/event/review', 'EventController@submitEventReview');
 
 

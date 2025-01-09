@@ -188,13 +188,25 @@ class Event {
         $stmt->execute();
         return $stmt->rowCount() > 0;
     }
-    public function registerForEvent($eventID, $userID) {
-        $query = 'INSERT INTO registrations (EventID, UserID) VALUES (:eventID, :userID)';
+    public function IsInWaitlist($eventID,$userID){
+        $query = 'SELECT * FROM waitlisting WHERE EventID = :eventID AND UserID = :userID';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
         $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+    public function registerForEvent($eventID, $userID, $quantity) {
+        // Insert the registration into the database
+        $query = 'INSERT INTO registrations (EventID, UserID, Quantity, RegistrationDate) 
+                  VALUES (:eventID, :userID, :quantity, NOW())';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
         return $stmt->execute();
     }
+    
     public function getRegisteredEvents($userID) {
         $query = 'SELECT * FROM events WHERE EventID IN (SELECT EventID FROM registrations WHERE UserID = :userID)';
         $stmt = $this->db->prepare($query);
@@ -224,6 +236,13 @@ class Event {
         $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
         return $stmt->execute();
     }
+    public function removeFromWaitlist($eventID, $userID){
+        $query = 'DELETE FROM waitlisting WHERE EventID = :eventID AND UserID = :userID';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
     public function HasWaitlist($eventID){
         $query = 'SELECT * FROM waitlisting WHERE EventID = :eventID';
         $stmt = $this->db->prepare($query);
@@ -233,7 +252,7 @@ class Event {
     }
     public function MoveFromWaitlist($eventID){
         //take the user from the waitlisting with the earliest waitlisting date in and add it to the registrations
-        $query = 'SELECT * FROM waitlisting WHERE EventID = :eventID ORDER BY WaitlistDate ASC LIMIT 1';
+        $query = 'SELECT * FROM waitlisting WHERE EventID = :eventID ORDER BY WaitlistingDate ASC LIMIT 1';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
         $stmt->execute();
@@ -251,6 +270,7 @@ class Event {
         return $stmt->execute();
 
     }
+
     public function IsEventFull($eventID) {
         // Get the attendance count
         $attendanceCount = $this->getAttendanceCount($eventID);
@@ -272,7 +292,7 @@ class Event {
     }
     
     public function getAttendanceCount($eventID) {
-        $query = 'SELECT COUNT(*) as count FROM registrations WHERE EventID = :eventID';
+        $query = 'SELECT SUM(Quantity) as count FROM registrations WHERE EventID = :eventID';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
         $stmt->execute();
@@ -282,12 +302,29 @@ class Event {
         return ($result && isset($result['count'])) ? (int)$result['count'] : 0;
     }
     
-    public function getAttendees($eventID) {
+    public function getAttendeesAccounts($eventID) {
         $query = 'SELECT * FROM users WHERE UserID IN (SELECT UserID FROM registrations WHERE EventID = :eventID)';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getWaitlistAccounts($eventID){
+        $query = 'SELECT * FROM users WHERE UserID IN (SELECT UserID FROM waitlisting WHERE EventID = :eventID)';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getAttendanceCountUser($eventID,$userID){
+        //q:look for the quantity registration of user with that id 
+        $query = 'SELECT Quantity FROM registrations WHERE EventID = :eventID AND UserID = :userID';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return ($result && isset($result['Quantity'])) ? (int)$result['Quantity'] : 0;
     }
     public function get_5_UpcomingEvents() {
         $query = 'SELECT * FROM events WHERE StartDate > NOW() ORDER BY StartDate ASC LIMIT 5';

@@ -83,6 +83,10 @@
             case 'event-attendees':
                 echo $pathPrefix . 'assets/css/event-attendees.css';
                 break;
+
+             case 'event-waitlist':
+                echo $pathPrefix . 'assets/css/event-attendees.css';
+                break;
             default:
                 echo $pathPrefix . 'assets/css/global.css';
                 break;
@@ -118,7 +122,7 @@
 //        require views_path('partials/footer-small.php');
     } else {
 //        COMMENT THIS OUT TO GET RID OF FOOTER
-//        require views_path('partials/footer-large.php');
+        require views_path('partials/footer-large.php');
 //        !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     ?>
