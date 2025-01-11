@@ -103,6 +103,7 @@
     // Use the cookie to decide which navbar and footer to load
     $screenType = isset($_COOKIE['screenType']) ? $_COOKIE['screenType'] : 'large';
     if ($screenType === 'small') {
+        require views_path('partials/navbar-large.php');
 //        require views_path('partials/navbar-small.php');
     } else {
 //        COMMENT THIS OUT TO GET RID OF NAVBAR
