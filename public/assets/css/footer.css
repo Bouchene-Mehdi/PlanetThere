@@ -112,3 +112,10 @@
     font-size: 0.875em;
     margin-right: 60px;
 }
+
+@media (max-width: 1024px)
+{
+    .footer {
+        display: none;
+    }
+}
