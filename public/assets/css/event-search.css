@@ -121,17 +121,13 @@
 	flex-direction: column;
 }
 
-/* Default events grid */
 .events-grid {
 	display: grid;
 	gap: 20px;
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
-	grid-template-columns: repeat(
-		auto-fit,
-		minmax(31%, 1fr)
-	); /* Default 3 columns */
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 .event-block {
 	max-width: 350px;
@@ -166,6 +162,8 @@
 	height: 180px;
 	object-fit: cover;
 	border-radius: 10px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .event-title {

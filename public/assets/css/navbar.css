@@ -1,9 +1,10 @@
-/* navbar.css */
+/* General Navbar Styles */
 .nav-bar {
 	position: relative;
-	z-index: 1;
+	z-index: 1001;
 	display: flex;
 	width: 100%;
+	max-width: 100%;
 	align-items: center;
 	flex-direction: row;
 	font-size: 18px;
@@ -20,6 +21,7 @@
 
 .brand-logo img {
 	width: 180px;
+	margin-right: 15px;
 	height: auto;
 	align-self: center;
 	object-fit: contain;
@@ -29,7 +31,7 @@
 .nav-menu {
 	display: flex;
 	align-items: center;
-	gap: 40px;
+	z-index: 11;	
 	font: 400, 'Poppins', sans-serif;
 	margin-left: auto;
 }
@@ -45,11 +47,14 @@
 	margin-right: 20px;
 	padding: 12px 34px;
 	border: none;
+	cursor: pointer;
 }
 
 .nav-links {
 	list-style: none;
+	align-items: center;
 	display: flex;
+	z-index: 11;
 	gap: 30px 68px;
 	padding: 0;
 	margin: 0;
@@ -57,13 +62,12 @@
 	min-width: 240px;
 }
 
-.profile-link {
-	display: flex;
-	align-items: center;
-	margin-left: auto;
+.account-text {
+	display: none;
 }
 
 .profile-image {
+	display: block;
 	aspect-ratio: 1 / 1;
 	margin-left: auto;
 	margin-right: 20px;
@@ -73,4 +77,140 @@
 	border: 2px solid #009688;
 	cursor: pointer;
 	object-fit: cover;
+}
+
+/* Hamburger Icon Styles */
+.hamburger {
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 30px;
+	height: 24px;
+	cursor: pointer;
+	margin-left: auto;
+	z-index: 1001;
+}
+
+.hamburger .bar {
+	height: 3px;
+	width: 100%;
+	background-color: #101010;
+	border-radius: 5px;
+	transition: all 0.3s ease-in-out;
+}
+
+.hamburger.active .bar:nth-child(1) {
+	transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+	opacity: 0;
+}    
+
+.hamburger.active .bar:nth-child(3) {
+	transform: translateY(-10px) rotate(-45deg);
+}
+
+
+
+/* Responsive CSS */
+@media (max-width: 1140px) {
+	.nav-menu {
+		flex-direction: column;
+		align-items: flex-start;
+		position: absolute;
+		z-index: 11;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		background-color: #fff;
+		display: none;
+		z-index: 1000;
+		padding: 0;
+	}
+
+	.nav-menu.active {
+		display: flex;
+	}
+
+	.nav-links {
+		align-items: flex-start;
+		z-index: 11;
+		flex-direction: column;
+		width: 100%;
+		gap: 10px;
+		padding: 15px 0;
+	}
+
+	.nav-link {
+		display: block;
+		min-width: 90%;
+		width: 90%;
+		padding: 10px 20px;
+		text-align: left;
+		color: #101010;
+		text-decoration: none;
+	}
+
+	.nav-link-account{
+		display: block;
+	}
+
+	.nav-link-bar {
+		width:90%;
+	}
+
+	.nav-link-bar:hover {
+		background-color: #f0f0f0;
+		color: #009688;
+		width: 100%;
+	}
+
+	.hamburger {
+		display: block;
+		cursor: pointer;
+		margin-left: auto;
+		margin-right: 26px;
+		display: flex;
+	}
+
+	.hamburger-icon {
+		width: 30px;
+		height: auto;
+	}
+
+	.bar {
+		background-color: #101010;
+	}
+
+	.profile-image {
+		display: none;
+	}
+
+	.account-text {
+		display: block;
+	}
+
+	.signup-btn {
+		border-radius: 12px;
+		background: transparent;
+		gap: 10px;
+		color: #009688;
+		white-space: nowrap;
+		text-align: center;
+		margin: 0px 0;
+		margin-right: 0px;
+		padding: 12px 20px;
+		padding-right: 89%;
+		font-size: 1rem;
+		font-weight: bold;
+		border: none;
+		cursor: pointer;
+	}
+
+	.signup-btn:hover {
+		background: #009688;
+		color: white;
+	}
+	
 }
