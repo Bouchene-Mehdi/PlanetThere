@@ -50,11 +50,11 @@ $router->post('/event/create-2', 'EventController@createEventStep2');
 $router->post('/event/search', 'EventController@postEventSearch');
 $router->post('/event/register/{eventID}', 'EventController@RegisterForEvent');
 $router->post('/event/waitlist/{eventID}', 'EventController@WaitlistForEvent');
+$router->post('/event/edit/{eventID}', 'EventController@EditEvent');
 $router->post('/event/unwaitlist/{eventID}', 'EventController@UnwaitlistForEvent');
 $router->post('/event/unregister/{eventID}', 'EventController@UnregisterForEvent');
 $router->post('/event/removeAttendee', 'EventController@RemoveAttendee');
 $router->post('/event/removeWaitlister', 'EventController@RemoveWaitlister');
-
 $router->post('/event/review', 'EventController@submitEventReview');
 
 

@@ -381,4 +381,34 @@ class Event {
             return false; // Insertion failed
         }
     }
+    public function editEvent($eventID, $locationName, $locationAddress, $description) {
+        $query = "UPDATE events 
+                  SET LocationName = :locationName, 
+                      LocationAddress = :locationAddress, 
+                      Description = :description 
+                  WHERE EventID = :eventID";
+    
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':locationName', $locationName);
+        $stmt->bindParam(':locationAddress', $locationAddress);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+    
+        // Execute the statement and return a boolean based on success or failure
+        return $stmt->execute() ? true : false;
+    }
+    
+
+    /**
+     * Delete Event: Remove the event by ID
+     */
+    public function deleteEvent($eventID) {
+        $query = "DELETE FROM events WHERE EventID = :eventID";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 }
+?>

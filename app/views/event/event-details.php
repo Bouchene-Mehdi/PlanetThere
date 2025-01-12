@@ -80,25 +80,67 @@
     </section>
 
     <!-- Event Details Section -->
-    <section class="event-text-details">
-      <div class="event-description">
-        <h3>Time and Date</h3>
-        <p><?= date('l, F j, Y, g:i A', strtotime($event['StartDate'])); ?></p>
-      </div>
-      <div class="event-description">
-        <h3>Location</h3>
-        <p><?= htmlspecialchars($event['LocationName']) . ', ' . htmlspecialchars($event['LocationAddress']); ?></p>
-      </div>
+    <form action="/event/edit/<?php echo $event['EventID'] ?>" class="form_remove" method="POST">
 
-      <div class="event-description">
-        <h3>Categories</h3>
-        <p><?= htmlspecialchars($categories['CategoryName']); ?></p>
-      </div>
-      <div class="event-description">
-        <h3>DESCRIPTION</h3>
-        <p><?= nl2br(htmlspecialchars($event['Description'])); ?></p>
-      </div>
-    </section>
+    <section class="event-text-details">
+      <?php if ($_SESSION['user']['UserID'] == $manager['UserID']): ?>
+        
+            <div class="event-description">
+              <h3>Time and Date</h3>
+              <p><?= date('l, F j, Y, g:i A', strtotime($event['StartDate'])); ?></p>
+            </div>
+            <div class="event-description">
+              <h3>Location</h3>
+              <input type="text" name="location" class="input_manager" value="<?= htmlspecialchars($event['LocationName']) . ', ' . htmlspecialchars($event['LocationAddress']); ?>" />
+            </div>
+            <div class="event-description">
+              <h3 >Categories</h3>
+              <p><?= htmlspecialchars($categories['CategoryName']); ?></p>
+            </div>
+            <div class="event-description">
+              <h3>DESCRIPTION</h3>
+              <textarea name="description" class="input_manager"  rows="5"><?= htmlspecialchars($event['Description']); ?></textarea>
+            </div>
+            <?php if (isset($_SESSION['success_message'])): ?>
+                <div class="message success">
+                    <p><?= $_SESSION['success_message']; ?></p>
+                </div>
+                <?php unset($_SESSION['success_message']); ?>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['error_message'])): ?>
+                <div class="message error">
+                    <p><?= $_SESSION['error_message']; ?></p>
+                </div>
+                <?php unset($_SESSION['error_message']); ?>
+            <?php endif; ?>
+            <div class="event-actions">
+                <button type="submit" name="action" value="save" class="btn-apply">SAVE</button>
+                <button type="submit" name="action" value="delete" class="btn-apply" style="background-color: #d11a2a;" 
+                        onclick="return confirm('Are you sure you want to delete this event?');">DELETE EVENT</button>
+            </div>
+
+      <?php elseif (isset($_SESSION['user']['UserID'])): ?>
+        <div class="event-description">
+          <h3>Time and Date</h3>
+          <p><?= date('l, F j, Y, g:i A', strtotime($event['StartDate'])); ?></p>
+        </div>
+        <div class="event-description">
+          <h3>Location</h3>
+          <p><?= htmlspecialchars($event['LocationName']) . ', ' . htmlspecialchars($event['LocationAddress']); ?></p>
+        </div>
+        <div class="event-description">
+          <h3 >Categories</h3>
+          <p><?= htmlspecialchars($categories['CategoryName']); ?></p>
+        </div>
+        <div class="event-description">
+          <h3>DESCRIPTION</h3>
+          <p><?= nl2br(htmlspecialchars($event['Description'])); ?></p>
+        </div>
+      <?php endif; ?>
+      </section>
+    </form>
+
 
     <!-- More Events Section -->
     <section class="events-section">

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="dashboardstyles.css" />
+		<title></title>
+	</head>
+	<body>
+		<header class="nav-bar">
+			<img src="pictures/logo.png" alt="Planet There Logo" class="logo" />
+			<img src="pictures/logo-text.svg" alt="Brand Logo" class="brand-logo" />
+			<nav class="nav-menu">
+				<!-- Profile Picture as a clickable link -->
+				<a href="#" class="profile-link">
+					<img
+						src="pictures/profile-image.jpg"
+						alt="Profile"
+						class="profile-image"
+					/>
+				</a>
+			</nav>
+		</header>
+		<main>
+			<section class="side-bar-section">
+				<ul class="side-bar">
+					<li class="side-bar-element">
+						<img src="sidebarpics/home.png" class="side-bar-element-picture" />
+						<a href="#" class="side-bar-element-text text">Dashboard</a>
+					</li>
+
+					<li class="side-bar-element">
+						<img
+							src="sidebarpics/transfer.png"
+							class="side-bar-element-picture"
+						/>
+						<a href="#" class="side-bar-element-text text">Event proposition</a>
+					</li>
+
+					<li class="side-bar-element">
+						<img src="sidebarpics/user.png" class="side-bar-element-picture" />
+						<a href="#" class="side-bar-element-text text">User managment</a>
+					</li>
+
+					<li class="side-bar-element">
+						<img src="sidebarpics/chart.png" class="side-bar-element-picture" />
+						<a href="#" class="side-bar-element-text text">Accepted events</a>
+					</li>
+
+					<li class="side-bar-element">
+						<img src="sidebarpics/card.png" class="side-bar-element-picture" />
+						<a href="#" id="banned-users" class="side-bar-element-text text"
+							>Banned users</a
+						>
+					</li>
+
+					<li class="side-bar-element">
+						<img src="sidebarpics/loan.png" class="side-bar-element-picture" />
+						<a href="#" class="side-bar-element-text text"
+							><abbr
+								class="side-bar-elemet-text-abbreviation"
+								title="Terms and conditions"
+								>TAC</abbr
+							></a
+						>
+					</li>
+
+					<li class="side-bar-element">
+						<img src="sidebarpics/home.png" class="side-bar-element-picture" />
+						<a href="#" class="side-bar-element-text text"
+							><abbr
+								class="side-bar-elemet-text-abbreviation"
+								title="Freaquently asked questions"
+								>FAQ</abbr
+							></a
+						>
+					</li>
+				</ul>
+			</section>
+
+			<section class="dashboard">
+				<div class="main-stats">
+					<div class="main-stat-item">
+						<div class="main-stats-image-frame">
+							<img
+								class="main-stats-image"
+								src="dashboardimages/totalNumberOfUsers.png"
+							/>
+						</div>
+						<div class="main-stat-item-text-section">
+							<p class="main-stat-item-text-section-maintext">
+								Total user count
+							</p>
+							<p class="main-stat-item-text-section-number">150000</p>
+						</div>
+					</div>
+
+					<div class="main-stat-item">
+						<div class="main-stats-image-frame img2">
+							<img
+								class="main-stats-image"
+								src="dashboardimages/activeUsers.png"
+							/>
+						</div>
+						<div class="main-stat-item-text-section">
+							<p class="main-stat-item-text-section-maintext">
+								Number of active admins
+							</p>
+							<p class="main-stat-item-text-section-number">5</p>
+						</div>
+					</div>
+
+					<div class="main-stat-item">
+						<div class="main-stats-image-frame img3">
+							<img
+								class="main-stats-image"
+								src="dashboardimages/eventsPic.png"
+							/>
+						</div>
+						<div class="main-stat-item-text-section">
+							<p class="main-stat-item-text-section-maintext">
+								Events on website
+							</p>
+							<p class="main-stat-item-text-section-number">150000</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="activities-and-categories">
+					<div class="weekly-activity-section">
+						<h2 class="activities-and-categories-section-header">
+							Weekly Activity
+						</h2>
+						<img class="chart1" src="dashboardimages/BigAndScaryChart.png" />
+					</div>
+				</div>
+
+				<div class="dashboard-bottom-section">
+					<div class="additional-statistics-section">
+						<h2 class="additional-statistics-section-header">
+							Additional statistics
+						</h2>
+						<div class="additional-statistics-item">
+							<div class="add-stats-image-frame">
+								<img
+									class="add-stats-image"
+									src="dashboardimages/BannedUsers.png"
+								/>
+							</div>
+							<p class="add-stats-main-text">Number of banned users</p>
+							<div class="add-stats-item-col">
+								<p class="add-stats-value">72</p>
+								<p class="add-stats-secondary-text">users</p>
+							</div>
+
+							<div class="add-stats-item-col">
+								<p class="add-stats-value plus">+16%</p>
+								<p class="add-stats-secondary-text">from last month</p>
+							</div>
+						</div>
+
+						<div class="additional-statistics-item">
+							<div class="add-stats-image-frame item2">
+								<img class="add-stats-image" src="dashboardimages/letter.png" />
+							</div>
+							<p class="add-stats-main-text">Number of event propositions</p>
+							<div class="add-stats-item-col">
+								<p class="add-stats-value">72</p>
+								<p class="add-stats-secondary-text">events</p>
+							</div>
+
+							<div class="add-stats-item-col">
+								<p class="add-stats-value minus">-4%</p>
+								<p class="add-stats-secondary-text">from last month</p>
+							</div>
+						</div>
+
+						<div class="additional-statistics-item">
+							<div class="add-stats-image-frame item3">
+								<img class="add-stats-image" src="dashboardimages/FAQNum.png" />
+							</div>
+							<p class="add-stats-main-text">Number of FAQ questions</p>
+							<div class="add-stats-item-col">
+								<p class="add-stats-value">5</p>
+								<p class="add-stats-secondary-text">questions</p>
+							</div>
+
+							<div class="add-stats-item-col">
+								<p class="add-stats-value plus">+25%</p>
+								<p class="add-stats-secondary-text">from last month</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="user-activity-section">
+						<h2 class="user-activity-section-header">User Activity</h2>
+						<img
+							class="user-activity-pic"
+							src="dashboardimages/UserActivity.png"
+						/>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer -->
+		<footer class="footer">
+			<div class="footer-logo">
+				<img
+					src="pictures/logo.png"
+					alt="Planet There Logo"
+					class="footer-logo-img"
+				/>
+				<img
+					src="pictures/footer-logo.svg"
+					alt="Brand Logo"
+					class="footer-brand-logo"
+				/>
+			</div>
+
+			<nav class="footer-nav">
+				<ul class="footer-links">
+					<li><a href="#" class="nav-link">Home</a></li>
+					<li><a href="#" class="nav-link">Events</a></li>
+					<li><a href="#" class="nav-link">People</a></li>
+					<li><a href="#" class="nav-link">Become a Manager</a></li>
+					<li><a href="#" class="nav-link">About us</a></li>
+				</ul>
+			</nav>
+
+			<hr class="footer-divider" />
+			<div class="footer-bottom">
+				<div class="language-selector">
+					<a href="#" class="language-option active">English</a>
+					<a href="#" class="language-option">French</a>
+				</div>
+				<div class="social-icons">
+					<a href="#" aria-label="Linkedin">
+						<img
+							src="pictures/linkedin-icon.svg"
+							alt="Linkedin"
+							class="social-icon"
+						/>
+					</a>
+					<a href="#" aria-label="Instagram">
+						<img
+							src="pictures/instagram-logo.svg"
+							alt="Instagram"
+							class="social-icon"
+						/>
+					</a>
+					<a href="#" aria-label="Facebook">
+						<img
+							src="pictures/facebook-icon.svg"
+							alt="Facebook"
+							class="social-icon"
+						/>
+					</a>
+				</div>
+				<p class="copyright">Non Copyrighted © 2024 by Digital Dreamers</p>
+			</div>
+		</footer>
+	</body>
+</html>

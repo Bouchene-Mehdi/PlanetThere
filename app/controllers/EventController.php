@@ -332,6 +332,46 @@ class EventController {
         header('Location: /event/' . $EventID);
         exit();
     }
+    public function EditEvent($eventID) {
+        $eventModel = new Event();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $action = $_POST['action'];
+
+            if ($action === 'save') {
+                // Handle Edit Event
+                $location = $_POST['location'];
+                $description = $_POST['description'];
+
+                // Split location into name and address
+                [$locationName, $locationAddress] = array_map('trim', explode(',', $location, 2));
+
+                $success = $eventModel->editEvent($eventID, $locationName, $locationAddress, $description);
+
+                if ($success) {
+                    $_SESSION['success_message'] = "Event updated successfully!";
+                } else {
+                    $_SESSION['error_message'] = "Failed to update event. Please try again.";
+                }
+
+                header("Location: /event/$eventID"); // Redirect to event details
+                exit();
+
+            } elseif ($action === 'delete') {
+                // Handle Delete Event
+                $success = $eventModel->deleteEvent($eventID);
+
+                if ($success) {
+                    header("Location: /event-search"); // Redirect to the list of events
+                } else {
+                    $_SESSION['error_message'] = "Failed to delete event. Please try again.";
+                    header("Location: /event/$eventID"); // Redirect to event details
+                }
+
+                exit();
+            }
+        }
+    }
     public function UnwaitlistForEvent($EventID){
         // Initialize the event model
         $eventModel = new Event();
