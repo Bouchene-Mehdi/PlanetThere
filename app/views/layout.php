@@ -10,7 +10,6 @@
     $segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
     $pathPrefix = (count($segments) > 1) ? '../' : '';  // If there are more than 1 segment, go up one level
     ?>
-
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/navbar.css'; ?>" />
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/global.css'; ?>" />
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/footer.css'; ?>" />

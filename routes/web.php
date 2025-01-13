@@ -31,8 +31,11 @@ $router->get('/create-event2', 'EventController@ShowEventCreate2');
 $router->get('/event/{eventID}', 'EventController@ShowEventDetails');
 $router->get('/event-attendees/{eventID}', 'EventController@ShowEventAttendees');
 $router->get('/event-waitlist/{eventID}', 'EventController@ShowEventWaitlist');
-
-
+$router->get('/AdminEvent', 'AdminController@ShowEventList');
+$router->get('/AdminUsers', 'AdminController@ShowUserList');
+$router->get('/AdminBanned', 'AdminController@ShowBanned');
+$router->get('/AdminPropositions', 'AdminController@ShowPropositions');
+$router->get('/Dashboard', 'AdminController@ShowDashboard');
 
 // POST routes
 $router->post('/user/register-1', 'UserController@register_1');
