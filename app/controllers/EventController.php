@@ -388,30 +388,38 @@ function uploadFile($file) {
     public function ShowEventSearch() {
         // Set the search query if not already set
         if (!isset($_SESSION['searchQuery_event'])) {
-            $_SESSION['searchQuery_event'] = ''; // Default to empty if no search
+            $_SESSION['searchQuery_event'] = '';
         }
     
         // Retrieve "From" and "To" dates from session or POST data
         $fromDate = isset($_SESSION['from-date']) ? $_SESSION['from-date'] : '';
         $toDate = isset($_SESSION['to-date']) ? $_SESSION['to-date'] : '';
+
+        // Retrieve the category from the session
+        $selectedCategory = isset($_SESSION['event-category']) ? $_SESSION['event-category'] : '';
         
         // Initialize the model
         $eventModel = new Event();
         
         // Fetch events based on the search query and date range
-        $events = $eventModel->searchEvents($_SESSION['searchQuery_event'], $fromDate, $toDate);
+        $events = $eventModel->searchEvents($_SESSION['searchQuery_event'], $fromDate, $toDate, $selectedCategory);
         
         foreach ($events as &$event) {
             // Add attendance count to the event
             $event['attendanceCount'] = $eventModel->getAttendanceCount($event['EventID']);
         }
+
+        $categoryModel = new Category();
+        $categories = $categoryModel->getAllCategories();
     
         // Render the view with event data and filter values
         render('event/event-search', [
+            'categories' => $categories,
             'events' => $events,
             'searchQuery_event' => $_SESSION['searchQuery_event'],
             'fromDate' => $fromDate,
-            'toDate' => $toDate
+            'toDate' => $toDate,
+            'selectedCategory' => $selectedCategory
         ]);
     }  
     public function postEventSearch() {
@@ -426,18 +434,19 @@ function uploadFile($file) {
             // Store the "From" and "To" dates in the session
             $fromDate = $_POST['from-date'] ?? '';
             $toDate = $_POST['to-date'] ?? '';
+
             
             $_SESSION['from-date'] = $fromDate;
             $_SESSION['to-date'] = $toDate;
+
+            // Store the selected category in the session
+            $_SESSION['event-category'] = trim($_POST['event-category'] ?? '');
             
             // Redirect back to the search page
             header('Location: /event-search');
             exit();
         }
     }
-
-
-
 }
 
 ?>

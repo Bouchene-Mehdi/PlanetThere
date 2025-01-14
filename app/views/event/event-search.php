@@ -2,20 +2,25 @@
     <div class="event-search-container">
         <!-- Filters Section -->
         <aside class="filters">
-        <form method="POST" action="/event/search"> <!-- Add action here to handle the form -->
+        <form method="POST" action="/event/search">
                 <div class="looking-for">
                     <label for="looking-for">What are you looking for?</label>
                     <input type="text" id="looking-for" name="search_query" placeholder="Search here..." value="<?php echo htmlspecialchars($_SESSION['searchQuery_event'] ?? ''); ?>">
                 </div> 
 
-                <div class="add-keyword">
-                    <label for="add-keyword">Add Keyword</label>
-                    <input type="text" id="add-keyword" placeholder="Enter keywords">
-
-                    <div class="filter-tags">
-                        <span>Music <button type="button">x</button></span>
-                        <span>Young <button type="button">x</button></span>
-                        <span>Outside <button type="button">x</button></span>
+                <div class="category">
+                    <label for="category">Category</label>
+                    <div class="category-dropdown" id="event-category-dropdown">
+                        <span class="dropdown-title"><?= htmlspecialchars($selectedCategory) ?: 'Choose event category' ?></span>
+                        <input type="hidden" name="event-category" id="event-category" value="<?= htmlspecialchars($selectedCategory) ?>" />
+                        <ul class="dropdown-options hidden" id="event-category-options">
+                            <?php 
+                                foreach ($categories as $category) {
+                                    $isSelected = ($category['CategoryName'] === $selectedCategory) ? 'selected' : '';
+                                    echo "<li class='dropdown-option $isSelected'>" . htmlspecialchars($category['CategoryName']) . "</li>";
+                                }
+                            ?>
+                        </ul>
                     </div>
                 </div>
 
@@ -73,6 +78,43 @@
         </section>
     </div>
 </main>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const eventCategoryInput = document.getElementById("event-category"); // Correct ID
+
+    const dropdown = document.getElementById("event-category-dropdown");
+    const options = document.getElementById("event-category-options");
+    const categoryTitle = dropdown.querySelector(".dropdown-title");
+
+    // Toggle dropdown visibility
+    dropdown.addEventListener("click", () => {
+        options.classList.toggle("hidden");
+    });
+
+    // Handle option selection
+    options.addEventListener("click", (event) => {
+        if (event.target.classList.contains("dropdown-option")) {
+            categoryTitle.textContent = event.target.textContent;
+            categoryTitle.style.color = "#333";
+            options.classList.add("hidden");
+
+            // Set the hidden input value
+            eventCategoryInput.value = event.target.textContent.trim();
+        }
+        event.stopPropagation();
+    });
+
+    // Close dropdown if clicked outside
+    document.addEventListener("click", (event) => {
+        if (!dropdown.contains(event.target) && !options.contains(event.target)) {
+            options.classList.add("hidden");
+        }
+    });
+});
+
+</script>
+
 <?php
 unset($_SESSION['searchQuery_event']);
 ?>
