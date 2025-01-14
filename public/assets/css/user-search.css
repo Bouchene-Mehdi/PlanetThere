@@ -106,3 +106,19 @@
 .load-more-btn:hover {
 	background-color: #00796b;
 }
+
+@media screen and (max-width: 780px) {
+	.user-profiles {
+		padding: 0 20px;
+		align-self: center;
+	}
+	.profile-card {
+		justify-self: center;
+		width: 250px;
+	}
+
+	.user-profiles {
+		align-self: center;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	}
+}

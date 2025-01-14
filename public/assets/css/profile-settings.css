@@ -183,3 +183,35 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
+
+@media (max-width: 1024px) {
+    .page-header {
+        display: none;
+    }
+
+    .profile-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px 20px;
+        margin: auto 30px;
+    }
+
+    .combined-header {
+        display: flex;
+        flex-direction: column;
+        justify-self: start;
+        gap: 20px 20px;
+        margin: 30px 30px;
+
+    }
+
+    .profile-header img {
+        aspect-ratio: 1 / 1;
+        width: 20%;
+        height: 20%;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-left: 40px;
+    }
+    
+}
