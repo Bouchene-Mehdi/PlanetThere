@@ -16,6 +16,9 @@
 .footer-logo {
     display: flex;
     align-items: center;
+    align-self: center;
+    justify-self: center;
+    justify-content: center;
     gap: 10px;
     margin: 10px;
 }
@@ -52,7 +55,6 @@
 
 .footer-divider {
     background-color: #f5f7fa;
-    align-self: stretch;
     margin-top: 15px;
     width: 90%;
     height: 1px;
@@ -60,11 +62,14 @@
 
 .footer-bottom {
     display: flex;
-    margin-top: 23px;
+    flex-direction: row;
+    margin-top: 18px;
     width: 100%;
-    align-items: flex-start;
+    align-items: center;
+    align-content: center;
     gap: 20px;
-    justify-content: space-evenly;
+    justify-content: center;
+    
 }
 
 .language-selector {
@@ -109,13 +114,34 @@
 .copyright {
     color: #f5f7fa;
     text-align: right;
-    font-size: 0.875em;
+    font-size: 0.75em;
     margin-right: 60px;
 }
 
 @media (max-width: 1024px)
 {
-    .footer {
+    .footer-links {
         display: none;
+    }
+
+    .footer-divider {
+        display: none;
+    }
+
+    .language-option {
+        display: none;
+    }
+
+    .social-icons {
+        display: none;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .copyright {
+        margin-right: 0;
     }
 }
