@@ -45,7 +45,8 @@
     document.addEventListener('DOMContentLoaded', () => {
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
-        const navLinks = document.querySelectorAll('.nav-link');
+        const navLinks = document.querySelectorAll('.nav-menu .nav-link');
+
         console.log("Loaded");
 
         // menu is made visible when hamburger icon is clicked
@@ -54,11 +55,13 @@
             navMenu.classList.toggle('active');
         });
 
-        navMenu.forEach(link => {
+         // Get all links inside nav-menu
+        navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             });
         });
+
     });
 </script>

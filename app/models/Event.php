@@ -150,36 +150,47 @@ class Event {
             return false;
         }
     }
-    public function searchEvents($searchQuery, $fromDate = '', $toDate = '') {
+    public function searchEvents($searchQuery, $fromDate = '', $toDate = '', $selectedCategory = '') {
         // Start building the SQL query
-        $query = 'SELECT * FROM events WHERE EventName LIKE :searchQuery AND IsActive = 1';
-        
+        $query = 'SELECT e.* 
+                  FROM events e 
+                  INNER JOIN categories c ON e.CategoryID = c.CategoryID
+                  WHERE e.EventName LIKE :searchQuery AND e.IsActive = 1';
+
+    
         // Add date filters to the query if provided
-        if ($fromDate != '') {
-            $query .= ' AND StartDate >= :fromDate';
+        if (!empty($fromDate)) {
+            $query .= ' AND e.StartDate >= :fromDate';
         }
-        if ($toDate != '') {
-            $query .= ' AND StartDate <= :toDate';
+        if (!empty($toDate)) {
+            $query .= ' AND e.StartDate <= :toDate';
         }
-        
+        if (!empty($selectedCategory)) {
+            $query .= ' AND c.CategoryName = :category';
+        }
+
         // Prepare the SQL statement
         $stmt = $this->db->prepare($query);
-        
+    
         // Bind parameters
         $stmt->bindValue(':searchQuery', '%' . $searchQuery . '%');
-        if ($fromDate != '') {
+        if (!empty($fromDate)) {
             $stmt->bindValue(':fromDate', $fromDate);
         }
-        if ($toDate != '') {
+        if (!empty($toDate)) {
             $stmt->bindValue(':toDate', $toDate);
         }
-        
+        if (!empty($selectedCategory)) {
+            $stmt->bindValue(':category', $selectedCategory);
+        }
+
         // Execute the query
         $stmt->execute();
-        
+    
         // Return the results
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     public function IsRegistered($eventID, $userID) {
         $query = 'SELECT * FROM registrations WHERE EventID = :eventID AND UserID = :userID';
         $stmt = $this->db->prepare($query);
