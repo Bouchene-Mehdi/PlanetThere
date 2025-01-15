@@ -12,7 +12,7 @@ class PagesController
         $conn=$database->getConnection();
         $categoryModel = new Category();
         $categories = $categoryModel->getAllCategories();
-
+        $followersEvents = [];
         $eventModel = new Event();
         $upcomaingEvents = $eventModel->get_5_UpcomingEvents();
         $popularEvents = $eventModel->get_5_PopularEvents();
@@ -27,12 +27,21 @@ class PagesController
         foreach ($stayfitEvents as $key => $event) {
             $stayfitEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($event['EventID']);
         }
+        if(isset($_SESSION['user'])){
+            $followersEvents = $eventModel->get_5_FollowersEvents();
+            foreach ($followersEvents as $key => $event) {
+                $followersEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($event['EventID']);
+            }
+        }
+
+
         render('home/index',
         [
             'upcomingEvents' => $upcomaingEvents,
             'popularEvents' => $popularEvents,
             'stayfitEvents' => $stayfitEvents,
-            'categories' => $categories
+            'categories' => $categories,
+            'followersEvents' => $followersEvents
         ]);
     }
     public function about()
@@ -43,13 +52,13 @@ class PagesController
     {
         $faqModel = new Faq();
         $faqs = $faqModel->getAllFaqs();
-        render('faq/index');
+        render('faq/index',['faqs' => $faqs]);
     }
     public function TAC()
     {
         $tacModel = new Tac();
         $tacs = $tacModel->getAllTacs();
-        render('TAC/index');
+        render('TAC/index',['tacs' => $tacs]);
     }
 
 }   

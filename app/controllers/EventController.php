@@ -27,6 +27,7 @@ class EventController {
         $userModel = new User();
         $moreEvents = $eventModel->get_5_UpcomingEvents();
 
+
         foreach ($moreEvents as $key => $displayEvent){
             $moreEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($displayEvent['EventID']);
         }
@@ -79,10 +80,9 @@ class EventController {
                 $review['UserFirstName'] = $reviewUser['FirstName'];
                 $review['UserLastName'] = $reviewUser['LastName'];
                 if ($reviewUser['UserID'] === $_SESSION['user']['UserID']) {
-                    $canReview = false;
+                    $canReview = true;
                 }
             }
-
             render('event/event-review',
             [
                 'event' => $event,
@@ -96,9 +96,6 @@ class EventController {
                 'isWaitlisted'=>$IsInWaitlist,
             ]);
         }
-
-
-
     }
     public function IsEventFull($EventID){
         // Initialize the event model
@@ -236,6 +233,7 @@ class EventController {
             }
         }
     }
+    
 
     public function submitEventReview() {
         // Check if the user is logged in

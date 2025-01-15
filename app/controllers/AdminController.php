@@ -21,6 +21,10 @@ class AdminController
     }
     public function ShowUserList()
     {
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+            header('Location: /unauthorized');
+            exit();
+        }
         $userModel = new User();
         $users = $userModel->getAllActiveUsers();
         render('admin/userlist',[
@@ -38,6 +42,10 @@ class AdminController
         header('Location: /AdminBanned');
     }
     public function ShowBanned(){
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+            header('Location: /unauthorized');
+            exit();
+        }
         $userModel = new User();
         $users = $userModel->getAllBannedUsers();
         render('admin/bannedusers',[
@@ -45,6 +53,10 @@ class AdminController
         ],'admin/layout');
     }
     public function ShowPropositions(){
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+            header('Location: /unauthorized');
+            exit();
+        }
         $evenModel = new Event();
         $events = $evenModel->getAllPropositions();
         render('admin/eventproposition',[
@@ -57,6 +69,10 @@ class AdminController
         header('Location: /AdminPropositions');
     }
     public function ShowDashboard(){
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']== 0 ) {
+            header('Location: /unauthorized');
+            exit();
+        }
         $data=[];
         $eventModel= new Event();
         $userModel= new User();
@@ -82,6 +98,10 @@ class AdminController
         header('Location: /AdminPropositions');
     }
     public function ShowFaq() {
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+            header('Location: /unauthorized');
+            exit();
+        }
         $faqModel = new Faq();
         $faqs = $faqModel->getAllFaqs();
         render('admin/faq', [
@@ -107,6 +127,10 @@ class AdminController
         header('Location: /AdminFaq');
     }
     public function ShowTAC(){
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+            header('Location: /unauthorized');
+            exit();
+        }
         $tacModel = new Tac();
         $tacs = $tacModel->getAllTacs();
         render('admin/tac', [

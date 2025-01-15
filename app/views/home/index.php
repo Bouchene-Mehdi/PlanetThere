@@ -1,3 +1,4 @@
+
 <main class="homepage">
     <!-- Hero Section -->
     <section class="hero-section">
@@ -6,14 +7,12 @@
             PLAN IT FREE <br />
             PLAN IT THERE
         </h2>
-
         <!-- Search Section -->
         <section class="search-section">
             <form class="search-form">
-                    
                 <div class="search-field">
                     <label for="event-category" class="search-label">Category</label>
-                    <div class="search-specific" id="event-category-dropdown">
+                        <div class="search-specific" id="event-category-dropdown">
                         <span class="dropdown-title">Choose event category</span>
                         <img src="assets/images/dropdown-icon.svg" alt="Dropdown" class="dropdown-icon" />
                         <input type="hidden" name="event-category" id="event-category" />
@@ -76,6 +75,35 @@
             </div>
         </div>
     </section>
+    <?php if (!empty($followersEvents)): ?>
+        <section class="events-section">
+        <h2 class="section-title">
+            People <span class="highlight">You Follow</span>
+        </h2>
+        <div class="events-container">
+            <div class="events-grid">
+                <?php foreach ($followersEvents as $event): ?>
+                    <article class="event-card">
+                        <a href="/event/<?php echo $event['EventID']; ?>">
+                            <img src="<?php echo $event['image1']; ?>" alt="<?php echo htmlspecialchars($event['EventName']); ?>" class="event-image" />
+                            <h3 class="event-title"><?php echo htmlspecialchars($event['EventName']); ?></h3>
+                            <div class="event-details">
+                                <div class="event-info">
+                                    <time class="event-date"><?php echo date("l, F j, Y g:i A", strtotime($event['StartDate'])); ?></time>
+                                    <address class="event-location"><?php echo htmlspecialchars($event['LocationName']); ?></address>
+                                </div>
+                                <div class="event-attendance">
+                                    <img src="assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon" />
+                                    <span class="attendance-count"><?php echo $event['AttendeesCount']; ?>/<?php echo $event['MaxParticipants']; ?></span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
 	<section class="create-event-section">
         <div class="create-event-container">
             <div class="create-event-image">
@@ -158,6 +186,7 @@
         </div>
     </section>
 	<div class="spacer"></div>
+
 
 </main>
 

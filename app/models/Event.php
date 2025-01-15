@@ -217,6 +217,7 @@ class Event {
         $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
     
     public function getRegisteredEvents($userID) {
         $query = 'SELECT * FROM events WHERE EventID IN (SELECT EventID FROM registrations WHERE UserID = :userID)';
@@ -343,6 +344,19 @@ class Event {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function get_5_FollowersEvents() {
+        $query = 'SELECT e.* 
+                  FROM events e
+                  INNER JOIN registrations r ON e.EventID = r.EventID
+                  INNER JOIN follows f ON r.UserID = f.followed_id 
+                  WHERE f.follower_id  = :userID
+                  ORDER BY e.StartDate ASC
+                  LIMIT 5';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userID', $_SESSION['user']['UserID'], PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function get_5_PopularEvents() {
         $query = 'SELECT * FROM events WHERE StartDate > NOW() ORDER BY (SELECT COUNT(*) FROM registrations WHERE EventID = events.EventID) DESC LIMIT 5';
         $stmt = $this->db->prepare($query);
@@ -463,5 +477,6 @@ class Event {
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
 }
 ?>

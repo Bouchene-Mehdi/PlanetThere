@@ -38,6 +38,7 @@
             case 'AdminT':
                 echo $pathPrefix . '../assets/css/AdminTAC.css';
                 break;
+
             default:
                 echo $pathPrefix . '../assets/css/global.css';
                 break;
@@ -59,10 +60,9 @@
         require views_path('partials/sidebar_admin.php');
     ?>
     <?php echo $content; ?>
-
     </main>
     <?php 
-        require views_path('partials/footer-large.php');
+        require views_path('partials/footer.php');
     ?>
     </body>
 </html>
