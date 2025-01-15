@@ -5,7 +5,6 @@
                 <img src="assets/images/sidebarpics/home.png" class="side-bar-element-picture">
                 <a href="Dashboard" class="side-bar-element-text text">Dashboard</a>
             </li>
-
             <li class="side-bar-element">
                 <img src="assets/images/sidebarpics/transfer.png" class="side-bar-element-picture">
                 <a href="AdminPropositions" class="side-bar-element-text text">Event proposition</a>
@@ -28,12 +27,12 @@
 
             <li class="side-bar-element">
                 <img src="assets/images/sidebarpics/loan.png" class="side-bar-element-picture">
-                <a href="#" class="side-bar-element-text text"><abbr class="side-bar-elemet-text-abbreviation" title="Terms and conditions">TAC</abbr></a>
+                <a href="AdminT" class="side-bar-element-text text"><abbr class="side-bar-elemet-text-abbreviation" title="Terms and conditions">TAC</abbr></a>
             </li>
 
             <li class="side-bar-element">
                 <img src="assets/images/sidebarpics/home.png" class="side-bar-element-picture">
-                <a href="#" class="side-bar-element-text text"><abbr class="side-bar-elemet-text-abbreviation" title="Freaquently asked questions">FAQ</abbr></a>
+                <a href="AdminFaq" class="side-bar-element-text text"><abbr class="side-bar-elemet-text-abbreviation" title="Freaquently asked questions">FAQ</abbr></a>
             </li>
         </ul>
 </section>

@@ -32,6 +32,12 @@
             case 'Dashboard':
                 echo $pathPrefix . '../assets/css/dashboard.css';
                 break;
+            case 'AdminFaq':
+                echo $pathPrefix . '../assets/css/AdminFAQ.css';
+                break;
+            case 'AdminT':
+                echo $pathPrefix . '../assets/css/AdminTAC.css';
+                break;
             default:
                 echo $pathPrefix . '../assets/css/global.css';
                 break;

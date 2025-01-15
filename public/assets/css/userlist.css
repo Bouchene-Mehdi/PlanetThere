@@ -212,6 +212,7 @@ abbr {
 
 .event-proposition-button {
 	font-family: 'Product Sans', sans-serif;
+	text-align: center;
 	border: #32bcd8 1px solid;
 	padding: 15px 30px 15px 30px;
 	border-radius: 30px;
@@ -247,6 +248,7 @@ abbr {
 }
 
 .event-proposition-section {
+	min-height: 70%;
 	display: flex;
 	margin-left: auto;
 	margin-right: auto;

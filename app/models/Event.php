@@ -410,5 +410,47 @@ class Event {
 
         return $stmt->execute();
     }
+    public function getAllActiveEvents() {
+        $query = 'SELECT * FROM events WHERE IsActive = 1';
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function PropositionCount(){
+        $query = 'SELECT COUNT(*) FROM events WHERE IsActive = 0';
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function ActiveEventCount(){
+        $query = 'SELECT COUNT(*) FROM events WHERE IsActive = 1';
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function getAllPropositions() {
+        $query = 'SELECT * FROM events WHERE IsActive = 0';
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function makeActive($eventID) {
+        $query = 'UPDATE events SET IsActive = 1 WHERE EventID = :eventID';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+    public function makeUnactive($eventID) {
+        $query = 'UPDATE events SET IsActive = 0 WHERE EventID = :eventID';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+    public function removeEvent($eventID){
+        $query = 'DELETE FROM events WHERE EventID = :eventID';
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }
 ?>

@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../models/Event.php';
 require_once __DIR__ . '/../models/Category.php';
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../models/Faq.php';
+require_once __DIR__ . '/../models/Tac.php';
 class PagesController 
 {
     public function index()
@@ -36,10 +38,14 @@ class PagesController
     }
     public function faq()
     {
+        $faqModel = new Faq();
+        $faqs = $faqModel->getAllFaqs();
         render('faq/index');
     }
     public function TAC()
     {
+        $tacModel = new Tac();
+        $tacs = $tacModel->getAllTacs();
         render('TAC/index');
     }
 
