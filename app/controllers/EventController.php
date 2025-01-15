@@ -7,15 +7,12 @@ class EventController {
     public function ShowEventCreate1(){
         render('event/create-event-1');
     }
-    public function ShowEventCreate2(){
-           // Fetch categories from the database
-    
-    $categoryModel = new Category();
-    $categories = $categoryModel->getAllCategories();
+    public function ShowEventCreate2(){    
+        $categoryModel = new Category();
+        $categories = $categoryModel->getAllCategories();
 
-    // Pass the categories to the view
-    render('event/create-event-2', ['categories' => $categories]);
-
+        // Pass the categories to the view
+        render('event/create-event-2', ['categories' => $categories]);
     }
 
     public function ShowEventDetails($EventID){
@@ -36,7 +33,8 @@ class EventController {
         // Vérifier si un username est passé en paramètre
 
         $manager=$userModel->getUserById($event['EventManagerID']);
-        $_SESSION['IsRegistered'] = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
+        $IsInWaitlist = $eventModel->IsInWaitlist($EventID, $_SESSION['user']['UserID']);
+        $IsRegistered = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
 
         
         $isFull = $eventModel->IsEventFull($event);
@@ -61,10 +59,11 @@ class EventController {
                 'attendanceCount' => $attendanceCount,
                 'manager'=>$manager,
                 'categories'=>$categories,
-                'moreEvents'=>$moreEvents
+                'moreEvents'=>$moreEvents,
+                'IsRegistered'=>$IsRegistered,
+                'IsInWaitlist'=>$IsInWaitlist,
             ]);
         } else {
-//            // Render the event review view
             $reviews = $eventModel->getEventReviews($EventID);
 
 
@@ -92,7 +91,9 @@ class EventController {
                 'categories'=>$categories,
                 'reviews'=>$reviews,
                 'moreEvents'=>$moreEvents,
-                'canReview'=>$canReview
+                'canReview'=>$canReview,
+                'isRegistered'=>$IsRegistered,
+                'isWaitlisted'=>$IsInWaitlist,
             ]);
         }
 
@@ -282,15 +283,25 @@ class EventController {
 
     public function RegisterForEvent($EventID){
         // Initialize the event model
-        $eventModel = new Event();
+        if (isset($_POST['quantity']) && is_numeric($_POST['quantity']) && $_POST['quantity'] > 0) {
+            $quantity = (int)$_POST['quantity'];  // Get the number of tickets from POST
+            
+            // Initialize the event model
+            $eventModel = new Event();
+            
+            // Register the user for the event with the specified quantity
+            $eventModel->registerForEvent($EventID, $_SESSION['user']['UserID'], $quantity);
         
-        // Register the user for the event
-        $eventModel->registerForEvent($EventID, $_SESSION['user']['UserID']);
-        
-        // Redirect back to the event details page
-        header('Location: /event/' . $EventID);
+            // Register the user for the event
+            
+            // Redirect back to the event details page
+            header('Location: /event/' . $EventID);
+        }
         exit();
     }
+
+
+    
     public function UnregisterForEvent($EventID){
         // Initialize the event model
         $eventModel = new Event();
@@ -300,16 +311,73 @@ class EventController {
         if($eventModel->HasWaitlist($EventID)){
             $eventModel->MoveFromWaitlist($EventID);
         }
+        //q :i want to get the earliest waitlist user and register him?
+
+        
+        // Get the earliest user from the waitlist
+
+
         // Redirect back to the event details page
         header('Location: /event/' . $EventID);
         exit();
-    }
+    }   
     public function WaitlistForEvent($EventID){
         // Initialize the event model
         $eventModel = new Event();
         
         // Add the user to the waitlist for the event
         $eventModel->addToWaitlist($EventID, $_SESSION['user']['UserID']);
+        
+        // Redirect back to the event details page
+        header('Location: /event/' . $EventID);
+        exit();
+    }
+    public function EditEvent($eventID) {
+        $eventModel = new Event();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $action = $_POST['action'];
+
+            if ($action === 'save') {
+                // Handle Edit Event
+                $location = $_POST['location'];
+                $description = $_POST['description'];
+
+                // Split location into name and address
+                [$locationName, $locationAddress] = array_map('trim', explode(',', $location, 2));
+
+                $success = $eventModel->editEvent($eventID, $locationName, $locationAddress, $description);
+
+                if ($success) {
+                    $_SESSION['success_message'] = "Event updated successfully!";
+                } else {
+                    $_SESSION['error_message'] = "Failed to update event. Please try again.";
+                }
+
+                header("Location: /event/$eventID"); // Redirect to event details
+                exit();
+
+            } elseif ($action === 'delete') {
+                // Handle Delete Event
+                $success = $eventModel->deleteEvent($eventID);
+
+                if ($success) {
+                    header("Location: /event-search"); // Redirect to the list of events
+                } else {
+                    $_SESSION['error_message'] = "Failed to delete event. Please try again.";
+                    header("Location: /event/$eventID"); // Redirect to event details
+                }
+
+                exit();
+            }
+        }
+    }
+    public function UnwaitlistForEvent($EventID){
+        // Initialize the event model
+        $eventModel = new Event();
+        
+        // Remove the user from the waitlist for the event
+        $eventModel->removeFromWaitlist($EventID, $_SESSION['user']['UserID']);
         
         // Redirect back to the event details page
         header('Location: /event/' . $EventID);
@@ -323,12 +391,34 @@ class EventController {
         $event = $eventModel->getEventById($EventID);
         
         // Fetch the attendees for the event
-        $attendees = $eventModel->getAttendees($EventID);
-        
+        $attendees = $eventModel->getAttendeesAccounts($EventID);
+        //q:i want to add how many registrations for each attendee with $attendees
+        foreach ($attendees as &$attendee) {
+            $attendee['registrationCount'] = $eventModel->getAttendanceCountUser($EventID,$attendee['UserID']);
+        }
         // Render the view with event details and attendees
         render('event/event-attendees', [
             'event' => $event,
             'attendees' => $attendees
+        ]);
+    }
+    public function ShowEventWaitlist($EventID){
+        // Initialize the event model
+        $eventModel = new Event();
+        
+        // Fetch the event details by ID
+        $event = $eventModel->getEventById($EventID);
+        
+        // Fetch the attendees for the event
+        $waitlisters = $eventModel->getWaitlistAccounts($EventID);
+        //q:i want to add how many registrations for each attendee with $attendees
+        foreach ($waitlisters as $waitlister) {
+            $waitlister['registrationCount'] = $eventModel->getAttendanceCountUser($EventID,$waitlister['UserID']);
+        }
+        // Render the view with event details and attendees
+        render('event/event-waitlist', [
+            'event' => $event,
+            'waitlisters' => $waitlisters
         ]);
     }
     public function RemoveAttendee(){
@@ -347,44 +437,62 @@ class EventController {
             header('Location: /event-attendees/' . $_POST['event_id']);
             exit();
         }
+
     }
+    public function RemoveWaitlister(){
+        // Check if the form is submitted
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            
+            // Initialize the event model
+            $eventModel = new Event();
+            
+            // Remove the waitlister from the event
+            $eventModel->removeFromWaitlist($_POST['event_id'], $_POST['user_id']);
+            
+            // Redirect back to the event waitlist page
+            header('Location: /event-waitlist/' . $_POST['event_id']);
+            exit();
+        }
+    }
+    
 
     
-    
-function uploadFile($file) {
-    // Define allowed file types and max file size
-        $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-        $maxFileSize = 5 * 1024 * 1024; // 5 MB
-    
-        // Check if the file is valid
-        if ($file['error'] === UPLOAD_ERR_OK) {
-            $fileType = $file['type'];
-            $fileSize = $file['size'];
-    
-            if (!in_array($fileType, $allowedTypes)) {
-                echo 'Invalid file type.';
-                return null;
+        
+    function uploadFile($file) {
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+            $maxFileSize = 5 * 1024 * 1024; // 5 MB
+        
+            // Check if the file is valid
+            if ($file['error'] === UPLOAD_ERR_OK) {
+                $fileType = $file['type'];
+                $fileSize = $file['size'];
+        
+                if (!in_array($fileType, $allowedTypes)) {
+                    echo 'Invalid file type.';
+                    return null;
+                }
+                if ($fileSize > $maxFileSize) {
+                    echo 'File size exceeds the limit.';
+                    return null;
+                }
+        
+                // Generate unique file name and move the uploaded file
+                $fileName = uniqid('event_', true) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
+                $uploadDir = 'uploads/images/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+        
+                $filePath = $uploadDir . $fileName;
+                move_uploaded_file($file['tmp_name'], $filePath);
+        
+                return $filePath;
             }
-            if ($fileSize > $maxFileSize) {
-                echo 'File size exceeds the limit.';
-                return null;
-            }
-    
-            // Generate unique file name and move the uploaded file
-            $fileName = uniqid('event_', true) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
-            $uploadDir = 'uploads/images/';
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
-            }
-    
-            $filePath = $uploadDir . $fileName;
-            move_uploaded_file($file['tmp_name'], $filePath);
-    
-            return $filePath;
+        
+            return null;
         }
-    
-        return null;
-    }
     public function ShowEventSearch() {
         // Set the search query if not already set
         if (!isset($_SESSION['searchQuery_event'])) {
@@ -448,5 +556,6 @@ function uploadFile($file) {
         }
     }
 }
+
 
 ?>

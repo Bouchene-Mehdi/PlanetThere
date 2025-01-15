@@ -30,8 +30,14 @@ $router->get('/create-event1', 'EventController@ShowEventCreate1');
 $router->get('/create-event2', 'EventController@ShowEventCreate2');
 $router->get('/event/{eventID}', 'EventController@ShowEventDetails');
 $router->get('/event-attendees/{eventID}', 'EventController@ShowEventAttendees');
-
-
+$router->get('/event-waitlist/{eventID}', 'EventController@ShowEventWaitlist');
+$router->get('/AdminEvent', 'AdminController@ShowEventList');
+$router->get('/AdminUsers', 'AdminController@ShowUserList');
+$router->get('/AdminBanned', 'AdminController@ShowBanned');
+$router->get('/AdminPropositions', 'AdminController@ShowPropositions');
+$router->get('/Dashboard', 'AdminController@ShowDashboard');
+$router->get('/AdminFaq', 'AdminController@ShowFaq');
+$router->get('/AdminT', 'AdminController@ShowTAC');
 
 // POST routes
 $router->post('/user/register-1', 'UserController@register_1');
@@ -48,10 +54,21 @@ $router->post('/event/create-1', 'EventController@createEventStep1');
 $router->post('/event/create-2', 'EventController@createEventStep2');
 $router->post('/event/search', 'EventController@postEventSearch');
 $router->post('/event/register/{eventID}', 'EventController@RegisterForEvent');
+$router->post('/event/waitlist/{eventID}', 'EventController@WaitlistForEvent');
+$router->post('/event/edit/{eventID}', 'EventController @EditEvent');
+$router->post('/event/unwaitlist/{eventID}', 'EventController@UnwaitlistForEvent');
 $router->post('/event/unregister/{eventID}', 'EventController@UnregisterForEvent');
 $router->post('/event/removeAttendee', 'EventController@RemoveAttendee');
+$router->post('/event/removeWaitlister', 'EventController@RemoveWaitlister');
 $router->post('/event/review', 'EventController@submitEventReview');
-
+$router->post('/ban/{userid}', 'AdminController@BanUser');
+$router->post('/unban/{userid}', 'AdminController@UnbanUser');
+$router->post('/moveToProp/{eventid}', 'AdminController@MoveToPropositions');
+$router->post('/acceptProposition/{eventid}', 'AdminController@makeActive');
+$router->post('/AdminFaq/Add', 'AdminController@AddFaq');
+$router->post('/AdminFaq/Delete/{faqID}', 'AdminController@DeleteFaq');
+$router->post('/AdminT/Add', 'AdminController@AddTac');
+$router->post('/AdminT/Delete/{tacID}', 'AdminController@DeleteTac');
 
 
 

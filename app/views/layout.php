@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Planet There</title>
@@ -9,7 +10,6 @@
     $segments = explode('/', trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'));
     $pathPrefix = (count($segments) > 1) ? '../' : '';  // If there are more than 1 segment, go up one level
     ?>
-
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/navbar.css'; ?>" />
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/global.css'; ?>" />
     <link rel="stylesheet" href="<?php echo $pathPrefix . 'assets/css/footer.css'; ?>" />
@@ -82,6 +82,10 @@
             case 'event-attendees':
                 echo $pathPrefix . 'assets/css/event-attendees.css';
                 break;
+
+             case 'event-waitlist':
+                echo $pathPrefix . 'assets/css/event-attendees.css';
+                break;
             default:
                 echo $pathPrefix . 'assets/css/global.css';
                 break;
@@ -105,6 +109,7 @@
     <?php echo $content; ?>
     <?php
     // Include the correct footer dynamically
+
         require views_path('partials/footer.php');
     ?>
     </body>
