@@ -51,6 +51,7 @@ $router->post('/event/register/{eventID}', 'EventController@RegisterForEvent');
 $router->post('/event/unregister/{eventID}', 'EventController@UnregisterForEvent');
 $router->post('/event/removeAttendee', 'EventController@RemoveAttendee');
 $router->post('/event/review', 'EventController@submitEventReview');
+$router->post('/home/index.php', 'PagesController@postEventSearch');
 
 
 
