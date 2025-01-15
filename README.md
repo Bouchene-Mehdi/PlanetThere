@@ -145,7 +145,7 @@ PlanetThere is licensed under the [MIT License](LICENSE).
 ---
 
 ## Contact
-For questions or support, reach out to [contact@example.com](mailto:contact@example.com).
+For questions or support, reach out to [kacperj2022@gmail.com](mailto:kacperj2022@gmail.com).
 
 ---
 
