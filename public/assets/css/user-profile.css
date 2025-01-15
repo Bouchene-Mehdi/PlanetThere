@@ -12,7 +12,7 @@
 /* Header to store the elements of the profile section */
 .combined-header {
 	display: grid;
-	grid-template-columns: 1fr auto;
+	grid-template-columns: repeat(3, 1fr); /* Divide the header into 3 equal columns */
 	align-items: start;
 	gap: 20px; /* Ensure spacing between the profile content and actions */
 	margin: 0 70px;

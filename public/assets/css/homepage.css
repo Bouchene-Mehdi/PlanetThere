@@ -36,12 +36,10 @@
 }
 
 
-
 .search-section {
 	justify-content: center;
 	border-radius: 20px;
 	background: #333;
-	z-index: 10;
 	display: flex;
 	width: 80%;
 	gap: 40px 42px;
@@ -73,17 +71,79 @@
 	color: #f5f5f5;
 }
 
-.search-dropdown {
-	justify-content: space-between;
-	align-items: center;
+.search-specific {
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    background: #f5f5f5;
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    position: relative; /* Ensure the dropdown options align correctly */
+}
+
+input[type='text'],
+input[type='date'] {
+	width: 98%;
+	padding: 11px 18px;
+	background-color: #f5f7fa;
 	border-radius: 5px;
-	background: #ececec;
-	display: flex;
-	margin-top: 11px;
-	width: 100%;
-	gap: 40px 100px;
-	font-size: 0.75em;
-	padding: 8px 16px;
+	cursor: pointer;
+	color: #7f7f7f;
+    font-size: 0.9rem;
+	border: none;
+}
+
+@media (max-width: 900px){
+	.search-specific{
+		width: 100%;
+	}
+
+	input[type='text'],
+	input[type='date'] {
+		width: 92%;
+	}
+}
+
+
+.dropdown-title {
+	color: #7f7f7f;
+	font-size: 0.9rem;
+}
+
+.dropdown-options {
+    display: block;
+    position: absolute;
+    background: #f5f7fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; 
+    margin-top: 220px;
+	margin-left: -16px;
+	max-height: 160px; /* Restrict the height */
+    overflow-y: auto; 
+    z-index: 10;
+    list-style: none;
+    padding: 0;
+	font-size: 1rem;
+}
+
+.dropdown-options.hidden {
+    display: none;
+}
+
+.dropdown-options .dropdown-option {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+}
+
+.dropdown-options .dropdown-option:hover {
+    background-color: #ececec;
 }
 
 .search-btn {
@@ -131,7 +191,7 @@
 		width: 100%; /* Ensures the form spans the full width */
 	}
 
-	.search-dropdown{
+	.search-specific{
 		width: inherit;
 	}
 
@@ -186,11 +246,12 @@
 .event-image {
 	max-width: 285px;
 	min-width: 285px;
-	margin-left: auto;
-	margin-right: auto;
+	/* margin-left: auto;
+	margin-right: auto; */
 	height: 180px;
 	object-fit: cover;
 	border-radius: 10px;
+	align-self: center;
 }
 
 
