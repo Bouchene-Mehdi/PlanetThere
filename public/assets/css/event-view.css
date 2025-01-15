@@ -34,6 +34,7 @@
 .event-author-header {
 	display: flex;
 	width: 90%;
+	padding-right: 50px;
 	height: 100px;
 	justify-content: space-between;
 	justify-self: center;
@@ -64,15 +65,29 @@
 .author-by {
 	font: 400 1em 'Product Sans', sans-serif;
 }
-
+.tickets {
+	font-size: 18px;
+	font: 600 'Product Sans', sans-serif;
+}
 .author-by .author-name {
 	font: 400 1.6em 'Product Sans', sans-serif;
 	margin-left: 5px;
 }
+.input_manager {
+	all: unset; /* Remove all default textarea styling */
+	display: block; /* Make it behave like a block element */
+	width: 100%; /* Full width of the container */
+	font: inherit; /* Match the font style of <p> */
+	line-height: inherit; /* Match the line height of <p> */
+	color: inherit; /* Match the text color of <p> */
+	box-sizing: border-box; /* Include padding in width calculations */
+	overflow: hidden; /* Prevent scrollbars */
+	resize: none; /* Disable manual resizing */
+}
 
-.event-header-extra{
-	width: 50%;
+.event-header-extra {
 	display: flex;
+
 	flex-direction: row;
 	/*flex-wrap: wrap;*/
 	justify-content: space-evenly;
@@ -92,6 +107,18 @@
 	padding: 0; /* Remove any padding */
 	border: none; /* Remove form borders */
 }
+.apply-form {
+	display: flex; /* Keep the form inline with other elements */
+	justify-content: space-evenly;
+	gap: 30px;
+	align-items: center;
+	margin: 0; /* Remove any default margin */
+	padding: 0; /* Remove any padding */
+	border: none; /* Remove form borders */
+}
+.form_remove {
+	width: 100%;
+}
 
 .btn-attend,
 .btn-follow,
@@ -109,12 +136,51 @@
 	text-transform: uppercase;
 }
 
-.btn-attend{
+.btn-apply {
+	margin-right: 60px;
+	padding: 15px 25px;
+	width: 15vw;
+	background-color: #009688;
+	color: #ffffff;
+	border: none;
+	border-radius: 10px;
+	font-size: 1em;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.btn-attend {
 	margin-right: 0px;
 }
 
 .btn-finished {
 	background-color: #a94442;
+}
+.ticket-quantity {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.quantity-btn {
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	background-color: #009688;
+	border-radius: 10px;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+#ticket-quantity {
+	width: 50px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	border-radius: 10px;
+	font-size: 16px;
 }
 
 /* Media query for smaller screens */
@@ -139,7 +205,7 @@
 		height: 35%;
 	}
 
-	.event-header-extra{
+	.event-header-extra {
 		width: 100%;
 		justify-content: space-evenly;
 	}
@@ -154,9 +220,7 @@
 		margin-right: 0;
 		margin-left: 0;
 	}
-
 }
-
 
 .btn-edit {
 	position: absolute; /* Position relative to the container */
@@ -271,7 +335,6 @@
 	}
 }
 
-
 /* Event Details */
 .event-text-details {
 	display: flex; /* Arrange items in a row */
@@ -284,6 +347,7 @@
 
 /* Description */
 .event-description {
+	margin-left: 0;
 	position: relative; /* Make this container a positioning context */
 	justify-self: center;
 	width: 90%;
@@ -311,8 +375,15 @@ p {
 	/* BlackFont */
 	color: #333333;
 }
-
+.event-description input {
+	margin: 0 20px 10px 20px;
+}
+.event-description textarea {
+	margin: 20px 10px 20px;
+	margin-right: 50px;
+}
 .event-description p {
+	margin: 0 20px 10px 20px;
 	font-style: normal;
 	font-weight: 400;
 	font-size: 16px;
@@ -432,8 +503,8 @@ p {
 	align-items: flex-start; /* Ensures the avatar stays at the top */
 }
 
-.comment-content{
-	margin-top:10px;
+.comment-content {
+	margin-top: 10px;
 	display: flex;
 	align-items: flex-start; /* Ensures the avatar stays at the top */
 }
@@ -611,8 +682,8 @@ p {
 	margin-right: 8px;
 }
 
-@media (max-width: 700px){
-	.events-grid{
+@media (max-width: 700px) {
+	.events-grid {
 		justify-items: center;
 	}
 }
@@ -631,4 +702,32 @@ p {
 
 .load-more-btn:hover {
 	background-color: #00796b;
+}
+.message {
+	padding: 15px;
+	margin: 20px 0;
+	border-radius: 5px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* Success message */
+.message.success {
+	background-color: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+}
+
+/* Error message */
+.message.error {
+	background-color: #f8d7da;
+	color: #721c24;
+	border: 1px solid #f5c6cb;
+}
+
+/* Optional - add some padding around the message text */
+.message p {
+	margin: 0;
+	padding: 0;
 }

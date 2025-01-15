@@ -25,6 +25,65 @@ class User {
         // Return the user data if found, otherwise return false
         return $user ?: false;
     }
+    public function AdminCount(){
+        $query = "SELECT COUNT(*) FROM users WHERE IsAdmin = 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function BannedCount(){
+        $query = "SELECT COUNT(*) FROM users WHERE IsBanned = 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function isAdmin(){
+        $query = "SELECT IsAdmin FROM users WHERE UserID = :userId";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userId', $_SESSION['user']['UserID']);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function UserCount(){
+        $query = "SELECT COUNT(*) FROM users";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    public function getAllActiveUsers() {
+        try {
+            $query = "SELECT UserID, Username, Email, CONCAT(FirstName, ' ', LastName) AS FullName, Phone, DateOfBirth FROM users WHERE IsBanned = 0";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Database error in getAllUsers: " . $e->getMessage());
+            return [];
+        }
+    }
+    public function getAllBannedUsers(){
+        try {
+            $query = "SELECT UserID, Username, Email, CONCAT(FirstName, ' ', LastName) AS FullName, Phone, DateOfBirth FROM users WHERE IsBanned = 1";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Database error in getAllUsers: " . $e->getMessage());
+            return [];
+        }
+    }
+    public function BanUser($userid){
+        $query = "UPDATE users SET IsBanned = 1 WHERE UserID = :userId";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userId', $userid);
+        $stmt->execute();
+    }
+    public function UnbanUser($userId){
+        $query = "UPDATE users SET IsBanned = 0 WHERE UserID = :userId";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+    }
     // Function to verify if a user exists by email or username
     public function verify($email, $username) {
         // Prepare the query to check if the email or username exists

@@ -58,6 +58,7 @@ class UserController
     }
         // Show the login form   
      public function ShowLogin(){
+
         render('user/login');
     }
     public function showProfile(){
@@ -380,9 +381,17 @@ class UserController
                     // Store user in session (successful login)
                     $_SESSION['user'] = $user;
                     echo "Login successful!";
+                    $userModel=new User();
+                    $isAdmin=$userModel->isAdmin();
+                    if($isAdmin){
+                        header('Location: /Dashboard');
+                        exit();
+                    }else{
+                        header('Location: /');
+                        exit();
+                    }
                     // Redirect after successful login
-                    header('Location: /');
-                    exit();
+
                 }
             }
             header('Location: /login');

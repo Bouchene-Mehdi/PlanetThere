@@ -12,9 +12,11 @@
                     <img src="../<?= htmlspecialchars($attendee['ProfileImage']); ?>" alt="Profile Picture" class="profile-pic">
                     <h2><?= htmlspecialchars($attendee['Username']); ?></h2>
                     <p><?= htmlspecialchars($attendee['FirstName']) . ' ' .htmlspecialchars($attendee['LastName']); ?></p>
+                    <p><?= htmlspecialchars($attendee['registrationCount']); ?> Ticket(s)</p>
                     <form action="/event/removeAttendee" method="POST">
                         <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
                         <input type="hidden" name="user_id" value="<?= $attendee['UserID']; ?>">
+    
                         <button type="submit" class="remove-btn">Remove</button>
                     </form>
                 </div>
