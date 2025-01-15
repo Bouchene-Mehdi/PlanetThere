@@ -494,63 +494,67 @@ class EventController {
             return null;
         }
     public function ShowEventSearch() {
-        // Set the search query if not already set
+        // setting the query
         if (!isset($_SESSION['searchQuery_event'])) {
             $_SESSION['searchQuery_event'] = '';
         }
+
+        if (!isset($_SESSION['searchQuery_location'])) {
+            $_SESSION['searchQuery_location'] = '';
+        }
     
-        // Retrieve "From" and "To" dates from session or POST data
         $fromDate = isset($_SESSION['from-date']) ? $_SESSION['from-date'] : '';
         $toDate = isset($_SESSION['to-date']) ? $_SESSION['to-date'] : '';
-
-        // Retrieve the category from the session
         $selectedCategory = isset($_SESSION['event-category']) ? $_SESSION['event-category'] : '';
+        $showFullEvents = isset($_SESSION['show-full-events']) ? $_SESSION['show-full-events'] : false;
         
-        // Initialize the model
         $eventModel = new Event();
         
-        // Fetch events based on the search query and date range
-        $events = $eventModel->searchEvents($_SESSION['searchQuery_event'], $fromDate, $toDate, $selectedCategory);
+        // passing to the model
+        $events = $eventModel->searchEvents($_SESSION['searchQuery_event'], $fromDate, $toDate, $selectedCategory, $_SESSION['searchQuery_location'], $showFullEvents);
         
         foreach ($events as &$event) {
-            // Add attendance count to the event
+            // adding the attendance count
             $event['attendanceCount'] = $eventModel->getAttendanceCount($event['EventID']);
         }
 
         $categoryModel = new Category();
         $categories = $categoryModel->getAllCategories();
     
-        // Render the view with event data and filter values
+        // rendering the view
         render('event/event-search', [
             'categories' => $categories,
             'events' => $events,
             'searchQuery_event' => $_SESSION['searchQuery_event'],
             'fromDate' => $fromDate,
             'toDate' => $toDate,
-            'selectedCategory' => $selectedCategory
+            'selectedCategory' => $selectedCategory,
+            'location' => $_SESSION['searchQuery_location'],
+            'showFullEvents' => $showFullEvents
         ]);
-    }  
+    } 
+
     public function postEventSearch() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             
-            // Store the search query and date filters in the session
+            // storing the search query in the session
             $searchQuery = $_POST['search_query'] ?? '';
+            $location = $_POST['location'] ?? '';
             $_SESSION['searchQuery_event'] = trim($searchQuery);
+            $_SESSION['searchQuery_location'] = trim($location);
             
-            // Store the "From" and "To" dates in the session
             $fromDate = $_POST['from-date'] ?? '';
             $toDate = $_POST['to-date'] ?? '';
+            $selectedCategory = $_POST['event-category'] ?? '';
+            $showFullEvents = isset($_POST['show-full-events']);
 
-            
             $_SESSION['from-date'] = $fromDate;
             $_SESSION['to-date'] = $toDate;
-
-            // Store the selected category in the session
-            $_SESSION['event-category'] = trim($_POST['event-category'] ?? '');
+            $_SESSION['event-category'] = trim($selectedCategory);
+            $_SESSION['show-full-events'] = $showFullEvents;
             
-            // Redirect back to the search page
+            // sending hte user back to the search page
             header('Location: /event-search');
             exit();
         }

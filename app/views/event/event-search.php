@@ -9,11 +9,12 @@
                 </div> 
 
                 <div class="category">
-                    <label for="category">Category</label>
+                    <label for="event-category">Category</label>
                     <div class="category-dropdown" id="event-category-dropdown">
                         <span class="dropdown-title"><?= htmlspecialchars($selectedCategory) ?: 'Choose event category' ?></span>
                         <input type="hidden" name="event-category" id="event-category" value="<?= htmlspecialchars($selectedCategory) ?>" />
                         <ul class="dropdown-options hidden" id="event-category-options">
+                            <li class="dropdown-option" data-value="">All Categories</li>
                             <?php 
                                 foreach ($categories as $category) {
                                     $isSelected = ($category['CategoryName'] === $selectedCategory) ? 'selected' : '';
@@ -26,7 +27,7 @@
 
                 <div class="location">
                     <label for="location">Location</label>
-                    <input type="text" id="location" placeholder="Enter location">
+                    <input type="text" id="location" name="location" placeholder="Enter location" value="<?php echo htmlspecialchars($_SESSION['searchQuery_location'] ?? ''); ?>">
                 </div>
 
                 <div class="checkbox-group">
@@ -35,7 +36,7 @@
                         Show online events
                     </label>
                     <label>
-                        <input type="checkbox" checked>
+                        <input type="checkbox" checked id="show-full-events" name="show-full-events" <?= isset($showFullEvents) && $showFullEvents ? 'checked' : '' ?>>
                         Show full events
                     </label>
                 </div>
@@ -87,25 +88,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const options = document.getElementById("event-category-options");
     const categoryTitle = dropdown.querySelector(".dropdown-title");
 
-    // Toggle dropdown visibility
     dropdown.addEventListener("click", () => {
         options.classList.toggle("hidden");
     });
 
-    // Handle option selection
     options.addEventListener("click", (event) => {
         if (event.target.classList.contains("dropdown-option")) {
             categoryTitle.textContent = event.target.textContent;
             categoryTitle.style.color = "#333";
             options.classList.add("hidden");
 
-            // Set the hidden input value
+            // set the selected category in the input field
             eventCategoryInput.value = event.target.textContent.trim();
         }
         event.stopPropagation();
     });
 
-    // Close dropdown if clicked outside
+    // close dropdown when clicking outside
     document.addEventListener("click", (event) => {
         if (!dropdown.contains(event.target) && !options.contains(event.target)) {
             options.classList.add("hidden");
@@ -117,4 +116,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <?php
 unset($_SESSION['searchQuery_event']);
+unset($_SESSION['searchQuery_location']);
 ?>

@@ -61,6 +61,7 @@ $router->post('/event/unregister/{eventID}', 'EventController@UnregisterForEvent
 $router->post('/event/removeAttendee', 'EventController@RemoveAttendee');
 $router->post('/event/removeWaitlister', 'EventController@RemoveWaitlister');
 $router->post('/event/review', 'EventController@submitEventReview');
+$router->post('/home/index.php', 'PagesController@postEventSearch');
 $router->post('/ban/{userid}', 'AdminController@BanUser');
 $router->post('/unban/{userid}', 'AdminController@UnbanUser');
 $router->post('/moveToProp/{eventid}', 'AdminController@MoveToPropositions');
@@ -69,7 +70,6 @@ $router->post('/AdminFaq/Add', 'AdminController@AddFaq');
 $router->post('/AdminFaq/Delete/{faqID}', 'AdminController@DeleteFaq');
 $router->post('/AdminT/Add', 'AdminController@AddTac');
 $router->post('/AdminT/Delete/{tacID}', 'AdminController@DeleteTac');
-
 
 
 

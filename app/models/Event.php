@@ -150,15 +150,18 @@ class Event {
             return false;
         }
     }
-    public function searchEvents($searchQuery, $fromDate = '', $toDate = '', $selectedCategory = '') {
-        // Start building the SQL query
+    public function searchEvents($searchQuery, $fromDate = '', $toDate = '', $selectedCategory = '', $location='', $showFullEvents = true) {
+        // building up the sql query
         $query = 'SELECT e.* 
                   FROM events e 
                   INNER JOIN categories c ON e.CategoryID = c.CategoryID
                   WHERE e.EventName LIKE :searchQuery AND e.IsActive = 1';
-
+        
+        if ($selectedCategory == 'All Categories') {
+            $selectedCategory = '';
+        }
     
-        // Add date filters to the query if provided
+        // adding the date and category filters
         if (!empty($fromDate)) {
             $query .= ' AND e.StartDate >= :fromDate';
         }
@@ -168,12 +171,19 @@ class Event {
         if (!empty($selectedCategory)) {
             $query .= ' AND c.CategoryName = :category';
         }
-
-        // Prepare the SQL statement
+        if (!empty($location)) {
+            $query .= ' AND e.LocationAddress LIKE :location';
+        }
+    
         $stmt = $this->db->prepare($query);
     
-        // Bind parameters
+        // Always bind search query
         $stmt->bindValue(':searchQuery', '%' . $searchQuery . '%');
+    
+        // Bind other parameters if they are set
+        if (!empty($location)) {
+            $stmt->bindValue(':location', '%' . $location . '%');
+        }
         if (!empty($fromDate)) {
             $stmt->bindValue(':fromDate', $fromDate);
         }
@@ -183,11 +193,18 @@ class Event {
         if (!empty($selectedCategory)) {
             $stmt->bindValue(':category', $selectedCategory);
         }
-
-        // Execute the query
-        $stmt->execute();
     
-        // Return the results
+        $stmt->execute();
+        if ($showFullEvents == false){
+            $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $filteredEvents = [];
+            foreach ($events as $event) {
+                if (!$this->IsEventFull($event['EventID'])) {
+                    $filteredEvents[] = $event;
+                }
+            }
+            return $filteredEvents;
+        }
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     

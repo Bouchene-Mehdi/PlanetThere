@@ -9,7 +9,7 @@
 
         <!-- Search Section -->
         <section class="search-section">
-            <form class="search-form">
+            <form class="search-form" method="POST" action="/event/search">
                     
                 <div class="search-field">
                     <label for="event-category" class="search-label">Category</label>
@@ -169,28 +169,10 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    // Focus on the input fields automatically when the page loads
-    const fromDateInput = document.getElementById("from-date");
-    const toDateInput = document.getElementById("to-date");
-    const eventCategoryInput = document.getElementById("event-category");
-
-    if (fromDateInput) {
-        fromDateInput.focus();
-    }
-    if (toDateInput) {
-        toDateInput.focus();
-    }
-
-    if (eventCategoryInput) {
-        eventCategoryInput.focus();
-    }
-
-    // if 
-
-
     const dropdown = document.getElementById("event-category-dropdown");
     const options = document.getElementById("event-category-options");
     const categoryTitle = dropdown.querySelector(".dropdown-title");
+    const eventCategoryInput = document.getElementById("event-category");
 
     // Toggle dropdown visibility
     dropdown.addEventListener("click", () => {
@@ -200,11 +182,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Handle option selection
     options.addEventListener("click", (event) => {
         if (event.target.classList.contains("dropdown-option")) {
+            // Set the category title and hidden input value
             categoryTitle.textContent = event.target.textContent;
-            categoryTitle.style.color = "#333";
-            options.classList.add("hidden");
+            categoryTitle.style.color = "#333";  // Change color after selection
+            eventCategoryInput.value = event.target.textContent;  // Update hidden input
+            options.classList.add("hidden");  // Close dropdown
         }
-        event.stopPropagation(); 
+        event.stopPropagation(); // Prevent event bubbling
     });
 
     // Close dropdown if clicked outside
@@ -214,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
 </script>
 
 
