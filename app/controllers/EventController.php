@@ -547,7 +547,7 @@ class EventController {
             $fromDate = $_POST['from-date'] ?? '';
             $toDate = $_POST['to-date'] ?? '';
             $selectedCategory = $_POST['event-category'] ?? '';
-            $showFullEvents = isset($_POST['show-full-events']);
+            $showFullEvents = $_POST['show-full-events'];
 
             $_SESSION['from-date'] = $fromDate;
             $_SESSION['to-date'] = $toDate;

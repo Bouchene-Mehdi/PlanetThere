@@ -62,7 +62,7 @@
 
     </main>
     <?php 
-        require views_path('partials/footer-large.php');
+        require views_path('partials/footer.php');
     ?>
     </body>
 </html>

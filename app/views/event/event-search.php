@@ -36,7 +36,7 @@
                         Show online events
                     </label>
                     <label>
-                        <input type="checkbox" checked id="show-full-events" name="show-full-events" <?= isset($showFullEvents) && $showFullEvents ? 'checked' : '' ?>>
+                        <input type="checkbox" id="show-full-events" name="show-full-events" <?= $_SESSION['show-full-events'] ? 'checked' : '' ?>>
                         Show full events
                     </label>
                 </div>
