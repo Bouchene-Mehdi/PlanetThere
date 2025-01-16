@@ -48,8 +48,7 @@
                         ?>
                     </p>
                 </div>
-            </div>
-            <div class="profile-actions">
+                <div class="profile-actions">
                 <?php if ($_SESSION['user']['Username'] !== $_SESSION['user_profile']['Username']): ?>
 
                     <!-- Follow / Unfollow Form -->
@@ -80,6 +79,8 @@
                     </form>
                 <?php endif; ?>
             </div>
+            </div>
+
         </header>
     </div>
     <?php if (!empty($managedEvents)): ?>

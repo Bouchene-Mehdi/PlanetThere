@@ -430,9 +430,16 @@ p {
 .star-rating i.active {
 	color: #ffcc00; /* Highlighted star color */
 }
-
+.feedback-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
 .feedback-input {
-	width: 100%;
+	padding: 20px;
+
+	width: 80%;
 	height: 300px;
 	margin: 15px 0;
 	/*padding: 10px;*/
@@ -451,12 +458,18 @@ p {
 }
 
 .btn-submit {
+	margin-left: auto;
+	margin-right: auto;
+	font-style: bold;
+	font-size: 20px;
+	margin-top: 20px;
+	padding: 10px;
+	width: 20%;
 	background: #009688;
 	color: #ffffff;
 	border: none;
 	padding: 10px 20px;
-	border-radius: 5px;
-	font-size: 16px;
+	border-radius: 10px;
 	cursor: pointer;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 	transition: background-color 0.3s ease-in-out;

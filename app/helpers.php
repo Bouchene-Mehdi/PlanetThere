@@ -22,7 +22,7 @@ function base_path($path = '') {
 
 function views_path($path = '') {
     return base_path('app/views' . '/' . ltrim($path, '/'));
-}
+}   
 
 
 function redirect($path = '', $queryParams = []){

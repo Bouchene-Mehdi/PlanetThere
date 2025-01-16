@@ -215,23 +215,30 @@ class User {
     public function login($email, $password) {
         // Check if the username exists
         $user = $this->verifyEmail($email);
-
+    
         if ($user) {
-            // If username exists, check if the password matches
+            // If username exists, check if the user is banned
+            if ($user['IsBanned'] == 1) {
+                // Log that the user is banned
+                error_log("This account is banned: " . $email);
+                return null; // Return null if the user is banned
+            }
+    
+            // If the user is not banned, check if the password matches
             if ($this->checkPassword($user['PasswordHash'], $password)) {
-                return $user; // Successful login, return user data 
-            
+                return $user; // Successful login, return user data
             } else {
-                error_log("This is an error in password");
-
+                // Log incorrect password attempt
+                error_log("Incorrect password for user: " . $email);
                 return null; // Incorrect password
             }
         }
-                error_log("This is an error in email");
-
         
+        // Log email not found error
+        error_log("Email not found: " . $email);
         return null; // Username not found
     }
+    
     public function savePasswordResetToken($userId, $token) {
         $query = 'UPDATE users SET reset_token = :token, token_expiry = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE UserID = :id';
         $stmt = $this->db->prepare($query);

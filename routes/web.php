@@ -16,8 +16,9 @@ $router->get('/forgot-2', 'UserController@ShowForgot_2');
 $router->get('/login', 'UserController@ShowLogin');
 $router->get('/profile', 'UserController@ShowProfile');
 $router->get('/profile/{username}', 'UserController@showUserProfileByUsername');
-
 $router->get('/log-out', 'UserController@logout');
+$router->get('/blocked','UserController@ShowBlockScreen');
+$router->get('/unauthorized','UserController@ShowUnauthorizedScreen');
 $router->get('/delete-account', 'UserController@deleteAccount');
 $router->get('/account', 'UserController@UserAccount');
 $router->get('/user-search', 'UserController@ShowUserSearch');
@@ -25,6 +26,7 @@ $router->get('/settings', 'UserController@ShowUserSettings');
 $router->get('/friends', 'UserController@ShowFriends');
 $router->get('/user/register', 'UserController@showRegisterForm');
 $router->get('/user/login', 'UserController@showLoginForm');
+$router->get('/createAcc', 'UserController@ShowCreateAcc');
 $router->get('/event-search', 'EventController@ShowEventSearch');
 $router->get('/create-event1', 'EventController@ShowEventCreate1');
 $router->get('/create-event2', 'EventController@ShowEventCreate2');
@@ -38,7 +40,6 @@ $router->get('/AdminPropositions', 'AdminController@ShowPropositions');
 $router->get('/Dashboard', 'AdminController@ShowDashboard');
 $router->get('/AdminFaq', 'AdminController@ShowFaq');
 $router->get('/AdminT', 'AdminController@ShowTAC');
-
 // POST routes
 $router->post('/user/register-1', 'UserController@register_1');
 $router->post('/user/register-2', 'UserController@register_2');
@@ -59,6 +60,7 @@ $router->post('/event/edit/{eventID}', 'EventController @EditEvent');
 $router->post('/event/unwaitlist/{eventID}', 'EventController@UnwaitlistForEvent');
 $router->post('/event/unregister/{eventID}', 'EventController@UnregisterForEvent');
 $router->post('/event/removeAttendee', 'EventController@RemoveAttendee');
+$router->post('/event/delete/{eventID}', 'EventController@DeleteEvent');
 $router->post('/event/removeWaitlister', 'EventController@RemoveWaitlister');
 $router->post('/event/review', 'EventController@submitEventReview');
 $router->post('/home/index.php', 'PagesController@postEventSearch');

@@ -62,14 +62,31 @@ class UserController
         render('user/login');
     }
     public function showProfile(){
+
         render('user/profile');
     }
+    public function ShowBlockScreen(){
+        render('user/blocked');
+    }
+    public function ShowCreateAcc(){
+        render('user/create_an_account');
+    }
     public function showUserProfileByUsername($username = null) {
+        if(!isset($_SESSION['user'])){
+            header('Location: /createAcc');
+            exit();
+        }
         $userModel = new User();
         $user = $userModel->getUserByUsername($username);
+        $_SESSION['isBlockedByUser'] = $userModel->isBlocked($user['UserID'], $_SESSION['user']['UserID']);
+        if ($_SESSION['isBlockedByUser']) {
 
+            header("Location: /blocked");
+            exit();
+        }
         // Vérifier si un username est passé en paramètre
         if ($username) {    
+
             $_SESSION['isFollowing']=$userModel->isFollowing($_SESSION['user']['UserID'],$user['UserID']);
             $_SESSION['isBlocked']=$userModel->isBlocked($_SESSION['user']['UserID'],$user['UserID']);
 
@@ -183,7 +200,9 @@ class UserController
         render('user/user-search');
     }
     
-        
+   public function ShowUnauthorizedScreen(){
+        render('user/unauthorized');
+   }      
     public function ShowUserSettings(){
         render('user/settings');
     }
@@ -376,7 +395,7 @@ class UserController
                 $user = $userModel->login($data['email'], $data['password']); // Verify credentials
 
                 if (!$user) {
-                    $_SESSION['login_errors']['login_err'] = 'Invalid email or password.';
+                    $_SESSION['login_errors']['login_err'] = 'Invalid email or password. Or your account has been banned';
                 } else {
                     // Store user in session (successful login)
                     $_SESSION['user'] = $user;
@@ -489,7 +508,7 @@ class UserController
     
         // Destroy the session
         session_destroy();
-    
+        
         // Redirect the user to the homepage or login page
         header('Location: /');
         exit();

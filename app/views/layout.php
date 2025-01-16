@@ -40,6 +40,9 @@
             case 'profile-settings':
                 echo $pathPrefix . 'assets/css/profile-settings.css';
                 break;
+            case 'unauthorized':
+                echo $pathPrefix . 'assets/css/blocked.css';
+                break;
             case 'signup-1':
                 echo $pathPrefix . 'assets/css/signup-1.css';
                 break;
@@ -85,6 +88,12 @@
 
              case 'event-waitlist':
                 echo $pathPrefix . 'assets/css/event-attendees.css';
+                break;
+            case 'blocked':
+                echo $pathPrefix . 'assets/css/blocked.css';
+                break;
+            case 'createAcc':
+                echo $pathPrefix . 'assets/css/blocked.css';
                 break;
             default:
                 echo $pathPrefix . 'assets/css/global.css';

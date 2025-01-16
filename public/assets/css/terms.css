@@ -1,6 +1,7 @@
 /* terms.css */
 .terms {
 	width: 100%;
+	min-height: 70vh;
 }
 
 .hero-section {

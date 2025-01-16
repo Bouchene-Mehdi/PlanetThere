@@ -7,11 +7,13 @@
                 <img src="../<?php echo $manager['ProfileImage']?> " alt="Organizer" class="author-photo" />
                 <h2 class="author-by">BY <span class="author-name"><?= htmlspecialchars($manager['FirstName']) . ' '.htmlspecialchars($manager['LastName']) ;  ?></span></h2>
             </div>
-            <div class="event-header-extra">
-                <div class="event-header-attendance">
+            <div class="event-header-attendance">
                     <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
                     <span class="attendance-count"><?= $attendanceCount . '/' . $event['MaxParticipants']; ?></span>
                 </div>
+            <div class="event-header-extra">
+
+            
                 <?php if ($_SESSION['user']['UserID'] == $manager['UserID']): ?>
                     <!-- Form to show "ATTENDANTS" if the user is the event manager -->
                     <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
@@ -65,7 +67,7 @@
     <?php if ($canReview): ?>
     <section class="feedback-section">
         <h1>Give us your <span class="highlight">Feedback!</span></h1>
-        <form id="feedbackForm" action="/event/review" method="POST">
+        <form id="feedbackForm" action="/event/review/" method="POST" class="feedback-form">
             <div class="star-rating">
                 <i class="fa fa-star" data-rating="1"></i>
                 <i class="fa fa-star" data-rating="2"></i>
