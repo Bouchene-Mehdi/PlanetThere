@@ -34,12 +34,6 @@
                     </p>
                     <!-- Date of Birth -->
                     <p class="dob">
-                        <style>
-                            .dob {
-                                color: #009688;
-                                padding-left: 10px;
-                            }
-                        </style>
                         <?php 
                         // Show date of birth only if dobPublic is 1
                         echo ($_SESSION['user_profile']['dobPublic'] ?? 1) 

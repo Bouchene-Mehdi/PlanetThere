@@ -502,6 +502,9 @@ class EventController {
         if (!isset($_SESSION['searchQuery_location'])) {
             $_SESSION['searchQuery_location'] = '';
         }
+        if (!isset($_SESSION['show-full-events'])) {
+            $_SESSION['show-full-events'] = false;
+        }
     
         $fromDate = isset($_SESSION['from-date']) ? $_SESSION['from-date'] : '';
         $toDate = isset($_SESSION['to-date']) ? $_SESSION['to-date'] : '';
