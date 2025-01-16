@@ -11,20 +11,37 @@
 
 /* Header to store the elements of the profile section */
 .combined-header {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr); /* Divide the header into 3 equal columns */
+	display: flex;
+	flex-direction: row;
 	align-items: start;
-	gap: 20px; /* Ensure spacing between the profile content and actions */
-	margin: 0 70px;
+	gap: 40px; /* Ensure spacing between the profile content and actions */
+	margin-left: 70px;
 	margin-top: 20px;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
+}
+
+@media (max-width: 1024px) {
+	.combined-header {
+		flex-direction: column;
+		align-items: center;
+		margin-left: 0;
+	}
+	
 }
 
 /* Profile Section */
 .profile-section {
-	width: 55%;
+	width: 90%;
 	padding-left: 20px;
 	padding-top: 20px;
+}
+
+@media (max-width: 1024px) {
+	.profile-section {
+		width: 100%;
+		padding-left: 0;
+	}
+	
 }
 
 /* Profile Header */
@@ -33,24 +50,44 @@
 	align-items: flex-start; /* Align image and text to the start */
 	gap: 20px;
 	width: 100%;
+	justify-content: space-around;
 }
 
 /* Profile Image */
 .profile-header img {
+	align-self: center;
 	aspect-ratio: 1 / 1;
-	width: 30%;
-	height: 30%;
+	width: 180px;
+	height: 180px;
 	border-radius: 50%;
-	border: 5px solid #009688;
+	border: 3px solid #009688;
 	object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+	.profile-header img {
+		width: 100px;
+		height: 100px;
+	}
+	.spacer {
+		display: none;
+	}
 }
 
 /* Profile Text (Name, Email, Phone) */
 .profile-text {
 	display: flex;
+	align-self: flex-end;
 	flex-direction: column;
 	margin-top: 20px;
-	gap: 8px; /* Ensure proper spacing between text elements */
+	gap: 8px;
+}
+
+
+.dob {
+	color: #009688;
+	margin: 0;
+	/* padding-left: 10px; */
 }
 
 .profile-header h1 {
@@ -75,11 +112,35 @@
 	margin-bottom: 0;
 }
 
+@media (max-width: 1024px) {
+	.profile-header h1 {
+		font-size: 1.5em;
+	}
+	.profile-header .name {
+		font-size: 1.2em;
+	}
+	.profile-header .email,
+	.profile-header .phone-number {
+		font-size: 1em;
+	}
+	.dob {
+		font-size: 1em;
+	}
+}
+
 /* Profile Actions (Follow, Block buttons) */
 .profile-actions {
 	display: flex;
 	flex-direction: column;
 	gap: 15px; /* Provide space between buttons */
+}
+
+@media (max-width: 1024px) {
+	.profile-actions {
+		flex-direction: row;
+		justify-content: space-between;
+		margin-left: 15px;
+	}
 }
 
 .follow-btn,
@@ -94,8 +155,14 @@
 	color: #fff;
 }
 
+@media (max-width: 1024px) {
+	.follow-btn,
+	.block-btn {
+		margin-right: 0;
+		margin-top: 0;
+	}
+}
 .follow-btn {
-	margin-top: 10px;
 	background-color: #009688;
 	transition: background-color 0.3s ease-in-out;
 }
