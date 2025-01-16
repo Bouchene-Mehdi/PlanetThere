@@ -68,7 +68,14 @@ class UserController
     public function ShowBlockScreen(){
         render('user/blocked');
     }
+    public function ShowCreateAcc(){
+        render('user/create_an_account');
+    }
     public function showUserProfileByUsername($username = null) {
+        if(!isset($_SESSION['user'])){
+            header('Location: /createAcc');
+            exit();
+        }
         $userModel = new User();
         $user = $userModel->getUserByUsername($username);
         $_SESSION['isBlockedByUser'] = $userModel->isBlocked($user['UserID'], $_SESSION['user']['UserID']);

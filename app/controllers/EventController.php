@@ -5,9 +5,17 @@ require_once __DIR__ . '/../models/User.php';
 class EventController {
 
     public function ShowEventCreate1(){
+        if(!isset($_SESSION['user'])){
+            header('Location: /createAcc');
+            exit();
+        }
         render('event/create-event-1');
     }
-    public function ShowEventCreate2(){    
+    public function ShowEventCreate2(){ 
+        if(!isset($_SESSION['user'])){
+            header('Location: /createAcc');
+            exit();
+        }      
         $categoryModel = new Category();
         $categories = $categoryModel->getAllCategories();
 
@@ -16,6 +24,10 @@ class EventController {
     }
 
     public function ShowEventDetails($EventID){
+        if(!isset($_SESSION['user'])){
+            header('Location: /createAcc');
+            exit();
+        }
         // Initialize the event model
         $eventModel = new Event();
         
@@ -369,6 +381,15 @@ class EventController {
                 exit();
             }
         }
+    }
+    public function AdminDeleteEvent($EventID){
+        // Initialize the event model
+        $eventModel = new Event();
+        // Delete the event
+        $eventModel->deleteEvent($EventID);
+        // Redirect back to the event search page
+        header('Location: /AdminPropositions');
+        exit();
     }
     public function UnwaitlistForEvent($EventID){
         // Initialize the event model

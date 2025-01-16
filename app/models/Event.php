@@ -55,7 +55,8 @@ class Event {
                         Description, 
                         Image1, 
                         Image2, 
-                        EventManagerID  
+                        EventManagerID,
+                        IsActive
                       ) VALUES (
                         :eventName, 
                         :eventStartDateTime, 
@@ -70,7 +71,8 @@ class Event {
                         :description, 
                         :image1, 
                         :image2, 
-                        :eventManagerID
+                        :eventManagerID,
+                        :isActive
                       )";
     
             // Prepare statement
@@ -96,6 +98,7 @@ class Event {
             $stmt->bindParam(':image1', $image1);
             $stmt->bindParam(':image2', $image2);
             $stmt->bindParam(':eventManagerID', $eventManagerID);
+            $stmt->bindValue(':isActive', 0);
     
             // Execute the statement
             if ($stmt->execute()) {
@@ -339,17 +342,19 @@ class Event {
         return ($result && isset($result['Quantity'])) ? (int)$result['Quantity'] : 0;
     }
     public function get_5_UpcomingEvents() {
-        $query = 'SELECT * FROM events WHERE StartDate > NOW() ORDER BY StartDate ASC LIMIT 5';
+        $query = 'SELECT * FROM events WHERE StartDate > NOW() AND IsActive = 1 ORDER BY StartDate ASC LIMIT 5';
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     public function get_5_FollowersEvents() {
         $query = 'SELECT e.* 
                   FROM events e
                   INNER JOIN registrations r ON e.EventID = r.EventID
                   INNER JOIN follows f ON r.UserID = f.followed_id 
                   WHERE f.follower_id  = :userID
+                  AND e.IsActive = 1
                   ORDER BY e.StartDate ASC
                   LIMIT 5';
         $stmt = $this->db->prepare($query);
@@ -357,18 +362,21 @@ class Event {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     public function get_5_PopularEvents() {
-        $query = 'SELECT * FROM events WHERE StartDate > NOW() ORDER BY (SELECT COUNT(*) FROM registrations WHERE EventID = events.EventID) DESC LIMIT 5';
+        $query = 'SELECT * FROM events WHERE StartDate > NOW() AND IsActive = 1 ORDER BY (SELECT COUNT(*) FROM registrations WHERE EventID = events.EventID) DESC LIMIT 5';
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     public function get_5_StayFitEvents() {
-        $query = 'SELECT * FROM events WHERE CategoryID = 2 AND StartDate > NOW() ORDER BY StartDate ASC LIMIT 5';
+        $query = 'SELECT * FROM events WHERE IsActive = 1 AND CategoryID = 2 AND StartDate > NOW() ORDER BY StartDate ASC LIMIT 5';
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 
     public function getEventReviews($eventID){
         $query = 'SELECT * FROM reviews WHERE EventID = :eventID';

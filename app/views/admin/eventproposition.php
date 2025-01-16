@@ -44,7 +44,7 @@
                         <span class="button-text" style="color: #32BCD8;">accept</span>
                     </button>
                 </form>
-                <form action="/rejectProposition/<?php echo $event['EventID'] ?>" method="POST">
+                <form action="/event/delete/<?php echo $event['EventID'] ?>" method="POST">
                     <button type="submit" class="event-proposition-button reject-button">
                         <span class="button-text">reject</span>
                     </button>

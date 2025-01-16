@@ -92,6 +92,9 @@
             case 'blocked':
                 echo $pathPrefix . 'assets/css/blocked.css';
                 break;
+            case 'createAcc':
+                echo $pathPrefix . 'assets/css/blocked.css';
+                break;
             default:
                 echo $pathPrefix . 'assets/css/global.css';
                 break;
