@@ -8,6 +8,10 @@ class AdminController
 {
     public function ShowEventList()
     {
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0  || !isset($_SESSION['user'])) {
+            header('Location: /unauthorized');
+            exit();
+        }
         $evenModel = new Event();
         $events = $evenModel->getAllActiveEvents();
         render('admin/eventlist',[
@@ -21,7 +25,7 @@ class AdminController
     }
     public function ShowUserList()
     {
-        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0  || !isset($_SESSION['user'])) {
             header('Location: /unauthorized');
             exit();
         }
@@ -42,7 +46,7 @@ class AdminController
         header('Location: /AdminBanned');
     }
     public function ShowBanned(){
-        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0  || !isset($_SESSION['user'])) {
             header('Location: /unauthorized');
             exit();
         }
@@ -53,7 +57,8 @@ class AdminController
         ],'admin/layout');
     }
     public function ShowPropositions(){
-        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0  || !isset($_SESSION['user'])) {
             header('Location: /unauthorized');
             exit();
         }
@@ -69,7 +74,7 @@ class AdminController
         header('Location: /AdminPropositions');
     }
     public function ShowDashboard(){
-        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']== 0 ) {
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']== 0 || !isset($_SESSION['user'])) {
             header('Location: /unauthorized');
             exit();
         }
@@ -98,7 +103,7 @@ class AdminController
         header('Location: /AdminPropositions');
     }
     public function ShowFaq() {
-        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0  || !isset($_SESSION['user'])) {
             header('Location: /unauthorized');
             exit();
         }
@@ -127,7 +132,12 @@ class AdminController
         header('Location: /AdminFaq');
     }
     public function ShowTAC(){
-        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 ) {
+
+        if( !isset($_SESSION['user'])){
+            header('Location: /unauthorized');
+            exit();
+        }
+        if (isset($_SESSION['user']) && $_SESSION['user']['IsAdmin']==0 || !isset($_SESSION['user'])) {
             header('Location: /unauthorized');
             exit();
         }
