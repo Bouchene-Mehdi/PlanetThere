@@ -14,7 +14,7 @@
             <div class="event-header-extra">
 
             
-                <?php if ($_SESSION['user']['UserID'] == $manager['UserID']): ?>
+                <?php if (isset($_SESSION['user']) && $_SESSION['user']['UserID'] == $manager['UserID']): ?>
                     <!-- Form to show "ATTENDANTS" if the user is the event manager -->
                     <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
                         <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">

@@ -24,10 +24,7 @@ class EventController {
     }
 
     public function ShowEventDetails($EventID){
-        if(!isset($_SESSION['user'])){
-            header('Location: /createAcc');
-            exit();
-        }
+
         // Initialize the event model
         $eventModel = new Event();
         
@@ -38,16 +35,18 @@ class EventController {
         $categories = $categoryModel->getCategryById($event['CategoryID']);
         $userModel = new User();
         $moreEvents = $eventModel->get_5_UpcomingEvents();
+        $manager=$userModel->getUserById($event['EventManagerID']);
 
 
         foreach ($moreEvents as $key => $displayEvent){
             $moreEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($displayEvent['EventID']);
         }
         // Vérifier si un username est passé en paramètre
+        if(isset($_SESSION['user'])){
+            $IsInWaitlist = $eventModel->IsInWaitlist($EventID, $_SESSION['user']['UserID']);
+            $IsRegistered = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
+        }
 
-        $manager=$userModel->getUserById($event['EventManagerID']);
-        $IsInWaitlist = $eventModel->IsInWaitlist($EventID, $_SESSION['user']['UserID']);
-        $IsRegistered = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
 
         
         $isFull = $eventModel->IsEventFull($event);
@@ -66,7 +65,18 @@ class EventController {
 
         if ($endDate > $currentDate) {
             // Render the view with event details
-
+            if(!isset($_SESSION['user'])){
+                render('event/event-details', [
+                    'event' => $event,
+                    'attendanceCount' => $attendanceCount,
+                    'manager'=>$manager,
+                    'categories'=>$categories,
+                    'moreEvents'=>$moreEvents,
+                    'IsRegistered'=>false,
+                    'IsInWaitlist'=>false,
+                ]);
+                exit();
+            }
             render('event/event-details', [
                 'event' => $event,
                 'attendanceCount' => $attendanceCount,
@@ -82,7 +92,6 @@ class EventController {
 
             //Flag to check if the user has left a review
             // that is: was registered for the event and didn't leave a review yet
-            $canReview = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
 
 
             foreach ($reviews as &$review) {
@@ -91,10 +100,28 @@ class EventController {
                 $review['UserProfileImage'] = $reviewUser['ProfileImage'];
                 $review['UserFirstName'] = $reviewUser['FirstName'];
                 $review['UserLastName'] = $reviewUser['LastName'];
-                if ($reviewUser['UserID'] === $_SESSION['user']['UserID']) {
-                    $canReview = true;
+                if(isset($_SESSION['user'])){
+                    if ($review['UserID'] === $_SESSION['user']['UserID']) {
+                        $canReview = true;
+                    }
                 }
             }
+            if(!isset($_SESSION['user'])){
+                render('event/event-review',
+                [
+                    'event' => $event,
+                    'attendanceCount' => $attendanceCount,
+                    'manager'=>$manager,
+                    'categories'=>$categories,
+                    'reviews'=>$reviews,
+                    'moreEvents'=>$moreEvents,
+                    'canReview'=>false,
+                    'isRegistered'=>false,
+                    'isWaitlisted'=>false,
+                ]);
+                exit();
+            }
+            $canReview = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
             render('event/event-review',
             [
                 'event' => $event,
