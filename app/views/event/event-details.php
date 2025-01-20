@@ -13,8 +13,9 @@
             <span class="attendance-count"><?= $attendanceCount . '/' . $event['MaxParticipants']; ?></span>
           </div>
         <div class="event-header-extra">
+
   
-          <?php if ($_SESSION['user']['UserID'] == $manager['UserID']): ?>
+          <?php if ( isset($_SESSION['user']) &&  $_SESSION['user']['UserID'] == $manager['UserID'] ): ?>
             <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
               <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
               <button type="submit" class="btn-apply">SEE ATTENDANTS</button>
@@ -24,14 +25,14 @@
               <button type="submit" class="btn-apply">SEE WAITLIST</button>
             </form>
           <?php else: ?>
-            <?php if ($IsRegistered): ?>
+            <?php if ($IsRegistered && isset($_SESSION['user'])): ?>
               <form action="/event/unregister/<?php echo $event['EventID'] ?>" method="POST" class="follow-form"  onsubmit="return confirmUnregister()">
                 <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
                 <button type="submit" class="btn-attend"  >DELETE REGISTRATION</button>
               </form>
               
             <?php else: ?>
-              <?php if($attendanceCount < $event['MaxParticipants']): ?>
+              <?php if($attendanceCount < $event['MaxParticipants'] && isset($_SESSION['user'])): ?>
 
                 <form action="/event/register/<?php echo $event['EventID'] ?>" method="POST" class="apply-form"  onsubmit="return confirmRegister()">
                   <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
@@ -44,17 +45,19 @@
                 <button type="submit" class="btn-apply" >APPLY&nbspHere</button>
                 </form>
               <?php else: ?>
-                <?php if($IsInWaitlist): ?>
+                <?php if($IsInWaitlist && isset($_SESSION['user'])): ?>
                   <form action="/event/waitlist/<?php echo $event['EventID'] ?>" method="POST" class="apply-form"  onsubmit="return confirmRegister()">
                     <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">       
                     <button type="submit" class="btn-attend" >LEAVE WAITLIST</button>
                  </form> 
 
                 <?php else: ?>
-                  <form action="/event/waitlist/<?php echo $event['EventID'] ?>" method="POST" class="apply-form"  onsubmit="return confirmRegister()">
-                  <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">       
-                  <button type="submit" class="btn-attend" >JOIN WAITLIST</button>
-                </form>      
+                  <?php if(isset($_SESSION['user'])): ?>
+                    <form action="/event/waitlist/<?php echo $event['EventID'] ?>" method="POST" class="apply-form"  onsubmit="return confirmRegister()">
+                    <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">       
+                    <button type="submit" class="btn-attend" >JOIN WAITLIST</button>
+                  </form>      
+                  <?php endif; ?>
                 <?php endif; ?>
         
               <?php endif; ?>
@@ -83,7 +86,7 @@
     <form action="/event/edit/<?php echo $event['EventID'] ?>" class="form_remove" method="POST">
 
     <section class="event-text-details">
-      <?php if ($_SESSION['user']['UserID'] == $manager['UserID']): ?>
+      <?php if (isset($_SESSION['user']) && $_SESSION['user']['UserID'] == $manager['UserID']): ?>
         
             <div class="event-description">
               <h3>Time and Date</h3>
@@ -120,7 +123,7 @@
                         onclick="return confirm('Are you sure you want to delete this event?');">DELETE EVENT</button>
             </div>
 
-      <?php elseif (isset($_SESSION['user']['UserID'])): ?>
+      <?php else: ?>
         <div class="event-description">
           <h3>Time and Date</h3>
           <p><?= date('l, F j, Y, g:i A', strtotime($event['StartDate'])); ?></p>
