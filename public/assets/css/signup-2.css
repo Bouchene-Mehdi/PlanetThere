@@ -638,3 +638,41 @@ main {
 .image-sec {
 	justify-self: center;
 }
+
+@media (max-width: 1024px) {
+	input {
+		width: 90%;
+	}
+	.Join-us-section {
+		display: none;
+	}
+	.form-label {
+		width: 90%;
+	}
+	.nav-bar {
+		width: 100%;
+	}
+	.registration-section {
+		width: 100%;
+	}
+
+	.registration-form {
+		grid-template-columns: 45% 45%;
+	}
+	.Last-name-field,
+	.First-name-field,
+	.phone-field,
+	.dobField {
+		width: 100%;
+		justify-content: center; /* Centers horizontally */
+		align-items: center; /* Centers vertically */
+	}
+
+	.registration-form {
+		width: 100%;
+	}
+
+	.sign-up-button {
+		margin-top: 50px;
+	}
+}
