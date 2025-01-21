@@ -320,3 +320,68 @@ main {
 	color: #00a9b5;
 	font-weight: 600;
 }
+
+@media (max-width: 1024px) {
+	main {
+		flex-direction: column;
+	}
+	body {
+		height: 100%;
+		overflow-x: hidden;
+	}
+	input {
+		width: 90%;
+	}
+	.registration-section {
+		width: 100%;
+	}
+	.nav-menu {
+		display: none;
+	}
+	.Welcome-back-section {
+		display: none;
+		order: initial;
+		width: 0; /* Prevents it from reserving width */
+		height: 0; /* Ensures no height is allocated */
+		overflow: hidden; /* Hides any content or pseudo-elements */
+	}
+
+	.Welcome-back-section::before {
+		display: none;
+		content: none;
+	}
+
+	.form-label {
+		width: 90%;
+	}
+
+	.nav-bar {
+		width: 100%;
+	}
+	.registration-section {
+		width: 100%;
+		order: 1;
+		padding-right: 25px;
+		padding-left: 25px;
+	}
+
+	.registration-form {
+		grid-template-columns: 45% 45%;
+	}
+	.Email-field,
+	.Username-field,
+	.Password-field,
+	.Confirm-password-field {
+		width: 100%;
+		justify-content: center; /* Centers horizontally */
+		align-items: center; /* Centers vertically */
+	}
+
+	.registration-form {
+		width: 100%;
+	}
+
+	.sign-up-button {
+		margin-top: 50px;
+	}
+}
