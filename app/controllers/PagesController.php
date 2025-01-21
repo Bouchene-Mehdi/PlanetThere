@@ -13,6 +13,7 @@ class PagesController
         $categoryModel = new Category();
         $categories = $categoryModel->getAllCategories();
         $followersEvents = [];
+        $registeredEvents = [];
         $eventModel = new Event();
         $upcomaingEvents = $eventModel->get_5_UpcomingEvents();
         $popularEvents = $eventModel->get_5_PopularEvents();
@@ -32,6 +33,7 @@ class PagesController
             foreach ($followersEvents as $key => $event) {
                 $followersEvents[$key]['AttendeesCount'] = $eventModel->getAttendanceCount($event['EventID']);
             }
+            $registeredEvents = $eventModel -> getUpcomingEventsForUser($_SESSION['user']['UserID']);
         }
 
 
@@ -41,7 +43,8 @@ class PagesController
             'popularEvents' => $popularEvents,
             'stayfitEvents' => $stayfitEvents,
             'categories' => $categories,
-            'followersEvents' => $followersEvents
+            'followersEvents' => $followersEvents,
+            'registeredEvents' => $registeredEvents
 
         ]);
     }

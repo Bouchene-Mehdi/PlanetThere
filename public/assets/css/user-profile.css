@@ -15,33 +15,18 @@
 	flex-direction: row;
 	align-items: start;
 	gap: 40px; /* Ensure spacing between the profile content and actions */
-	margin-left: 70px;
+	margin-left: 20px;
 	margin-top: 20px;
 	margin-bottom: 20px;
-}
-
-@media (max-width: 1024px) {
-	.combined-header {
-		flex-direction: column;
-		align-items: center;
-		margin-left: 0;
-	}
-	
 }
 
 /* Profile Section */
 .profile-section {
 	width: 90%;
-	padding-left: 20px;
+	justify-self: start;
+	align-self: start;
+	/*padding-left: 20px;*/
 	padding-top: 20px;
-}
-
-@media (max-width: 1024px) {
-	.profile-section {
-		width: 100%;
-		padding-left: 0;
-	}
-	
 }
 
 /* Profile Header */
@@ -64,22 +49,12 @@
 	object-fit: cover;
 }
 
-@media (max-width: 1024px) {
-	.profile-header img {
-		width: 100px;
-		height: 100px;
-	}
-	.spacer {
-		display: none;
-	}
-}
-
 /* Profile Text (Name, Email, Phone) */
 .profile-text {
 	display: flex;
 	align-self: flex-end;
 	flex-direction: column;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 	gap: 8px;
 }
 
@@ -87,7 +62,6 @@
 .dob {
 	color: #009688;
 	margin: 0;
-	/* padding-left: 10px; */
 }
 
 .profile-header h1 {
@@ -112,21 +86,6 @@
 	margin-bottom: 0;
 }
 
-@media (max-width: 1024px) {
-	.profile-header h1 {
-		font-size: 1.5em;
-	}
-	.profile-header .name {
-		font-size: 1.2em;
-	}
-	.profile-header .email,
-	.profile-header .phone-number {
-		font-size: 1em;
-	}
-	.dob {
-		font-size: 1em;
-	}
-}
 
 /* Profile Actions (Follow, Block buttons) */
 .profile-actions {
@@ -135,19 +94,12 @@
 	gap: 15px; /* Provide space between buttons */
 }
 
-@media (max-width: 1024px) {
-	.profile-actions {
-		flex-direction: row;
-		justify-content: space-between;
-		margin-left: 15px;
-	}
-}
-
 .follow-btn,
 .block-btn {
 	margin-top: 20px;
 	margin-right: 30px;
-	padding: 15px 50px;
+	padding: 15px;
+	width: 20vw;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
@@ -155,13 +107,6 @@
 	color: #fff;
 }
 
-@media (max-width: 1024px) {
-	.follow-btn,
-	.block-btn {
-		margin-right: 0;
-		margin-top: 0;
-	}
-}
 .follow-btn {
 	background-color: #009688;
 	transition: background-color 0.3s ease-in-out;
@@ -177,6 +122,95 @@
 
 .block-btn:hover {
 	background-color: #d32f2f;
+}
+
+/* Styles for screens smaller than 900px */
+@media (max-width: 900px) {
+
+	.profile-text {
+		gap: 4px;
+	}
+	.profile-header img{
+		width: 150px;
+		height: 150px;
+	}
+
+	.profile-header h1 {
+		font-size: 1.7em;
+	}
+
+	.profile-header .name {
+		font-size: 1.5em;
+		color: #333;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.profile-header .email,
+	.profile-header .phone-number {
+		font-size: 1.3em;
+		color: #777;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.block-btn, .follow-btn {
+		margin-right: 10px;
+	}
+}
+
+
+@media (max-width: 700px){
+	.profile-header {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.combined-header {
+		margin: 20px 0;
+		width: 100%;
+	}
+
+	.profile-actions {
+		align-self: end;
+		flex-direction: row;
+	}
+
+	.block-btn, .follow-btn {
+		margin: 0;
+		width: 30vw;
+	}
+}
+
+@media (max-width: 550px){
+	.profile-header {
+		width: 100%;
+	}
+
+	.profile-text {
+		gap: 2px;
+	}
+	.profile-header img{
+		width: 100px;
+		height: 100px;
+	}
+
+	.profile-header h1 {
+		font-size: 1.3em;
+	}
+
+	.profile-header .name {
+		font-size: 1.1em;
+		color: #333;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.profile-header .email,
+	.profile-header .phone-number {
+		font-size: 0.9em;
+	}
+
 }
 
 /*Events Section*/

@@ -501,5 +501,25 @@ class Event {
         return $stmt->execute();
     }
 
+    //Event.php
+    public function getUpcomingEventsForUser($user_id) {
+        $db = Database::getInstance()->getConnection(); // Get the database connection
+
+        // SQL query to get events that the user has registered for and that are starting in the next two days
+        $query = 'SELECT e.EventName, e.StartDate 
+              FROM events e
+              INNER JOIN registrations r ON e.EventID = r.EventID
+              WHERE (r.UserID = :user_id OR e.EventManagerID = :user_id)
+              AND e.StartDate BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 2 DAY)
+              ORDER BY e.StartDate ASC';
+
+        // Prepare the statement
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+        // Execute and fetch the results
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
