@@ -6,7 +6,7 @@
         <!-- Combined Header -->
         <header class="combined-header">
             <div class="profile-header">
-                <!-- Profil e Picture -->
+                <!-- Profile Picture -->
                 <img src="../<?php echo $_SESSION['user_profile']['ProfileImage']; ?>" 
                      alt="Profile Picture" 
                      class="profile-picture">
