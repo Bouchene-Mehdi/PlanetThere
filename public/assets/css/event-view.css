@@ -426,8 +426,15 @@ p {
 	transition: color 0.3s ease-in-out;
 }
 
-.star-rating i:hover,
-.star-rating i.active {
+.star-rating i.fa-solid {
+	color: #ffcc00; /* Highlighted star color for selected stars */
+}
+
+.star-rating i.fa-regular {
+	color: #dcdcdc; /* Default gray color for unselected stars */
+}
+
+.star-rating i:hover {
 	color: #ffcc00; /* Highlighted star color */
 }
 .feedback-form {

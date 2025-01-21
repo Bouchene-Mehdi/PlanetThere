@@ -11,11 +11,11 @@ class EventController {
         }
         render('event/create-event-1');
     }
-    public function ShowEventCreate2(){ 
+    public function ShowEventCreate2(){
         if(!isset($_SESSION['user'])){
             header('Location: /createAcc');
             exit();
-        }      
+        }
         $categoryModel = new Category();
         $categories = $categoryModel->getAllCategories();
 
@@ -92,6 +92,7 @@ class EventController {
 
             //Flag to check if the user has left a review
             // that is: was registered for the event and didn't leave a review yet
+            $canReview = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
 
 
             foreach ($reviews as &$review) {
@@ -102,7 +103,7 @@ class EventController {
                 $review['UserLastName'] = $reviewUser['LastName'];
                 if(isset($_SESSION['user'])){
                     if ($review['UserID'] === $_SESSION['user']['UserID']) {
-                        $canReview = true;
+                        $canReview = false;
                     }
                 }
             }
@@ -135,6 +136,9 @@ class EventController {
                 'isWaitlisted'=>$IsInWaitlist,
             ]);
         }
+
+
+
     }
     public function IsEventFull($EventID){
         // Initialize the event model
@@ -272,7 +276,6 @@ class EventController {
             }
         }
     }
-    
 
     public function submitEventReview() {
         // Check if the user is logged in
@@ -322,15 +325,15 @@ class EventController {
         // Initialize the event model
         if (isset($_POST['quantity']) && is_numeric($_POST['quantity']) && $_POST['quantity'] > 0) {
             $quantity = (int)$_POST['quantity'];  // Get the number of tickets from POST
-            
+
             // Initialize the event model
             $eventModel = new Event();
-            
+
             // Register the user for the event with the specified quantity
             $eventModel->registerForEvent($EventID, $_SESSION['user']['UserID'], $quantity);
         
             // Register the user for the event
-            
+
             // Redirect back to the event details page
             header('Location: /event/' . $EventID);
         }
@@ -338,7 +341,7 @@ class EventController {
     }
 
 
-    
+
     public function UnregisterForEvent($EventID){
         // Initialize the event model
         $eventModel = new Event();
@@ -350,14 +353,14 @@ class EventController {
         }
         //q :i want to get the earliest waitlist user and register him?
 
-        
+
         // Get the earliest user from the waitlist
 
 
         // Redirect back to the event details page
         header('Location: /event/' . $EventID);
         exit();
-    }   
+    }
     public function WaitlistForEvent($EventID){
         // Initialize the event model
         $eventModel = new Event();
@@ -421,10 +424,10 @@ class EventController {
     public function UnwaitlistForEvent($EventID){
         // Initialize the event model
         $eventModel = new Event();
-        
+
         // Remove the user from the waitlist for the event
         $eventModel->removeFromWaitlist($EventID, $_SESSION['user']['UserID']);
-        
+
         // Redirect back to the event details page
         header('Location: /event/' . $EventID);
         exit();
@@ -451,10 +454,10 @@ class EventController {
     public function ShowEventWaitlist($EventID){
         // Initialize the event model
         $eventModel = new Event();
-        
+
         // Fetch the event details by ID
         $event = $eventModel->getEventById($EventID);
-        
+
         // Fetch the attendees for the event
         $waitlisters = $eventModel->getWaitlistAccounts($EventID);
         //q:i want to add how many registrations for each attendee with $attendees
@@ -483,38 +486,37 @@ class EventController {
             header('Location: /event-attendees/' . $_POST['event_id']);
             exit();
         }
-
     }
     public function RemoveWaitlister(){
         // Check if the form is submitted
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            
+
             // Initialize the event model
             $eventModel = new Event();
-            
+
             // Remove the waitlister from the event
             $eventModel->removeFromWaitlist($_POST['event_id'], $_POST['user_id']);
-            
+
             // Redirect back to the event waitlist page
             header('Location: /event-waitlist/' . $_POST['event_id']);
             exit();
         }
     }
-    
+
 
     
-        
+
     function uploadFile($file) {
             $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
             $maxFileSize = 5 * 1024 * 1024; // 5 MB
-        
+
             // Check if the file is valid
             if ($file['error'] === UPLOAD_ERR_OK) {
                 $fileType = $file['type'];
                 $fileSize = $file['size'];
-        
+
                 if (!in_array($fileType, $allowedTypes)) {
                     echo 'Invalid file type.';
                     return null;
@@ -523,20 +525,20 @@ class EventController {
                     echo 'File size exceeds the limit.';
                     return null;
                 }
-        
+
                 // Generate unique file name and move the uploaded file
                 $fileName = uniqid('event_', true) . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
                 $uploadDir = 'uploads/images/';
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
-        
+
                 $filePath = $uploadDir . $fileName;
                 move_uploaded_file($file['tmp_name'], $filePath);
-        
+
                 return $filePath;
             }
-        
+
             return null;
         }
     public function ShowEventSearch() {
@@ -551,12 +553,13 @@ class EventController {
         if (!isset($_SESSION['show-full-events'])) {
             $_SESSION['show-full-events'] = false;
         }
-    
+
         $fromDate = isset($_SESSION['from-date']) ? $_SESSION['from-date'] : '';
         $toDate = isset($_SESSION['to-date']) ? $_SESSION['to-date'] : '';
         $selectedCategory = isset($_SESSION['event-category']) ? $_SESSION['event-category'] : '';
         $showFullEvents = isset($_SESSION['show-full-events']) ? $_SESSION['show-full-events'] : false;
-        
+
+        // Initialize the model
         $eventModel = new Event();
         
         // passing to the model
@@ -581,7 +584,7 @@ class EventController {
             'location' => $_SESSION['searchQuery_location'],
             'showFullEvents' => $showFullEvents
         ]);
-    } 
+    }
 
     public function postEventSearch() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -592,11 +595,12 @@ class EventController {
             $location = $_POST['location'] ?? '';
             $_SESSION['searchQuery_event'] = trim($searchQuery);
             $_SESSION['searchQuery_location'] = trim($location);
-            
+
             $fromDate = $_POST['from-date'] ?? '';
             $toDate = $_POST['to-date'] ?? '';
             $selectedCategory = $_POST['event-category'] ?? '';
             $showFullEvents = $_POST['show-full-events'];
+
 
             $_SESSION['from-date'] = $fromDate;
             $_SESSION['to-date'] = $toDate;
@@ -609,6 +613,5 @@ class EventController {
         }
     }
 }
-
 
 ?>

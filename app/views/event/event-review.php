@@ -4,7 +4,9 @@
         <div class="event-name"><?= htmlspecialchars($event['EventName']); ?></div>
         <div class="event-author-header">
             <div class="event-author">
+            <a href="/profile/<?php echo urlencode($manager['Username']); ?>">
                 <img src="../<?php echo $manager['ProfileImage']?> " alt="Organizer" class="author-photo" />
+            </a>
                 <h2 class="author-by">BY <span class="author-name"><?= htmlspecialchars($manager['FirstName']) . ' '.htmlspecialchars($manager['LastName']) ;  ?></span></h2>
             </div>
             <div class="event-header-attendance">
@@ -13,7 +15,7 @@
                 </div>
             <div class="event-header-extra">
 
-            
+
                 <?php if (isset($_SESSION['user']) && $_SESSION['user']['UserID'] == $manager['UserID']): ?>
                     <!-- Form to show "ATTENDANTS" if the user is the event manager -->
                     <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
@@ -97,8 +99,9 @@
                 <div class="comment-header">
                     <div class="comment-content">
                         <!-- User Avatar -->
-                        <img src="<?= htmlspecialchars($review['UserProfileImage']); ?>" alt="User Avatar" class="user-avatar">
-
+                        <a href="/profile/<?php echo urlencode($review['Username']); ?>">
+                            <img src="<?= htmlspecialchars($review['UserProfileImage']); ?>" alt="User Avatar" class="user-avatar">
+                        </a>
                         <div class="user-info">
                             <!-- User Name -->
                             <h3><?= htmlspecialchars($review['UserFirstName'] . ' ' . $review['UserLastName']); ?></h3>
@@ -153,17 +156,39 @@
 </div>
 
 <script>
-    const stars = document.querySelectorAll('.star-rating .fa');
-    const ratingInput = document.getElementById('rating');
+    const stars = document.querySelectorAll('.star-rating i');
+    let ratingInput = document.getElementById('rating');
 
     stars.forEach((star, index) => {
         star.addEventListener('click', () => {
-            ratingInput.value = index + 1; // Set the hidden input value for rating
+            // Set the hidden input value for rating
+            ratingInput.value = index + 1;
+
+            // Update the stars' classes to reflect the selected rating
             stars.forEach((s, i) => {
-                s.classList.toggle('fa-star', i <= index); // Filled star
-                s.classList.toggle('fa-star-o', i > index); // Empty star
+                s.classList.toggle('fa-solid', i <= index); // Filled star
+                s.classList.toggle('fa-regular', i > index); // Empty star
             });
         });
+    });
+</script>
+
+<script>
+    document.getElementById('feedbackForm').addEventListener('submit', function (event) {
+        const rating = document.getElementById('rating').value; // Get the rating value
+        const feedback = document.getElementById('feedback').value.trim(); // Get and trim the feedback text
+
+        if (rating === "0") {
+            alert('Please select a rating before submitting your review.');
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
+        if (feedback === "") {
+            alert('Please write a comment before submitting your review.');
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
     });
 </script>
 

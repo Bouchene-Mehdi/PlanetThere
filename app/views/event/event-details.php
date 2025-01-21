@@ -1,11 +1,12 @@
-  
   <div class="main-content">
     <!-- Title and Author Section -->
     <section class="event-header">
       <div class="event-name"><?= htmlspecialchars($event['EventName']); ?></div>
       <div class="event-author-header">
         <div class="event-author" id="author">
-          <img src="../<?php echo $manager['ProfileImage']?> " alt="Organizer" class="author-photo" />
+        <a href="/profile/<?php echo urlencode($manager['Username']); ?>">
+            <img src="../<?php echo $manager['ProfileImage']?> " alt="Organizer" class="author-photo" />
+        </a>
           <h2 class="author-by">BY <span class="author-name"><?= htmlspecialchars($manager['FirstName']) . ' '.htmlspecialchars($manager['LastName']); ?></span></h2>
         </div>
         <div class="event-header-attendance">
@@ -14,7 +15,7 @@
           </div>
         <div class="event-header-extra">
 
-  
+
           <?php if ( isset($_SESSION['user']) &&  $_SESSION['user']['UserID'] == $manager['UserID'] ): ?>
             <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
               <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
@@ -30,7 +31,7 @@
                 <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
                 <button type="submit" class="btn-attend"  >DELETE REGISTRATION</button>
               </form>
-              
+
             <?php else: ?>
               <?php if($attendanceCount < $event['MaxParticipants'] && isset($_SESSION['user'])): ?>
 
@@ -41,25 +42,25 @@
                     <button type="button" class="quantity-btn" id="decrease-btn">-</button>
                     <input type="number" id="ticket-quantity" name="quantity" value="1" min="1" max="<?= $event['MaxParticipants']-$attendanceCount?>" readonly>
                     <button type="button" class="quantity-btn" id="increase-btn">+</button>
-                  </div>                
+                  </div>
                 <button type="submit" class="btn-apply" >APPLY&nbspHere</button>
                 </form>
               <?php else: ?>
                 <?php if($IsInWaitlist && isset($_SESSION['user'])): ?>
                   <form action="/event/waitlist/<?php echo $event['EventID'] ?>" method="POST" class="apply-form"  onsubmit="return confirmRegister()">
-                    <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">       
+                    <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
                     <button type="submit" class="btn-attend" >LEAVE WAITLIST</button>
-                 </form> 
+                 </form>
 
                 <?php else: ?>
                   <?php if(isset($_SESSION['user'])): ?>
                     <form action="/event/waitlist/<?php echo $event['EventID'] ?>" method="POST" class="apply-form"  onsubmit="return confirmRegister()">
-                    <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">       
+                    <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
                     <button type="submit" class="btn-attend" >JOIN WAITLIST</button>
-                  </form>      
+                  </form>
                   <?php endif; ?>
                 <?php endif; ?>
-        
+
               <?php endif; ?>
             <?php endif; ?>
           <?php endif; ?>
@@ -73,8 +74,8 @@
         <button class="carousel-control prev" id="prev-btn">&#9664;</button>
         <div class="carousel-image-container">
           <?php if (!empty($event['image1']) && !empty($event['image2'])): ?>
-            <img id="carousel-image" class="carousel-image" 
-                src="<?= htmlspecialchars($event['image1']); ?>" 
+            <img id="carousel-image" class="carousel-image"
+                src="<?= htmlspecialchars($event['image1']); ?>"
                 alt="Event Image 1" />
           <?php endif; ?>
         </div>
@@ -86,8 +87,9 @@
     <form action="/event/edit/<?php echo $event['EventID'] ?>" class="form_remove" method="POST">
 
     <section class="event-text-details">
+
       <?php if (isset($_SESSION['user']) && $_SESSION['user']['UserID'] == $manager['UserID']): ?>
-        
+
             <div class="event-description">
               <h3>Time and Date</h3>
               <p><?= date('l, F j, Y, g:i A', strtotime($event['StartDate'])); ?></p>

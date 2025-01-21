@@ -99,7 +99,7 @@ class Event {
             $stmt->bindParam(':image2', $image2);
             $stmt->bindParam(':eventManagerID', $eventManagerID);
             $stmt->bindValue(':isActive', 0);
-    
+
             // Execute the statement
             if ($stmt->execute()) {
                 $createdEvents++; // Increment the event counter if successful
@@ -159,7 +159,7 @@ class Event {
                   FROM events e 
                   INNER JOIN categories c ON e.CategoryID = c.CategoryID
                   WHERE e.EventName LIKE :searchQuery AND e.IsActive = 1';
-        
+
         if ($selectedCategory == 'All Categories') {
             $selectedCategory = '';
         }
@@ -177,12 +177,12 @@ class Event {
         if (!empty($location)) {
             $query .= ' AND e.LocationAddress LIKE :location';
         }
-    
+
         $stmt = $this->db->prepare($query);
     
         // Always bind search query
         $stmt->bindValue(':searchQuery', '%' . $searchQuery . '%');
-    
+
         // Bind other parameters if they are set
         if (!empty($location)) {
             $stmt->bindValue(':location', '%' . $location . '%');
@@ -196,7 +196,7 @@ class Event {
         if (!empty($selectedCategory)) {
             $stmt->bindValue(':category', $selectedCategory);
         }
-    
+
         $stmt->execute();
         if ($showFullEvents == false){
             $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -238,7 +238,7 @@ class Event {
         return $stmt->execute();
     }
 
-    
+
     public function getRegisteredEvents($userID) {
         $query = 'SELECT * FROM events WHERE EventID IN (SELECT EventID FROM registrations WHERE UserID = :userID)';
         $stmt = $this->db->prepare($query);
@@ -302,38 +302,36 @@ class Event {
         return $stmt->execute();
 
     }
-
     public function IsEventFull($eventID) {
         // Get the attendance count
         $attendanceCount = $this->getAttendanceCount($eventID);
-    
+
         // Query to get the maximum participants for the event
         $query = 'SELECT MaxParticipants FROM events WHERE EventID = :eventID';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
         $stmt->execute();
         $maxParticipants = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         // Ensure $maxParticipants is valid and contains the expected key
         if ($maxParticipants && isset($maxParticipants['MaxParticipants'])) {
             return $attendanceCount >= $maxParticipants['MaxParticipants'];
         }
-    
+
         // If event doesn't exist or is invalid, return false
         return false;
     }
-    
     public function getAttendanceCount($eventID) {
         $query = 'SELECT SUM(Quantity) as count FROM registrations WHERE EventID = :eventID';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         // Ensure $result is valid and contains the count
         return ($result && isset($result['count'])) ? (int)$result['count'] : 0;
     }
-    
+
     public function getAttendeesAccounts($eventID) {
         $query = 'SELECT * FROM users WHERE UserID IN (SELECT UserID FROM registrations WHERE EventID = :eventID)';
         $stmt = $this->db->prepare($query);
@@ -349,7 +347,7 @@ class Event {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getAttendanceCountUser($eventID,$userID){
-        //q:look for the quantity registration of user with that id 
+        //q:look for the quantity registration of user with that id
         $query = 'SELECT Quantity FROM registrations WHERE EventID = :eventID AND UserID = :userID';
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
@@ -364,7 +362,7 @@ class Event {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public function get_5_FollowersEvents() {
         $query = 'SELECT e.* 
                   FROM events e
@@ -379,21 +377,21 @@ class Event {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public function get_5_PopularEvents() {
         $query = 'SELECT * FROM events WHERE StartDate > NOW() AND IsActive = 1 ORDER BY (SELECT COUNT(*) FROM registrations WHERE EventID = events.EventID) DESC LIMIT 5';
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
     public function get_5_StayFitEvents() {
         $query = 'SELECT * FROM events WHERE IsActive = 1 AND CategoryID = 2 AND StartDate > NOW() ORDER BY StartDate ASC LIMIT 5';
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
 
     public function getEventReviews($eventID){
         $query = 'SELECT * FROM reviews WHERE EventID = :eventID';
@@ -437,24 +435,24 @@ class Event {
                       LocationAddress = :locationAddress, 
                       Description = :description 
                   WHERE EventID = :eventID";
-    
+
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':locationName', $locationName);
         $stmt->bindParam(':locationAddress', $locationAddress);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
-    
+
         // Execute the statement and return a boolean based on success or failure
         return $stmt->execute() ? true : false;
     }
-    
+
 
     /**
      * Delete Event: Remove the event by ID
      */
     public function deleteEvent($eventID) {
         $query = "DELETE FROM events WHERE EventID = :eventID";
-        
+
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':eventID', $eventID, PDO::PARAM_INT);
 
