@@ -3,6 +3,7 @@
 .main-content {
 	width: 100%;
 	background-color: #f5f7fa;
+	padding-bottom: 50px;
 }
 
 /* Event Header */
@@ -32,10 +33,11 @@
 }
 
 .event-author-header {
-	display: flex;
+	display: grid;
 	width: 90%;
-	padding-right: 50px;
-	height: 100px;
+	padding: 10px 50px;
+	height: auto;
+	grid-auto-flow: column;
 	justify-content: space-between;
 	justify-self: center;
 	align-items: center;
@@ -50,7 +52,7 @@
 	display: flex;
 	align-items: center;
 	height: inherit;
-	margin-left: 40px;
+	/*margin-left: 40px;*/
 }
 
 .author-photo {
@@ -87,10 +89,12 @@
 
 .event-header-extra {
 	display: flex;
-
 	flex-direction: row;
 	/*flex-wrap: wrap;*/
 	justify-content: space-evenly;
+	align-self: center;
+	justify-self: center;
+	width: inherit;
 }
 
 .event-header-attendance {
@@ -99,6 +103,7 @@
 	align-items: center;
 	color: #7f7f7f;
 	font-size: 0.9em;
+	margin: 40px;
 }
 
 .follow-form {
@@ -183,42 +188,33 @@
 	font-size: 16px;
 }
 
-/* Media query for smaller screens */
-@media (max-width: 933px) {
+@media (max-width: 1024px) {
 	.event-author-header {
-		flex-direction: column; /* Stack elements vertically */
-		height: auto; /* Adjust height to fit content */
-	}
-
-	.event-author,
-	.event-header-extra {
-		width: 100%; /* Make both columns take full width on small screens */
-		margin-bottom: 10px; /* Space between the two rows */
-	}
-
-	.event-author {
-		justify-content: space-evenly; /* Center the author info */
-		margin: 10px 0;
-	}
-
-	.author-photo {
-		height: 35%;
-	}
-
-	.event-header-extra {
-		width: 100%;
-		justify-content: space-evenly;
+		grid-auto-flow: row;
+		justify-content: center;
+		padding: 10px 20px;
 	}
 
 	.event-header-attendance {
-		justify-content: center; /* Center the attendance info */
+		justify-self: center;
 	}
 
-	.btn-attend {
-		width: auto; /* Adjust button width to fit content */
-		margin-bottom: 10px;
+	.btn-apply, .btn-attend{
 		margin-right: 0;
-		margin-left: 0;
+		padding: 15px 20px;
+		width: 40%;
+		font-size: 0.8em;
+		align-content: center;
+	}
+
+	.event-name {
+		font-size: 3.5em;
+	}
+
+
+	.btn-action {
+		width: 30vw;
+		padding: 15px;
 	}
 }
 
@@ -393,6 +389,48 @@ p {
 	color: #333333;
 }
 
+.event-actions {
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: space-between;
+	gap: 10px;
+	justify-self: center;
+	align-self: center;
+}
+
+.btn-action {
+	padding: 15px 25px;
+	background-color: #009688;
+	width: 20vw;
+	color: #ffffff;
+	border: none;
+	border-radius: 20px;
+	font-size: 1em;
+	font-weight: bold;
+	text-transform: uppercase
+}
+
+@media (max-width: 500px){
+	.apply-form {
+		flex-direction: column;
+	}
+
+	.event-actions {
+		grid-auto-flow: row;
+	}
+
+	.btn-action {
+		width: 40vw;
+		padding: 20px;
+	}
+
+	.event-name {
+		font-size: 2.7em;
+	}
+
+
+}
+
 /*Review Section*/
 
 /* Feedback Section */
@@ -443,6 +481,7 @@ p {
 	align-items: center;
 	justify-content: center;
 }
+
 .feedback-input {
 	padding: 20px;
 
@@ -633,6 +672,7 @@ p {
 	.events-grid {
 		grid-template-columns: 1fr; /* 1 column on very small screens */
 	}
+
 }
 
 /* Event Card */
