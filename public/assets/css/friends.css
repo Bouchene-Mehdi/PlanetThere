@@ -16,12 +16,12 @@
 .following-header h1 {
 	font-size: 2.4rem;
 	font-weight: bold;
-	color: #333;
+	color: var(--text-color);
 }
 
 .following-header p {
 	font-size: 1rem;
-	color: #666;
+	color: var(--gray-text-color);
 	margin-bottom: 20px;
 }
 
@@ -31,7 +31,7 @@
 	gap: 15px;
 	font-size: 1rem;
 	font-weight: bold;
-	color: #009688;
+	color: var(--primary-color);
 }
 
 .friends-list {
@@ -56,7 +56,7 @@
 }
 
 .tab.active {
-	background-color: #009688;
+	background-color: var(--primary-color);
 	color: #fff;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .profile-card {
-	background: white;
+	background: var(--foreground-color);
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	padding: 20px;
@@ -111,7 +111,7 @@
 }
 
 .follow-btn {
-	background-color: #009688;
+	background-color: var(--primary-color);
 	color: white;
 	border: none;
 	padding: 8px 15px;

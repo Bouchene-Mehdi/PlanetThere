@@ -37,7 +37,7 @@
 }
 
 .LogoTextP1 {
-	color: black;
+	color: var(--foreground-color);
 }
 
 .LogoTextP2 {
@@ -71,7 +71,7 @@ ul {
 .nav-link {
 	font-family: 'Product Sans', sans-serif;
 	size: 14px;
-	color: black;
+	color: var(--foreground-color);
 	text-decoration: none;
 }
 
@@ -186,7 +186,7 @@ input {
 }
 
 .legend-subtext {
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 	font-family: 'Product Sans', sans-serif;
 	text-align: center;
 	font-size: 20px;

@@ -1,3 +1,4 @@
+<body>
 <div class="main-content">
     <!-- Title and Author Section -->
     <section class="event-header">
@@ -154,6 +155,19 @@
         </div>
     </section>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        // If the theme is dark, apply the dark mode class to body
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    });
+</script>
+</body>
 
 <script>
     const stars = document.querySelectorAll('.star-rating i');

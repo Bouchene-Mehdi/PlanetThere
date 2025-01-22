@@ -1,4 +1,5 @@
-
+<body>
+<script src="../../scripts/theme.js"></script>
     <div class="settings-page">
         <!-- Header -->
         <header class="settings-header">
@@ -57,5 +58,44 @@
 
         
     </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        // If the theme is dark, apply the dark mode class to body
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    });
+</script>
+</body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+            // Check the current theme in localStorage or use default (light mode)
+            const currentTheme = localStorage.getItem('theme') || 'light';
+
+            // If the theme is dark, set the toggle to checked and apply dark mode
+            if (currentTheme === 'dark') {
+                darkModeToggle.checked = true;
+                document.body.classList.add('dark-mode');
+            }
+
+            // Handle the change event when the user toggles the dark mode switch
+            darkModeToggle.addEventListener('change', (event) => {
+                if (event.target.checked) {
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark'); // Save the user's preference
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light'); // Save the user's preference
+                }
+            });
+        });
+    </script>
 
 

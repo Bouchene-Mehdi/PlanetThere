@@ -61,7 +61,7 @@ body {
 
 .signup-btn {
 	border-radius: 12px;
-	background: #009688;
+	background: var(--primary-color);
 	gap: 10px;
 	color: #f5f5f5;
 	white-space: nowrap;

@@ -39,13 +39,13 @@
 
 .profile-header h1 {
 	font-size: 1.3em;
-	color: #333;
+	color: var(--text-color);
 	margin: 0;
 }
 
 .profile-header .email {
 	font-size: 1em;
-	color: #777;
+	color: var(--gray-text-color);
 	margin-top: 5px;
 }
 
@@ -57,7 +57,7 @@
 
 .page-header h1 {
 	font-size: 1.4em;
-	color: #333;
+	color: var(--text-color);
 	margin: 0;
 }
 
@@ -85,17 +85,6 @@
 	margin-right: 8px;
 }
 
-/* .page-header h1 {
-    font-size: 1.4em;
-    color: #333;
-    margin: 0;
-}
-
-.page-header .page-subheader {
-    font-size: 1em;
-    color: #777;
-    margin-top: 5px;
-} */
 
 /* Profile Form */
 .profile-form {
@@ -115,7 +104,7 @@
 
 label {
 	font-size: 0.9em;
-	color: #333;
+	color: var(--text-color);
 	margin-bottom: 5px; /* Space between label and input */
 }
 
@@ -126,7 +115,7 @@ label {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	overflow: hidden;
-	background: #fff;
+	background: var(--form-color);
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -163,7 +152,7 @@ select {
 	align-self: center;
 	padding: 12px 24px;
 	margin: 10px 44% 30px 44%;
-	background-color: #009688;
+	background-color: var(--primary-color);
 	color: #fff;
 	border: none;
 	border-radius: 5px;

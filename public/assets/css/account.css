@@ -1,6 +1,6 @@
 
 .account-center {
-    background: #f5f7fa;
+    background: var(--background-color);
     padding: 20px;
     align-self: center;
 }
@@ -13,7 +13,7 @@
 
 .account-header h1 {
     font-size: 1.4em;
-    color: #333;
+    color: var(--text-color);
     margin-bottom: -14px;
 }
 
@@ -45,12 +45,12 @@
 .text h2 {
     font-size: 1.2em;
     margin: 0;
-    color: #333;
+    color: var(--text-color);
 }
 
 .text p {
     font-size: 0.9em;
-    color: #666;
+    color: var(--gray-text-color);
     margin: 5px 0 0;
 }
 

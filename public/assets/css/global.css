@@ -1,28 +1,53 @@
 /* global.css */
 
-@font-face {
-	font-family: 'Product Sans';
-	src: url('../../assets/fonts/Product\ Sans\ Regular.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
+:root {
+	--background-color: #f5f5f5;
+	--foreground-color: #ffffff;
+	--text-color: #333333;
+	--gray-text-color: #7F7F7F;
+	--primary-color: #009688;
+	--form-color: #fffffff;
+	--footer-background-color: #333333;
+	--navbar-text-color: black;
+	--navbar-background-color: #ffffff;
 }
+
+/* Dark Mode */
+.dark-mode {
+	--background-color: #333333;
+	--foreground-color: #1E1E1E;
+	--gray-text-color: #7F7F7F;
+	--text-color: #E0E0E0;
+	--primary-color: #009688;
+	--form-color: #7F7F7F;
+	--navbar-text-color: #E0E0E0;
+	--footer-background-color: #1E1E1E;
+}
+
+
 
 a {
 	text-decoration: none;
-	color: #000;
+	color: var(--text-color);
 }
 
 body {
 	margin: 0;
 	font-family: 'Product Sans', sans-serif;
 	font-size: 1em;
-	color: #000;
+	color: var(--text-color);
 }
 
 .error-message {
 	color: red;
 	font-size: 0.9em;
 	margin-top: 5px;
+}
+@font-face {
+	font-family: 'Product Sans';
+	src: url('../../assets/fonts/Product Sans Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
@@ -38,3 +63,4 @@ body {
 	font-weight: normal;
 	font-style: normal;
 }
+

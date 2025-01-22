@@ -1,6 +1,6 @@
 .attendees-page {
 	text-align: center;
-	background: #f5f7fa;
+	background: var(--background-color);
 	min-height: 75vh;
 	padding: 20px;
 }
@@ -12,7 +12,7 @@
 .attendees-header h1 {
 	font-size: 2.4rem;
 	font-weight: bold;
-	color: #333;
+	color: var(--text-color);
 }
 
 .attendees-list {
@@ -25,7 +25,7 @@
 }
 
 .profile-card {
-	background: white;
+	background: var(--foreground-color);
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	padding: 20px;

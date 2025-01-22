@@ -22,7 +22,7 @@
 }
 
 .paragraph-section {
-	background-color: #f9f9f9;
+	background-color: var(--background-color);
 	text-align: center;
 	padding: 40px 150px;
 	margin: 0 auto;
@@ -32,12 +32,12 @@
 .paragraph-section p {
 	font-size: 1.2rem;
 	line-height: 1.8;
-	color: #333333;
+	color: var(--text-color);
 	margin: 0;
 }
 
 .highlight {
-	color: #009688;
+	color: var(--primary-color);
 	font-weight: bold;
 }
 
@@ -48,14 +48,14 @@
 	gap: 20px;
 	padding: 0px 20px;
 	padding-bottom: 60px;
-	background-color: #f9f9f9;
+	background-color: var(--background-color);
 }
 
 .overview-item {
 	text-align: center;
 	width: 300px;
 	padding: 20px;
-	background-color: #ffffff;
+	background-color: var(--foreground-color);
 	border-radius: 8px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -71,7 +71,7 @@
 .overview-item h2 {
 	font-size: 2rem;
 	font-weight: 700;
-	color: #333333;
+	color: var(--text-color);
 	margin: 0 0 10px;
 }
 
@@ -86,7 +86,7 @@
 	border: none;
 	font-size: 1.2em;
 	cursor: pointer;
-	color: #009688;
+	color: var(--primary-color);
 	transform: rotate(0deg);
 	transition: transform 2.2s;
 }

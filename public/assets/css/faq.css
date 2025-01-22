@@ -24,7 +24,7 @@
 }
 
 .question {
-	background-color: white;
+	background-color: var(--foreground-color);
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	margin-bottom: 20px;
@@ -52,7 +52,7 @@
 	border: none;
 	font-size: 1.2em;
 	cursor: pointer;
-	color: #009688;
+	color: var(--primary-color);
 	transform: rotate(0deg);
 	transition: transform 0.2s;
 	object-fit: contain;

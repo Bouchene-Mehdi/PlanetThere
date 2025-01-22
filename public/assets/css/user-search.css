@@ -1,6 +1,6 @@
 .user-search-page {
 	text-align: center;
-	background: #f5f7fa;
+	background: var(--background-color);
 	min-height: 85vh;
 }
 
@@ -17,7 +17,7 @@
 	gap: 10px;
 	max-width: 600px;
 	margin: 0 auto;
-	background-color: white;
+	background-color: var(--form-color);
 	border-radius: 30px;
 	padding: 5px 15px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -33,7 +33,7 @@
 }
 
 .search-bar button {
-	background-color: #009688;
+	background-color: var(--primary-color);
 	border: none;
 	border-radius: 50%;
 	padding: 10px;
@@ -58,7 +58,7 @@
 }
 
 .profile-card {
-	background: white;
+	background: var(--foreground-color);
 	border: 1px solid #ddd;
 	border-radius: 8px;
 	padding: 20px;
@@ -92,7 +92,7 @@
 }
 
 .load-more-btn {
-	background-color: #009688;
+	background-color: var(--primary-color);
 	color: white;
 	border: none;
 	padding: 10px 20px;

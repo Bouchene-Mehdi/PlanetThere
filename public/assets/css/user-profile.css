@@ -3,7 +3,7 @@
 /*Container for the background color*/
 .content-container {
 	width: 100%;
-	background-color: #f5f7fa;
+	background-color: var(--background-color);
 	min-height: 75vh;
 }
 
@@ -45,7 +45,7 @@
 	width: 180px;
 	height: 180px;
 	border-radius: 50%;
-	border: 3px solid #009688;
+	border: 3px solid var(--primary-color);
 	object-fit: cover;
 }
 
@@ -60,7 +60,7 @@
 
 
 .dob {
-	color: #009688;
+	color: var(--primary-color);
 	margin: 0;
 }
 
@@ -108,7 +108,7 @@
 }
 
 .follow-btn {
-	background-color: #009688;
+	background-color: var(--primary-color);
 	transition: background-color 0.3s ease-in-out;
 }
 
@@ -232,7 +232,7 @@
 }
 
 .section-title .highlight {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 .events-container {
@@ -307,11 +307,11 @@
 }
 
 .event-date {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 .event-location {
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 	margin-top: 4px;
 }
 
@@ -319,7 +319,7 @@
 .event-attendance {
 	display: flex;
 	align-items: center;
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 	font-size: 0.9em;
 }
 
@@ -334,7 +334,7 @@
 	padding: 10px 20px;
 	border: none;
 	border-radius: 5px;
-	background-color: #009688;
+	background-color: var(--primary-color);
 	color: white;
 	cursor: pointer;
 	font-size: 1em;

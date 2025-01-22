@@ -59,7 +59,7 @@ body{
 
 .signup-btn {
     border-radius: 12px;
-    background: #009688;
+    background: var(--primary-color);
     gap: 10px;
     color: #f5f5f5;
     white-space: nowrap;
@@ -92,7 +92,7 @@ body{
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: 2px solid #009688;
+    border: 2px solid var(--primary-color);
     cursor: pointer;
     object-fit: cover;
 }
@@ -169,7 +169,7 @@ abbr{
 
 .event-proposition-table-header-text{
     text-transform: uppercase;
-    color: #009688;
+    color: var(--primary-color);
     font-weight: lighter;
     font-size: 14px;
 }
@@ -252,8 +252,8 @@ abbr{
 
 
 .view-button{
-    border:#009688 2px solid;
-    color: #009688;
+    border:var(--primary-color) 2px solid;
+    color: var(--primary-color);
 }
 
 .event-proposition-section{
@@ -304,7 +304,7 @@ abbr{
 .event-navigation-link{
     font-family: 'Product Sans', sans-serif;
     text-decoration: none;
-    color:#009688;
+    color:var(--primary-color);
     font-weight: lighter;
     font-size: 15px;
     padding: 10px 17px 10px 17px;
@@ -319,7 +319,7 @@ abbr{
 }
 
 .event-navigation-link-selected{
-    background-color: #009688;
+    background-color: var(--primary-color);
     color: white;
 }
 
@@ -335,7 +335,7 @@ abbr{
 
 .event-navigation-button-left{
     align-items: center;
-    color: #009688;
+    color: var(--primary-color);
     border: none;
     text-transform: capitalize;
     background-color: inherit;
@@ -347,7 +347,7 @@ abbr{
 
 .event-navigation-button-right{    
     align-items: center;
-    color: #009688;
+    color: var(--primary-color);
     border: none;
     text-transform: capitalize;
     background-color: inherit;
@@ -457,12 +457,12 @@ abbr{
 }
 
 .language-option:hover {
-    background-color: #009688;
+    background-color: var(--primary-color);
 }
 
 .language-option.active {
     font-weight: bold;
-    background-color: #009688;
+    background-color: var(--primary-color);
 }
 
 .social-icons {

@@ -22,7 +22,7 @@
 	margin: 20px auto;
 	max-width: 68%;
 	padding: 20px;
-	background-color: white;
+	background-color: var(--foreground-color);
 	color: #333;
 	font-size: 1em;
 	line-height: 1.6em;
@@ -31,10 +31,10 @@
 .terms-content h2 {
 	font-size: 1.5em;
 	font-weight: bold;
-	color: #009688;
+	color: var(--primary-color);
 	margin-top: 30px;
 	margin-bottom: 10px;
-	border-left: 4px solid #009688;
+	border-left: 4px solid var(--primary-color);
 	padding-left: 10px;
 }
 

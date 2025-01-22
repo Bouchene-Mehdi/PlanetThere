@@ -1,4 +1,3 @@
-
 <body>
 
     <div class="account-center">
@@ -117,5 +116,16 @@
         }
     });
 </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentTheme = localStorage.getItem('theme') || 'light';
 
+            // If the theme is dark, apply the dark mode class to body
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        });
+    </script>
 </body>

@@ -8,6 +8,7 @@
 	align-items: center;
 	flex-direction: row;
 	font-size: 18px;
+	background-color: var(--foreground-color);
 }
 
 .logo {
@@ -42,7 +43,7 @@
 
 .signup-btn {
 	border-radius: 12px;
-	background: #009688;
+	background: var(--primary-color);
 	gap: 10px;
 	color: #f5f5f5;
 	white-space: nowrap;
@@ -78,7 +79,7 @@
 	width: 60px;
 	height: 60px;
 	border-radius: 50%;
-	border: 2px solid #009688;
+	border: 2px solid var(--primary-color);
 	cursor: pointer;
 	object-fit: cover;
 }
@@ -98,7 +99,7 @@
 .hamburger .bar {
 	height: 3px;
 	width: 100%;
-	background-color: #101010;
+	background-color: var(--navbar-text-color);
 	border-radius: 5px;
 	transition: all 0.3s ease-in-out;
 }
@@ -127,7 +128,7 @@
 		top: 100%;
 		left: 0;
 		width: 100%;
-		background-color: #fff;
+		background-color: var(--foreground-color);
 		display: none;
 		z-index: 1000;
 		padding: 0;
@@ -152,7 +153,7 @@
 		width: 90%;
 		padding: 10px 20px;
 		text-align: left;
-		color: #101010;
+		color: var(--navbar-text-color);
 		text-decoration: none;
 	}
 
@@ -166,7 +167,7 @@
 
 	.nav-link-bar:hover {
 		background-color: #f0f0f0;
-		color: #009688;
+		color: var(--primary-color);
 		width: 100%;
 	}
 
@@ -184,7 +185,7 @@
 	}
 
 	.bar {
-		background-color: #101010;
+		background-color: var(--navbar-text-color);
 	}
 
 	.profile-image {
@@ -199,7 +200,7 @@
 		border-radius: 12px;
 		background: transparent;
 		gap: 10px;
-		color: #009688;
+		color: var(--primary-color);
 		white-space: nowrap;
 		text-align: center;
 		margin: 0px 0;
@@ -213,7 +214,7 @@
 	}
 
 	.signup-btn:hover {
-		background: #009688;
+		background: var(--primary-color);
 		color: white;
 	}
 	

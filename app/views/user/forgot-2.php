@@ -22,6 +22,7 @@
 </style>
 
 
+<body>
 <main class="main">
   <section class="Welcome-back-section">
     <div class="Welcome-back-section-text">
@@ -68,6 +69,19 @@
     </form>
   </section>
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        // If the theme is dark, apply the dark mode class to body
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    });
+</script>
+</body>
 <?php
 // Clear session errors after displaying
 unset($_SESSION['forgot_errors']);

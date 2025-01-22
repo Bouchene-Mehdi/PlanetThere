@@ -37,11 +37,11 @@
 }
 
 .LogoTextP1 {
-	color: black;
+	color: var(--foreground-color);
 }
 
 .LogoTextP2 {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 ul {
@@ -71,7 +71,7 @@ ul {
 .nav-link {
 	font-family: 'Product Sans', sans-serif;
 	size: 14px;
-	color: black;
+	color: var(--foreground-color);
 	text-decoration: none;
 }
 
@@ -190,7 +190,7 @@ input {
 }
 
 .legend span {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 .sign-up-button {
