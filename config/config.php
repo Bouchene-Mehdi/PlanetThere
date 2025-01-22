@@ -4,7 +4,7 @@
             'name' => 'planetthere_new',
             'host' => 'localhost',
             'username'=> 'root',
-            'password' => '',
+            'password' => 'root',
             'port' => '3306',
             'charset' => 'utf8'
         ],
