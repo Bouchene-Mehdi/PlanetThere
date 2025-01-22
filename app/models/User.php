@@ -325,7 +325,8 @@ class User {
     public function searchUsers($query = '') {
         if (empty($query)) {
             // If no query, return all users
-            $sql = "SELECT username, firstName, lastName, ProfileImage FROM users";
+            $sql = "SELECT username, firstName, lastName, ProfileImage FROM users
+        WHERE Email != 'deleted@example.com' AND IsBanned = 0";
             $stmt = $this->db->prepare($sql);
         } else {
             // Search by username, firstName, or lastName
