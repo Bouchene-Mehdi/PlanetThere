@@ -265,7 +265,15 @@ CREATE TABLE `tac` (
 --
 
 INSERT INTO `tac` (`tacID`, `conditionT`, `detail`) VALUES
-(2, ' Acceptance of Terms', 'By accessing and using PlanetThere, you agree to comply with these Terms and Conditions. If you disagree with these terms, you must refrain from using the platform.\r\n\r\n');
+(2, 'Acceptance of Terms', 'By accessing and using PlanetThere, you agree to comply with these Terms and Conditions. If you disagree with these terms, you must refrain from using the platform.\r\n\r\n'),
+(3, 'Account Creation and Platform Usage', 'Users must create an account with accurate and up-to-date information to access certain features. The platform is designed for event planners and attendees to manage and participate in events, including a waitlist feature for events with limited spots (placement on the waitlist does not guarantee participation).'),
+(4, 'Responsibilities of Users', 'Event Planners: Must ensure the accuracy of their event information and refrain from uploading content that violates laws or infringes on third-party rights. PlanetThere reserves the right to approve, deny, or remove events that violate our policies or guidelines.\n\nAttendees: Should register for events responsibly, adhere to event-specific rules, and may cancel their participation within specified time limits.'),
+(5, 'User Conduct and Administrative Rights', 'Users must behave respectfully towards others. Any abuse, harassment, or violation of rules may result in account suspension or termination. PlanetThere administrators have the authority to monitor activity, remove content, and take necessary actions to maintain the platform\'s integrity.'),
+(6, 'Privacy Policy', 'Users are encouraged to review the Privacy Policy and acknowledge that data provided during registration and use may be stored and processed for operational purposes.'),
+(7, 'Disclaimer of Liability', 'PlanetThere disclaims all liability for event-related disputes, technical issues, or user misconduct.'),
+(8, 'Contact Information', 'For any queries or concerns, please contact our support team.'),
+(9, 'Legal Notice', 'All content and services provided on PlanetThere are the intellectual property of PlanetThere, unless otherwise noted. Unauthorized reproduction, distribution, or use of any content without explicit permission is strictly prohibited. PlanetThere reserves the right to take legal action against any unauthorized use or infringement.');
+
 
 -- --------------------------------------------------------
 
