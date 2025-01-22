@@ -108,7 +108,27 @@ class User {
     public function deleteAccountByUsername($username) {
         // Assume you have a database connection (using PDO here for security)
         $db = Database::getInstance(); // Assuming you have a Database class for DB connection
-        $query = "DELETE FROM users WHERE username = :username"; // Adjust the table name and field names if necessary
+
+        // Set fields to NULL or a placeholder
+        $query = "
+        UPDATE users
+        SET 
+            Username = 'Deleted User',
+            FirstName = NULL,
+            LastName = NULL,
+            Phone = NULL,
+            DateOfBirth = NULL,
+            Email = 'deleted@example.com',  -- or set it to NULL if there's no unique constraint
+            IsAdmin = 0,
+            IsBanned = 0,
+            PasswordHash = '', -- You might want to store a dummy hash instead of NULL for security
+            ProfileImage = NULL,
+            phonePublic = 0,
+            dobPublic = 0,
+            reset_token = NULL,
+            token_expiry = NULL
+        WHERE Username = :username
+    ";
 
         // Prepare and execute the query
         $stmt = $this->db->prepare($query);
@@ -305,7 +325,8 @@ class User {
     public function searchUsers($query = '') {
         if (empty($query)) {
             // If no query, return all users
-            $sql = "SELECT username, firstName, lastName, ProfileImage FROM users";
+            $sql = "SELECT username, firstName, lastName, ProfileImage FROM users
+        WHERE Email != 'deleted@example.com' AND IsBanned = 0";
             $stmt = $this->db->prepare($sql);
         } else {
             // Search by username, firstName, or lastName

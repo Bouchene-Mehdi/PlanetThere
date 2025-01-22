@@ -92,9 +92,23 @@
         } else {
             document.body.classList.remove('dark-mode');
             logo.src = 'assets/images/logo-text.svg';
-            
-
         }
+
+        // Add validation for "REPEAT UNTIL" date
+        const form = document.querySelector('.event-creation-form');
+        const eventStartDateInput = document.getElementById('eventstartdate');
+        const eventEndDateInput = document.getElementById('eventenddate');
+        const repeatDateInput = document.getElementById('repeatdate');
+
+        form.addEventListener('submit', function (event) {
+            const eventStartDate = new Date(eventStartDateInput.value);
+            const repeatDate = new Date(repeatDateInput.value);
+
+            if (repeatDate < eventStartDate || repeatDate < eventEndDate) {
+                event.preventDefault(); // Prevent form submission
+                alert('The repeat date cannot be before the event start date.');
+
+            }
     });
 </script>
 </body>
