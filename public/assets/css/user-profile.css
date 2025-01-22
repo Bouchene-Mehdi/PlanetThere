@@ -66,14 +66,14 @@
 
 .profile-header h1 {
 	font-size: 2em;
-	color: #333;
+	color: var(--text-color);
 	margin-top: 0;
 	margin-bottom: 1px;
 }
 
 .profile-header .name {
 	font-size: 1.7em;
-	color: #333;
+	color: var(--text-color);
 	margin-top: 0;
 	margin-bottom: 0;
 }
@@ -110,19 +110,15 @@
 .follow-btn {
 	background-color: var(--primary-color);
 	transition: background-color 0.3s ease-in-out;
+	cursor: grab;
 }
 
-.follow-btn:hover {
-	background-color: #00796b;
-}
 
 .block-btn {
-	background-color: #e57373;
+	background-color: #d32f2f;
+	cursor: grab;
 }
 
-.block-btn:hover {
-	background-color: #d32f2f;
-}
 
 /* Styles for screens smaller than 900px */
 @media (max-width: 900px) {
@@ -226,7 +222,7 @@
 
 .section-title {
 	margin-left: 20px;
-	color: #000;
+	color: var(--text-color);
 	font: 400 2em 'Product Sans', sans-serif;
 	font-weight: bold;
 }
@@ -268,7 +264,7 @@
 /* Event Card */
 .event-card {
 	border-radius: 10px;
-	background-color: #fff;
+	background-color: var(--foreground-color);
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 	display: flex;
 	flex-direction: column;
@@ -286,7 +282,7 @@
 }
 
 .event-title {
-	color: #000;
+	color: var(--text-color);
 	margin-top: 15px;
 	font-size: 1em;
 	font-weight: 400;

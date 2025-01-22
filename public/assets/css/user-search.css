@@ -17,7 +17,7 @@
 	gap: 10px;
 	max-width: 600px;
 	margin: 0 auto;
-	background-color: var(--form-color);
+	background-color: var(--footer-background-color);
 	border-radius: 30px;
 	padding: 5px 15px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -73,6 +73,7 @@
 	height: 80px;
 	object-fit: cover;
 	margin-bottom: 10px;
+	border: 3px solid var(--primary-color);
 }
 
 .profile-card h2 {

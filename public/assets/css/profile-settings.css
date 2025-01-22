@@ -8,7 +8,7 @@
 .profile-settings {
 	width: 100%;
 	margin: 0 auto;
-	background: #f5f7fa;
+	background: var(--background-color);
 	padding: 20px 0px;
 }
 

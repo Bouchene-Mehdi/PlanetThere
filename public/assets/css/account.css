@@ -58,6 +58,8 @@
     border: none;
     border-top: 1px solid #ddd;
     margin: 15px 0;
+    color: var(--foreground-color);
+    background-color: var(--foreground-color);
 }
 
 /* Delete account styling */

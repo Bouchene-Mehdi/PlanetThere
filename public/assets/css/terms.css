@@ -2,6 +2,8 @@
 .terms {
 	width: 100%;
 	min-height: 70vh;
+	padding-bottom: 20px;
+	background-color: var(--background-color);
 }
 
 .hero-section {
@@ -23,9 +25,10 @@
 	max-width: 68%;
 	padding: 20px;
 	background-color: var(--foreground-color);
-	color: #333;
+	color: var(--text-color);
 	font-size: 1em;
 	line-height: 1.6em;
+
 }
 
 .terms-content h2 {

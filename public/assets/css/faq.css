@@ -2,6 +2,8 @@
 .faq {
 	width: 100%;
 	min-height: 70vh;
+	background-color: var(--background-color);
+	padding-bottom: 20px;
 }
 
 .hero-section {
@@ -44,8 +46,10 @@
 	margin: 0;
 	font-size: 1.2em;
 	font-weight: bold;
-	color: #333;
+	color: var(--text-color);
 }
+
+
 
 .toggle-button {
 	background: none;
@@ -67,7 +71,7 @@
 	width: 80%;
 	padding: 15px 20px;
 	font-size: 1em;
-	color: #555;
+	color: var(--text-color);
 	display: none;
 	text-align: justify;
 }
