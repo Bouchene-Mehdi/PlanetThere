@@ -1,37 +1,16 @@
-@font-face {
-	font-family: 'Product Sans';
-	src: url('../fonts/ProductSansRegular.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
 *,
 *::before,
 *::after {
 	box-sizing: border-box;
-	margin: 0px;
-	padding: 0px;
-}
-@font-face {
-	font-family: 'Product Sans';
-	src: url('../fonts/ProductSansRegular.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 .Header {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	background-color: rgb(245, 247, 250);
+	background-color: var(--background-color);
 }
 .logo-section {
 	display: flex;
@@ -51,11 +30,11 @@
 }
 
 .LogoTextP1 {
-	color: black;
+	color: var(--foreground-color);
 }
 
 .LogoTextP2 {
-	color: rgb(0, 150, 136);
+	color: var(--primary-color);
 }
 
 ul {
@@ -85,7 +64,7 @@ ul {
 .nav-link {
 	font-family: 'Product Sans', sans-serif;
 	size: 14px;
-	color: black;
+	color: var(--text-color);
 	text-decoration: none;
 }
 
@@ -154,12 +133,18 @@ input {
 	padding: 17px 7px 17px 7px;
 	border-radius: 10px;
 	border: none;
-	box-shadow: 2px 5px 10px rgba(199, 199, 199);
+	/*box-shadow: 2px 5px 10px rgba(199, 199, 199);*/
+	background-color: var(--form-color);
+	color: var(--text-color);
+}
+
+::placeholder {
+	color: var(--text-color)''
 }
 
 .registration-section {
 	flex: 1;
-	background-color: #edeff2;
+	background-color: var(--background-color);
 	padding-bottom: 41px;
 }
 
@@ -210,7 +195,7 @@ input {
 }
 
 .legend-subtext {
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 	font-family: 'Product Sans', sans-serif;
 	text-align: center;
 	font-size: 20px;
@@ -352,7 +337,7 @@ main {
 }
 
 .LogoTextP1 {
-	color: black;
+	color: var(--foreground-color);
 }
 
 .LogoTextP2 {
@@ -383,12 +368,6 @@ ul {
 	padding: 15px 34px 15px 34px;
 }
 
-.nav-link {
-	font-family: 'Product Sans', sans-serif;
-	size: 14px;
-	color: black;
-	text-decoration: none;
-}
 
 .selected-link {
 	color: white;
@@ -449,30 +428,9 @@ fieldset {
 	border: none;
 }
 
-input {
-	font-family: 'Product Sans', sans-serif;
-	font-size: 14px;
-	padding: 17px 7px 17px 7px;
-	border-radius: 10px;
-	border: none;
-	box-shadow: 2px 5px 10px rgba(199, 199, 199);
-}
 
-.registration-section {
-	flex: 1;
-	background-color: #edeff2;
-	padding-bottom: 41px;
-}
 
-.registration-form {
-	display: grid;
-	grid-template-columns: 322px 322px;
-	margin-top: 50px;
-	justify-content: center;
-	justify-items: stretch;
-	grid-row-gap: 60px;
-	grid-column-gap: 30px;
-}
+
 
 .Last-name-field,
 .First-name-field {
@@ -511,7 +469,7 @@ input {
 }
 
 .legend-subtext {
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 	font-family: 'Product Sans', sans-serif;
 	text-align: center;
 	font-size: 20px;

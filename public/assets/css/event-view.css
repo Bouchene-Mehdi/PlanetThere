@@ -2,7 +2,7 @@
 
 .main-content {
 	width: 100%;
-	background-color: #f5f7fa;
+	background-color: var(--background-color);
 	padding-bottom: 50px;
 }
 
@@ -11,6 +11,7 @@
 	padding-bottom: 20px;
 	text-align: center;
 	width: 100%;
+	background-color: var(--background-color);
 }
 
 .event-name {
@@ -29,7 +30,7 @@
 	text-transform: uppercase;
 
 	/* GreyFont */
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 }
 
 .event-author-header {
@@ -41,7 +42,7 @@
 	justify-content: space-between;
 	justify-self: center;
 	align-items: center;
-	background-color: #ffffff;
+	background-color: var(--foreground-color);
 	border-radius: 15px;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	border: 1px solid #e0e0e0;
@@ -101,7 +102,7 @@
 	display: flex;
 	justify-self: left;
 	align-items: center;
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 	font-size: 0.9em;
 	margin: 40px;
 }
@@ -132,7 +133,7 @@
 	margin-right: 60px;
 	padding: 15px 25px;
 	width: 20vw;
-	background-color: #009688;
+	background-color: var(--primary-color);
 	color: #ffffff;
 	border: none;
 	border-radius: 10px;
@@ -145,7 +146,7 @@
 	margin-right: 60px;
 	padding: 15px 25px;
 	width: 15vw;
-	background-color: #009688;
+	background-color: var(--primary-color);
 	color: #ffffff;
 	border: none;
 	border-radius: 10px;
@@ -171,7 +172,7 @@
 	width: 30px;
 	height: 30px;
 	font-size: 20px;
-	background-color: #009688;
+	background-color: var(--primary-color);
 	border-radius: 10px;
 	color: white;
 	border: none;
@@ -222,7 +223,7 @@
 	position: absolute; /* Position relative to the container */
 	top: 20px; /* Adjust distance from the top */
 	right: 20px; /* Adjust distance from the right */
-	background-color: #009688;
+	background-color: var(--primary-color);
 	color: #ffffff;
 	border: none;
 	border-radius: 10px;
@@ -349,7 +350,7 @@
 	width: 90%;
 	padding: 30px 0;
 	flex: 1; /* Allow each detail to take equal space */
-	background: #fff; /* Set background color */
+	background: var(--foreground-color); /* Set background color */
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
 	border-radius: 8px; /* Rounded corners */
 	text-align: left; /* Align text to the left */
@@ -369,7 +370,7 @@ p {
 	font-size: 24px;
 	text-transform: uppercase;
 	/* BlackFont */
-	color: #333333;
+	color: var(--text-color);
 }
 .event-description input {
 	margin: 0 20px 10px 20px;
@@ -386,7 +387,7 @@ p {
 	display: flex;
 	align-items: center;
 	/* BlackFont */
-	color: #333333;
+	color: var(--text-color);
 }
 
 .event-actions {
@@ -400,7 +401,7 @@ p {
 
 .btn-action {
 	padding: 15px 25px;
-	background-color: #009688;
+	background-color: var(--primary-color);
 	width: 20vw;
 	color: #ffffff;
 	border: none;
@@ -449,7 +450,7 @@ p {
 }
 
 .feedback-section .highlight {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 .star-rating {
@@ -499,7 +500,7 @@ p {
 
 .feedback-input:focus {
 	outline: none;
-	border-color: #009688;
+	border-color: var(--primary-color);
 	box-shadow: 0 0 4px rgba(0, 150, 136, 0.4);
 }
 
@@ -511,7 +512,7 @@ p {
 	margin-top: 20px;
 	padding: 10px;
 	width: 20%;
-	background: #009688;
+	background: var(--primary-color);
 	color: #ffffff;
 	border: none;
 	padding: 10px 20px;
@@ -541,14 +542,14 @@ p {
 }
 
 .comments-section .highlight {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 /* Comment Card */
 .comment-card {
 	position: relative;
 	display: flex;
-	background: #ffffff;
+	background: var(--foreground-color);
 	border: 1px solid #e0e0e0;
 	border-radius: 8px;
 	padding: 20px;
@@ -585,12 +586,12 @@ p {
 .comment-content .user-info h3 {
 	margin: 0 0 0 20px;
 	font-size: 18px;
-	color: #333;
+	color: var(--text-color);
 }
 
 .comment-content .user-info .comment-text {
 	font-size: 16px;
-	color: #555;
+	color: var(--gray-text-color);
 	margin-top: 5px;
 }
 
@@ -599,7 +600,7 @@ p {
 	top: 10px;
 	right: 10px;
 	font-size: 14px;
-	color: #888;
+	color: var(--gray-text-color);
 	white-space: nowrap;
 	margin-left: auto; /* Pushes the date to the far right */
 }
@@ -635,13 +636,13 @@ p {
 
 .section-title {
 	margin-left: 20px;
-	color: #000;
+	color: var(--text-color);
 	font: 400 2em 'Product Sans', sans-serif;
 	font-weight: bold;
 }
 
 .section-title .highlight {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 .events-container {
@@ -678,7 +679,7 @@ p {
 /* Event Card */
 .event-card {
 	border-radius: 10px;
-	background-color: #fff;
+	background-color: var(--foreground-color);
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 	display: flex;
 	flex-direction: column;
@@ -696,7 +697,7 @@ p {
 }
 
 .event-title {
-	color: #000;
+	color: var(--text-color);
 	margin-top: 15px;
 	font-size: 1em;
 	font-weight: 400;
@@ -718,11 +719,11 @@ p {
 }
 
 .event-date {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 .event-location {
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 	margin-top: 4px;
 	text-align: left;
 	justify-self: left;
@@ -732,7 +733,7 @@ p {
 .event-attendance {
 	display: flex;
 	align-items: center;
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 	font-size: 0.9em;
 	align-self: end;
 }

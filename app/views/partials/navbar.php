@@ -4,11 +4,11 @@
     </a>
     
     <a href="/" class="brand-logo">
-        <img src="/assets/images/logo-text.svg" alt="Brand Logo">
+        <img id="logo" src="/assets/images/logo-text.svg" alt="Brand Logo">
     </a>
 
     <div class="hamburger">
-        <img src="/assets/images/hamburger-icon.svg" alt="Hamburger Icon" class="hamburger-icon">
+        <img id ="hamburger" src="/assets/images/hamburger-icon.svg" alt="Hamburger Icon" class="hamburger-icon">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>

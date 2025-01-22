@@ -1,5 +1,5 @@
 .settings-page {
-    background: #f5f7fa;
+    background: var(--background-color);
     text-align: center;
     padding: 5vh 5vw;
     display: flex;
@@ -10,7 +10,7 @@
 .settings-header h1 {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #333;
+    color: var(--text-color);
 }
 
 .settings-header p {
@@ -32,7 +32,7 @@
     justify-content: space-between; /* Push items to opposite ends */
     align-items: center; /* Vertically center the label and switch */
     padding: 1.5rem;
-    background-color: white;
+    background-color: var(--foreground-color);
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     flex-wrap: nowrap; /* Prevent items from wrapping */
@@ -41,13 +41,13 @@
 .settings-item label {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #333;
+    color: var(--text-color);
     text-align: left; /* Ensure the label text aligns to the left */
     flex: 1; /* Allow the label to take up remaining space */
 }
 
 .highlight {
-    color: #009688;
+    color: var(--primary-color);
 }
 
 .dropdown {
@@ -104,7 +104,7 @@
 }
 
 input:checked + .slider {
-    background-color: #009688; /* Background color when checked */
+    background-color: var(--primary-color); /* Background color when checked */
 }
 
 input:checked + .slider:before {
@@ -113,7 +113,7 @@ input:checked + .slider:before {
 
 .password-change {
     display: flexbox;
-    background-color: white;
+    background-color: var(--foreground-color);
     padding: 2.0rem;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -127,7 +127,7 @@ input:checked + .slider:before {
     margin: auto;
     font-size: 1.1rem;
     font-weight: bold;
-    color: #333;
+    color: var(--text-color);
     margin-bottom: 2.5rem;
 }
 
@@ -150,7 +150,7 @@ input:checked + .slider:before {
 }
 
 .password-form .save-button {
-    background-color: #009688;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 0.75em 1.5em;

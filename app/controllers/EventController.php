@@ -94,19 +94,22 @@ class EventController {
             // that is: was registered for the event and didn't leave a review yet
             $canReview = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
 
-
             foreach ($reviews as &$review) {
                 // Fetch user details by UserID
                 $reviewUser = $userModel->GetUserById($review['UserID']);
                 $review['UserProfileImage'] = $reviewUser['ProfileImage'];
                 $review['UserFirstName'] = $reviewUser['FirstName'];
                 $review['UserLastName'] = $reviewUser['LastName'];
+                $review['Username'] = $reviewUser['Username'];
+
+                //Check if the user hasn't made a review yet.
                 if(isset($_SESSION['user'])){
-                    if ($review['UserID'] === $_SESSION['user']['UserID']) {
+                    if ($review['UserID'] == $_SESSION['user']['UserID']) {
                         $canReview = false;
                     }
                 }
             }
+
             if(!isset($_SESSION['user'])){
                 render('event/event-review',
                 [
@@ -122,7 +125,6 @@ class EventController {
                 ]);
                 exit();
             }
-            $canReview = $eventModel->IsRegistered($EventID, $_SESSION['user']['UserID']);
             render('event/event-review',
             [
                 'event' => $event,

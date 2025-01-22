@@ -1,7 +1,7 @@
 /* footer.css */
 
 .footer {
-    background: #333;
+    background: var(--footer-background-color);
     align-self: stretch;
     display: flex;
     width: 100%;
@@ -90,12 +90,12 @@
 }
 
 .language-option:hover {
-    background-color: #009688;
+    background-color: var(--primary-color);
 }
 
 .language-option.active {
     font-weight: bold;
-    background-color: #009688;
+    background-color: var(--primary-color);
 }
 
 .social-icons {

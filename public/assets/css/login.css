@@ -1,10 +1,3 @@
-@font-face {
-	font-family: 'Product Sans';
-	src: url('fonts/ProductSansRegular.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
 *,
 *::before,
 *::after {
@@ -17,7 +10,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	background-color: rgb(245, 247, 250);
+	background-color: var(--background-color);
 }
 .logo-section {
 	display: flex;
@@ -37,11 +30,11 @@
 }
 
 .LogoTextP1 {
-	color: black;
+	color: var(--foreground-color);
 }
 
 .LogoTextP2 {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 ul {
@@ -71,7 +64,7 @@ ul {
 .nav-link {
 	font-family: 'Product Sans', sans-serif;
 	size: 14px;
-	color: black;
+	color: var(--text-color);
 	text-decoration: none;
 }
 
@@ -146,7 +139,7 @@ input {
 
 .registration-section {
 	flex: 0;
-	background-color: #edeff2;
+	background-color: var(--background-color);
 	padding-bottom: 78px;
 	padding-left: 100px;
 	padding-right: 77px;
@@ -190,7 +183,7 @@ input {
 }
 
 .legend span {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 .sign-up-button {

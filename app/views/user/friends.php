@@ -1,3 +1,4 @@
+<body>
 <div class="following-page">
     <!-- Page Header -->
     <header class="following-header">
@@ -49,6 +50,26 @@
         </div>
     </section>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        const logo = document.getElementById('logo'); // Access the logo image
+        
+
+        // If the theme is dark, apply the dark mode class to body
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            logo.src = '/assets/images/logo-text-white.svg';
+            
+        } else {
+            document.body.classList.remove('dark-mode');
+            logo.src = 'assets/images/logo-text.svg';
+            
+
+        }
+    });
+</script>
+</body>
 
 <script>
     // JavaScript for Tabs and Dynamic Counts

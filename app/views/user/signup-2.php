@@ -1,4 +1,3 @@
-
 <style>
     /* Error message style */
     .error-message {
@@ -7,6 +6,7 @@
       margin-top: 0px;
     }
   </style>
+<body>
 <main class="main">
 
     <section class="Join-us-section">
@@ -92,6 +92,26 @@
     </section>
 
 </main>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        const logo = document.getElementById('logo'); // Access the logo image
+        
+
+        // If the theme is dark, apply the dark mode class to body
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            logo.src = '/assets/images/logo-text-white.svg';
+            
+        } else {
+            document.body.classList.remove('dark-mode');
+            logo.src = 'assets/images/logo-text.svg';
+            
+
+        }
+    });
+</script>
+</body>
 <?php
 // Clear session errors after displaying
 unset($_SESSION['page2_errors']);

@@ -1,10 +1,3 @@
-@font-face {
-	font-family: 'Product Sans';
-	src: url('fonts/ProductSansRegular.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
 *,
 *::before,
 *::after {
@@ -41,7 +34,7 @@
 }
 
 .LogoTextP2 {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 ul {
@@ -71,7 +64,7 @@ ul {
 .nav-link {
 	font-family: 'Product Sans', sans-serif;
 	size: 14px;
-	color: black;
+	color: var(--text-color);
 	text-decoration: none;
 }
 
@@ -148,7 +141,7 @@ input {
 
 .registration-section {
 	flex: 0;
-	background-color: #edeff2;
+	background-color: var(--background-color);
 	padding-bottom: 78px;
 	padding-left: 100px;
 	padding-right: 77px;
@@ -199,12 +192,12 @@ input {
 
 .legend-subtext {
 	font-family: 'Product Sans', sans-serif;
-	color: #7f7f7f;
+	color: var(--gray-text-color);
 	font-size: 30px;
 }
 
 .legend span {
-	color: #009688;
+	color: var(--primary-color);
 }
 
 .sign-up-button {

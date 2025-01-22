@@ -1,71 +1,79 @@
-  <div class="main-content">
+<body>
+<div class="main-content">
     <!-- Title and Author Section -->
     <section class="event-header">
-      <div class="event-name"><?= htmlspecialchars($event['EventName']); ?></div>
-      <div class="event-author-header">
-        <div class="event-author" id="author">
-        <a href="/profile/<?php echo urlencode($manager['Username']); ?>">
-            <img src="../<?php echo $manager['ProfileImage']?> " alt="Organizer" class="author-photo" />
-        </a>
-          <h2 class="author-by">BY <span class="author-name"><?= htmlspecialchars($manager['FirstName']) . ' '.htmlspecialchars($manager['LastName']); ?></span></h2>
-        </div>
-        <div class="event-header-attendance">
-            <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
-            <span class="attendance-count"><?= $attendanceCount . '/' . $event['MaxParticipants']; ?></span>
-          </div>
-        <div class="event-header-extra">
+        <div class="event-name"><?= htmlspecialchars($event['EventName']); ?></div>
+        <div class="event-author-header">
+            <div class="event-author" id="author">
+                <a href="/profile/<?php echo urlencode($manager['Username']); ?>">
+                    <img src="../<?php echo $manager['ProfileImage'] ?> " alt="Organizer" class="author-photo"/>
+                </a>
+                <h2 class="author-by">BY <span
+                            class="author-name"><?= htmlspecialchars($manager['FirstName']) . ' ' . htmlspecialchars($manager['LastName']); ?></span>
+                </h2>
+            </div>
+            <div class="event-header-attendance">
+                <img src="../assets/images/attendance-icon.svg" alt="Attendees" class="attendance-icon">
+                <span class="attendance-count"><?= $attendanceCount . '/' . $event['MaxParticipants']; ?></span>
+            </div>
+            <div class="event-header-extra">
 
 
-          <?php if ( isset($_SESSION['user']) &&  $_SESSION['user']['UserID'] == $manager['UserID'] ): ?>
-            <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
-              <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-              <button type="submit" class="btn-apply">SEE ATTENDANTS</button>
-            </form>
-            <form action="/event-waitlist/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
-              <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-              <button type="submit" class="btn-apply">SEE WAITLIST</button>
-            </form>
-          <?php else: ?>
-            <?php if ($IsRegistered && isset($_SESSION['user'])): ?>
-              <form action="/event/unregister/<?php echo $event['EventID'] ?>" method="POST" class="follow-form"  onsubmit="return confirmUnregister()">
-                <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-                <button type="submit" class="btn-attend"  >DELETE REGISTRATION</button>
-              </form>
-
-            <?php else: ?>
-              <?php if($attendanceCount < $event['MaxParticipants'] && isset($_SESSION['user'])): ?>
-
-                <form action="/event/register/<?php echo $event['EventID'] ?>" method="POST" class="apply-form"  onsubmit="return confirmRegister()">
-                  <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-                  <div class="ticket-quantity">
-                    <label for="ticket-quantity" class="tickets">Number of tickets : </label>
-                    <button type="button" class="quantity-btn" id="decrease-btn">-</button>
-                    <input type="number" id="ticket-quantity" name="quantity" value="1" min="1" max="<?= $event['MaxParticipants']-$attendanceCount?>" readonly>
-                    <button type="button" class="quantity-btn" id="increase-btn">+</button>
-                  </div>
-                <button type="submit" class="btn-apply" >APPLY&nbspHere</button>
-                </form>
-              <?php else: ?>
-                <?php if($IsInWaitlist && isset($_SESSION['user'])): ?>
-                  <form action="/event/waitlist/<?php echo $event['EventID'] ?>" method="POST" class="apply-form"  onsubmit="return confirmRegister()">
-                    <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-                    <button type="submit" class="btn-attend" >LEAVE WAITLIST</button>
-                 </form>
-
+                <?php if (isset($_SESSION['user']) && $_SESSION['user']['UserID'] == $manager['UserID']): ?>
+                    <form action="/event-attendees/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
+                        <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
+                        <button type="submit" class="btn-apply">SEE ATTENDANTS</button>
+                    </form>
+                    <form action="/event-waitlist/<?php echo $event['EventID'] ?>" method="GET" class="follow-form">
+                        <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
+                        <button type="submit" class="btn-apply">SEE WAITLIST</button>
+                    </form>
                 <?php else: ?>
-                  <?php if(isset($_SESSION['user'])): ?>
-                    <form action="/event/waitlist/<?php echo $event['EventID'] ?>" method="POST" class="apply-form"  onsubmit="return confirmRegister()">
-                    <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
-                    <button type="submit" class="btn-attend" >JOIN WAITLIST</button>
-                  </form>
-                  <?php endif; ?>
-                <?php endif; ?>
+                    <?php if ($IsRegistered && isset($_SESSION['user'])): ?>
+                        <form action="/event/unregister/<?php echo $event['EventID'] ?>" method="POST"
+                              class="follow-form" onsubmit="return confirmUnregister()">
+                            <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
+                            <button type="submit" class="btn-attend">DELETE REGISTRATION</button>
+                        </form>
 
-              <?php endif; ?>
-            <?php endif; ?>
-          <?php endif; ?>
+                    <?php else: ?>
+                        <?php if ($attendanceCount < $event['MaxParticipants'] && isset($_SESSION['user'])): ?>
+
+                            <form action="/event/register/<?php echo $event['EventID'] ?>" method="POST"
+                                  class="apply-form" onsubmit="return confirmRegister()">
+                                <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
+                                <div class="ticket-quantity">
+                                    <label for="ticket-quantity" class="tickets">Number of tickets : </label>
+                                    <button type="button" class="quantity-btn" id="decrease-btn">-</button>
+                                    <input type="number" id="ticket-quantity" name="quantity" value="1" min="1"
+                                           max="<?= $event['MaxParticipants'] - $attendanceCount ?>" readonly>
+                                    <button type="button" class="quantity-btn" id="increase-btn">+</button>
+                                </div>
+                                <button type="submit" class="btn-apply">APPLY&nbspHere</button>
+                            </form>
+                        <?php else: ?>
+                            <?php if ($IsInWaitlist && isset($_SESSION['user'])): ?>
+                                <form action="/event/waitlist/<?php echo $event['EventID'] ?>" method="POST"
+                                      class="apply-form" onsubmit="return confirmRegister()">
+                                    <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
+                                    <button type="submit" class="btn-attend">LEAVE WAITLIST</button>
+                                </form>
+
+                            <?php else: ?>
+                                <?php if (isset($_SESSION['user'])): ?>
+                                    <form action="/event/waitlist/<?php echo $event['EventID'] ?>" method="POST"
+                                          class="apply-form" onsubmit="return confirmRegister()">
+                                        <input type="hidden" name="event_id" value="<?= $event['EventID']; ?>">
+                                        <button type="submit" class="btn-attend">JOIN WAITLIST</button>
+                                    </form>
+                                <?php endif; ?>
+                            <?php endif; ?>
+
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Image Carousel -->
@@ -176,6 +184,27 @@
       </div>
     </section>
   </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        const logo = document.getElementById('logo'); // Access the logo image
+        
+
+        // If the theme is dark, apply the dark mode class to body
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            logo.src = '/assets/images/logo-text-white.svg';
+            
+        } else {
+            document.body.classList.remove('dark-mode');
+            logo.src = 'assets/images/logo-text.svg';
+            
+
+        }
+    });
+</script>
+</body>
+
 <script>
     function confirmRegister() {
       return confirm("Are you sure you want to register for this event?");
